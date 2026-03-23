@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Cầu nối giữa Interact system và Dialogue/NPC system.
@@ -8,6 +9,9 @@ using UnityEngine;
 public class NPCInteractable : Interactable
 {
     public DialogueData dialogueData;
+
+    [Header("Events")]
+    [SerializeField] private UnityEvent onInteractStarted;
 
     private NPCMovement npcMovement;
     private bool waitingForDialogueEnd;
@@ -61,6 +65,8 @@ public class NPCInteractable : Interactable
 
     public override void OnInteract()
     {
+        onInteractStarted?.Invoke();
+
         if (dialogueData == null || DialogueManager.Instance == null) return;
 
         if (!DialogueManager.Instance.IsDialogueActive)
