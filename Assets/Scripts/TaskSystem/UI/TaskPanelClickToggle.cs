@@ -47,6 +47,7 @@ public class TaskPanelClickToggle : MonoBehaviour
 
     private void HandlePanelRevealRequested()
     {
+        Debug.Log("[TaskPanelClickToggle] Received panel reveal request event.");
         ShowPanel();
     }
 
@@ -59,20 +60,38 @@ public class TaskPanelClickToggle : MonoBehaviour
 
     public void ShowPanel()
     {
-        if (panelToToggle != null && !IsPanelVisible())
+        if (panelToToggle == null)
         {
-            SetPanelVisible(true);
-            Debug.Log("[TaskPanelClickToggle] Auto show panel from player interaction.");
+            Debug.LogWarning("[TaskPanelClickToggle] ShowPanel ignored because panelToToggle is NULL.");
+            return;
         }
+
+        if (IsPanelVisible())
+        {
+            Debug.Log("[TaskPanelClickToggle] ShowPanel ignored because panel is already visible.");
+            return;
+        }
+
+        SetPanelVisible(true);
+        Debug.Log("[TaskPanelClickToggle] ShowPanel => visible.");
     }
 
     public void HidePanel()
     {
-        if (panelToToggle != null && IsPanelVisible())
+        if (panelToToggle == null)
         {
-            SetPanelVisible(false);
-            Debug.Log("[TaskPanelClickToggle] Auto hide panel after display duration.");
+            Debug.LogWarning("[TaskPanelClickToggle] HidePanel ignored because panelToToggle is NULL.");
+            return;
         }
+
+        if (!IsPanelVisible())
+        {
+            Debug.Log("[TaskPanelClickToggle] HidePanel ignored because panel is already hidden.");
+            return;
+        }
+
+        SetPanelVisible(false);
+        Debug.Log("[TaskPanelClickToggle] HidePanel => hidden.");
     }
 
     private bool IsPanelVisible()

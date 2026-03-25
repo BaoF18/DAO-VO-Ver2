@@ -20,6 +20,7 @@ public class TaskUI : MonoBehaviour
     [SerializeField] private string completedStateLabel = "Completed";
 
     private Coroutine displayRoutine;
+    private int displayRoutineToken;
     private string lastRenderedTaskId;
     private string lastRenderedDescription;
     private TaskState? lastRenderedState;
@@ -28,6 +29,11 @@ public class TaskUI : MonoBehaviour
 
     private void Awake()
     {
+        if (panelToggle == null)
+        {
+            panelToggle = GetComponentInParent<TaskPanelClickToggle>(true);
+        }
+
         TaskEvents.OnTaskActivated += HandleTaskActivated;
         TaskEvents.OnTaskCompleted += HandleTaskCompleted;
         TaskEvents.OnTaskUpdated += HandleTaskUpdated;
@@ -36,7 +42,7 @@ public class TaskUI : MonoBehaviour
 
     private void OnEnable()
     {
-        SyncFromManager(startDisplayFlow: false);
+        SyncFromManager(startDisplayFlow: false, source: "OnEnable");
     }
 
     private void OnDestroy()
@@ -46,48 +52,43 @@ public class TaskUI : MonoBehaviour
         TaskEvents.OnTaskUpdated -= HandleTaskUpdated;
         TaskEvents.OnTaskPanelRevealRequested -= HandleTaskPanelRevealRequested;
 
-        StopDisplayRoutine();
+        StopDisplayRoutine("OnDestroy");
     }
 
     private void HandleTaskActivated(TaskData task)
     {
         Debug.Log($"[TaskUI] HandleTaskActivated => {task?.Id ?? "NULL"}");
-        StartDisplayFlow(task, displayDuration);
+        HandleDisplayEvent(task, displayDuration, "OnTaskActivated", suppressIfUnchanged: true);
     }
 
     private void HandleTaskCompleted(TaskData task)
     {
         Debug.Log($"[TaskUI] HandleTaskCompleted => {task?.Id ?? "NULL"}");
-        StartDisplayFlow(task, completedDisplayDuration);
+        HandleDisplayEvent(task, completedDisplayDuration, "OnTaskCompleted", suppressIfUnchanged: true);
     }
 
     private void HandleTaskUpdated(TaskData task)
     {
         Debug.Log($"[TaskUI] HandleTaskUpdated => {task?.Id ?? "NONE"}");
 
-        if (!HasTaskChanged(task))
-        {
-            return;
-        }
-
         float duration = task != null && task.State == TaskState.Completed
             ? completedDisplayDuration
             : displayDuration;
 
-        StartDisplayFlow(task, duration);
+        HandleDisplayEvent(task, duration, "OnTaskUpdated", suppressIfUnchanged: true);
     }
 
     private void HandleTaskPanelRevealRequested()
     {
-        SyncFromManager(startDisplayFlow: true);
+        SyncFromManager(startDisplayFlow: true, source: "OnTaskPanelRevealRequested");
     }
 
     public void SyncFromManager()
     {
-        SyncFromManager(startDisplayFlow: false);
+        SyncFromManager(startDisplayFlow: false, source: "SyncFromManager");
     }
 
-    private void SyncFromManager(bool startDisplayFlow)
+    private void SyncFromManager(bool startDisplayFlow, string source)
     {
         if (TaskManager.Instance == null)
         {
@@ -104,7 +105,7 @@ public class TaskUI : MonoBehaviour
                 ? completedDisplayDuration
                 : displayDuration;
 
-            StartDisplayFlow(currentTask, duration);
+            StartDisplayFlow(currentTask, duration, source);
             return;
         }
 
@@ -112,42 +113,68 @@ public class TaskUI : MonoBehaviour
         UpdateRenderCache(currentTask);
     }
 
-    private void StartDisplayFlow(TaskData task, float duration)
+    private void HandleDisplayEvent(TaskData task, float duration, string source, bool suppressIfUnchanged)
+    {
+        if (suppressIfUnchanged && !HasTaskChanged(task))
+        {
+            Debug.Log($"[TaskUI] Ignore duplicate display event ({source}) for task {task?.Id ?? "NONE"}.");
+            return;
+        }
+
+        StartDisplayFlow(task, duration, source);
+    }
+
+    private void StartDisplayFlow(TaskData task, float duration, string source)
     {
         // Bắt buộc stop routine cũ trước khi chạy routine mới.
         // Nếu không, nhiều routine cùng chạy sẽ làm panel bị tắt sớm hoặc chồng trạng thái UI.
-        StopDisplayRoutine();
+        StopDisplayRoutine($"Restart from {source}");
 
         ShowPanel();
         Render(task);
         UpdateRenderCache(task);
 
+        Debug.Log($"[TaskUI] Start display from {source} => task: {task?.Id ?? "NONE"}, state: {(task != null ? task.State.ToString() : "NONE")}, duration: {duration:0.00}s");
+
         if (duration <= 0f)
         {
+            Debug.Log("[TaskUI] Duration <= 0, skip auto hide.");
             return;
         }
 
-        displayRoutine = StartCoroutine(HidePanelAfterDelay(duration));
+        displayRoutineToken++;
+        int token = displayRoutineToken;
+        displayRoutine = StartCoroutine(HidePanelAfterDelay(duration, token));
+        Debug.Log($"[TaskUI] Start display coroutine token={token}");
     }
 
-    private IEnumerator HidePanelAfterDelay(float delay)
+    private IEnumerator HidePanelAfterDelay(float delay, int token)
     {
         // Flow hiển thị:
         // - Task mới: render description, đợi ~3s rồi ẩn panel.
         // - Task completed: render "Completed", đợi 1-2s rồi ẩn panel.
         // Khi event mới tới, routine này sẽ bị stop và reset timer từ đầu.
         yield return new WaitForSeconds(delay);
+
+        if (token != displayRoutineToken)
+        {
+            Debug.Log($"[TaskUI] Skip hide for stale coroutine token={token}, current={displayRoutineToken}");
+            yield break;
+        }
+
         displayRoutine = null;
+        Debug.Log($"[TaskUI] Hide panel from display coroutine token={token}");
         HidePanel();
     }
 
-    private void StopDisplayRoutine()
+    private void StopDisplayRoutine(string reason)
     {
         if (displayRoutine == null)
         {
             return;
         }
 
+        Debug.Log($"[TaskUI] Stop display coroutine token={displayRoutineToken}. Reason: {reason}");
         StopCoroutine(displayRoutine);
         displayRoutine = null;
     }
@@ -165,7 +192,10 @@ public class TaskUI : MonoBehaviour
         if (panelToggle != null)
         {
             panelToggle.HidePanel();
+            return;
         }
+
+        Debug.LogWarning("[TaskUI] panelToggle is NULL. Cannot hide panel.");
     }
 
     private void RenderUnavailable()
