@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: caa5043e78e2a1a49a7d151b51219d78
+guid: 21e35f4403c892546960fa1d2924ee1c
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wall1HD
+    second: {fileID: 2800000, guid: bcfcb66941621334785d74643dd13bd6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wall2
+    second: {fileID: 2800000, guid: d67c9e531b119f44d818c7ac0908698e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WallHD
+    second: {fileID: 2800000, guid: a13fd3e71f817e5488ab5baed00d747f, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

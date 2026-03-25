@@ -1,9 +1,64 @@
 fileFormatVersion: 2
-guid: caa5043e78e2a1a49a7d151b51219d78
+guid: 1d27b573e8948e941a8f45443b943601
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: 58453b08253e27f498f474df840e7749, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door1
+    second: {fileID: 2100000, guid: bec22436cea50534192ed264ca23abab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: b358a1c2ab703c74592ef149f4f6c93e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: c94056a16e80ada4db7d305e88d4991a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 5460410db1d30d84da0b00008658b893, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UpDoorF
+    second: {fileID: 2100000, guid: 3243de1dc1b46024184106dd08393487, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: 8933eb77b5e302b48bd0fa2079620c7c, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PileLine
+    second: {fileID: 2800000, guid: 6c5f6258c1d53194790df2de9e447cbb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: UpDoor
+    second: {fileID: 2800000, guid: 22720be6a986f7d48919d33ff5a3fee4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WallYellowHouse
+    second: {fileID: 2800000, guid: 966bf8bf501c3854386335baaa9d70ed, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2800000, guid: aaab24a708c62b944920201d355885d7, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

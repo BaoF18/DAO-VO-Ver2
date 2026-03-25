@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: caa5043e78e2a1a49a7d151b51219d78
+guid: 9a0ad479a0034c0458362d37204b5e3c
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Brick
+    second: {fileID: 2800000, guid: fd1efd91a44076542bdea16ac9bfd46f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Screenshot 2026-03-22 204409
+    second: {fileID: 2800000, guid: bc9b9402139d6fb48a6310fa9c3c951a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Substation
+    second: {fileID: 2800000, guid: 7ab7a36281a4473418efd5b78542d1ee, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
