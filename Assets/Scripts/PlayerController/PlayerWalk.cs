@@ -61,6 +61,12 @@ public class PlayerWalk : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Stop character movement if currently in a "LockMove" animation state (e.g. attacking, dodging, etc.)
+        if (m_animator.GetCurrentAnimatorStateInfo(0).IsTag("LockMove"))
+        {
+            m_animator.SetFloat("moveAmount", 0f, 0.1f, Time.deltaTime);
+            return; 
+        }
         float currentSpeed = WalkSpeed; // Default to walk speed
 
         if (playerSprint != null && playerSprint.IsSprintActive)

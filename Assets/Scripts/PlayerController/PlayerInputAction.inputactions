@@ -7,6 +7,15 @@
             "id": "f7e573c4-ea66-4eac-8167-e08ddb12db4a",
             "actions": [
                 {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "17f2c3bc-297c-4a44-bdeb-bcf63da9e785",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Movement",
                     "type": "Value",
                     "id": "ee2075d0-e9aa-437d-b0fb-9a33d27aee42",
@@ -37,6 +46,33 @@
                     "name": "Intreract",
                     "type": "Button",
                     "id": "9c610721-9b96-4501-902d-a0a19dc2badb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Block",
+                    "type": "Button",
+                    "id": "7fb25df0-7fcc-48ec-a113-c4d939b5cb2f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "7c255466-f7c7-4af1-a1a0-0aeb21e3617c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pickup",
+                    "type": "Button",
+                    "id": "c88c1018-fe3f-478e-8645-c9de63c25267",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -129,6 +165,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Intreract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8721ff83-9072-448e-b42d-b6b1915aed33",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71641ea8-5548-4c61-a3bf-af06090e2c8e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d44f9ce8-6ee0-468c-8f4f-75b8cad191e2",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14918fd9-b41a-4d2f-abce-21bfb658f2bc",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pickup",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
