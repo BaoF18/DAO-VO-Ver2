@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 21e35f4403c892546960fa1d2924ee1c
+guid: 1ce6f94632d73ea4fb24f9ebb357d35f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,33 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Rock
-    second: {fileID: 2100000, guid: 3aeb75153aade474fbe0c26748e45dd8, type: 2}
+      name: Material.001
+    second: {fileID: 2100000, guid: 14c1237d7f997f7409bcb498424526e7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Rock1
-    second: {fileID: 2100000, guid: 5cbcc8fa4e670c541a502e1e3722eda3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Rock2
-    second: {fileID: 2100000, guid: ec81e1051465a9e47b39440d222ea5dc, type: 2}
+      name: TrashBin
+    second: {fileID: 2100000, guid: 65b103dda5e4ca74887a6d34bcbc70d9, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: Wall1HD
-    second: {fileID: 2800000, guid: bcfcb66941621334785d74643dd13bd6, type: 3}
+      name: TrashBin
+    second: {fileID: 2800000, guid: 9d3d0ec1e4fdd324cb193ec3545e0638, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: Wall2
-    second: {fileID: 2800000, guid: d67c9e531b119f44d818c7ac0908698e, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: WallHD
-    second: {fileID: 2800000, guid: a13fd3e71f817e5488ab5baed00d747f, type: 3}
+      name: "po\u0192etsandalkye_DefaultMaterial_BaseColor"
+    second: {fileID: 2800000, guid: 11e847749e9351f408ca6b899eb8fed8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
