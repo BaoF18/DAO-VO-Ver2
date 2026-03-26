@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a6149f04780115a48b6bad836a1fe25b
+guid: 5c02ce2c03dfde4449afd0601b944d5d
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_GermanShepherd
-    second: {fileID: 2100000, guid: 3836024b02e79534bb0da2c69c2aba28, type: 2}
+    second: {fileID: 2100000, guid: a1dc3242a956ae644aaecaa76d92162e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_GermanShepherd_Transparent
-    second: {fileID: 2100000, guid: a3d8f160d8a665843b87febc4764a80d, type: 2}
+    second: {fileID: 2100000, guid: d62eba9b3ffa9ef47ac41c73e3a8b2a9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -32,7 +32,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -104,13 +104,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 3
+  animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
