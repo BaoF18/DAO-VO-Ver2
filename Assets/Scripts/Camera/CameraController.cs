@@ -1,4 +1,4 @@
-
+﻿
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +24,10 @@ public class CameraController : MonoBehaviour
     [Header("Input")]
     [Tooltip("Input Action for looking around.")]
     [SerializeField] private InputActionReference lookActionReference;
+
+    [Header("Camera Shake")]
+    private float shakeDuration = 0f;
+    private float shakeMagnitude = 0f;
 
 
     private float rotationY;
@@ -81,8 +85,22 @@ public class CameraController : MonoBehaviour
         // Make the camera follow the target at a fixed "distance" and "heightCamera"
         transform.position = focusPoint - targetRotation * new Vector3(0, 0, distance);
         transform.rotation = targetRotation;
+
+        // Handle camera shake
+        if (shakeDuration > 0)
+        {
+            Vector3 shakeOffset = Random.insideUnitSphere * shakeMagnitude;
+            transform.position += shakeOffset;
+
+            shakeDuration -= Time.deltaTime;
+        }
     }
     // Expose the planar rotation (rotation around the Y-axis) for external use
     public Quaternion planarRotation => Quaternion.Euler(0, rotationY, 0);
 
+    public void TriggerShake(float duration, float magnitude)
+    {
+        shakeDuration = duration;
+        shakeMagnitude = magnitude;
+    }
 }
