@@ -1,89 +1,29 @@
 fileFormatVersion: 2
-guid: 1d27b573e8948e941a8f45443b943601
+guid: be652ad97c4e1d547a460718e28dec08
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
   externalObjects:
   - first:
-      type: UnityEngine:Material
+      type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: Ad
-    second: {fileID: 2100000, guid: f857d46e606626d42a583be9072d7669, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Ad1
-    second: {fileID: 2100000, guid: 0a86bb69649efb44b8fd820909aa94e8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: BaseColor
-    second: {fileID: 2100000, guid: c8b2f49c8bd9d0a40873b18457294d9a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door
-    second: {fileID: 2100000, guid: 324a422cdffeae7418fe6910dbdf4338, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Door1
-    second: {fileID: 2100000, guid: 956a3c60dce7b0e418dd3650c11dcf72, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.002
-    second: {fileID: 2100000, guid: a84eacf8ee166714baa2a5492d49b364, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.003
-    second: {fileID: 2100000, guid: 86c9e9f976598f84898262834faac41b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.004
-    second: {fileID: 2100000, guid: e9e53f1797916db48af1204eb6d151a3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: UpDoorF
-    second: {fileID: 2100000, guid: b50dee301d5e33e47aceafee6fd1fa94, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Window
-    second: {fileID: 2100000, guid: 37e8b781edc2bf244a3ed006717db15f, type: 2}
+      name: texture_pbr_20250901
+    second: {fileID: 2800000, guid: c50f2f9816058aa4ba701e8f9207b191, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: Gemini_Generated_Image_9slr6l9slr6l9slr
-    second: {fileID: 2800000, guid: 3dda2713761c456498b3904a5d668cb0, type: 3}
+      name: texture_pbr_20250901_metallic
+    second: {fileID: 2800000, guid: 2da67f561ac70114791bbbc1425ab266, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: PileLine
-    second: {fileID: 2800000, guid: ec410c8799e47ab4e91e4f4423aaea33, type: 3}
+      name: texture_pbr_20250901_normal
+    second: {fileID: 2800000, guid: 269c1d569220f9441be8f855ad61ee4c, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: UpDoor
-    second: {fileID: 2800000, guid: 7125ff4c219cb064fb24f8f26c995b48, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: WallYellowHouse
-    second: {fileID: 2800000, guid: 7203bfc7bf1bbd64ba7f88240f8f1637, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Window
-    second: {fileID: 2800000, guid: b282cf009e2c53d4e9d6c72bfe19390f, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: e211a845-157f-4336-a083-6e29b9ca8f0a
-    second: {fileID: 2800000, guid: 73352829e65d6f64e958ce558a52b7a9, type: 3}
+      name: texture_pbr_20250901_roughness
+    second: {fileID: 2800000, guid: 9c5f1d718fa0d52418a30a2dcaa3b644, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
