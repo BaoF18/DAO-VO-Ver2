@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a9c83c8ef0a7b9e4f90ff87abfda08e8
+guid: 048bc16876c1d014eaef56aaeecf42f4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -95,100 +95,12 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: item slot_0
-      rect:
-        serializedVersion: 2
-        x: 638
-        y: 1316
-        width: 2493
-        height: 2478
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 929, y: 1003, z: 772, w: 893}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4df3f87c54256e04e86051bd21214c19
-      internalID: -1347913675
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: item slot_1
-      rect:
-        serializedVersion: 2
-        x: 3323
-        y: 1205
-        width: 2778
-        height: 2785
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1082, y: 1156, z: 963, w: 1044}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c888c2fe0cef474fb2c5f9e38cb17b9
-      internalID: 193920737
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: item slot_2
-      rect:
-        serializedVersion: 2
-        x: 6205
-        y: 1366
-        width: 2513
-        height: 2508
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 274, y: 240, z: 280, w: 265}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59c8946acf784264aa05498975a6af91
-      internalID: -419567856
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: item slot_3
-      rect:
-        serializedVersion: 2
-        x: 8780
-        y: 1240
-        width: 2773
-        height: 2797
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 395, y: 414, z: 457, w: 452}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e0ae55a1e35787d4c9f227a66805a6ff
-      internalID: -1046099358
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e6a0abab2c138714b816e1b85e5eecf3
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -197,11 +109,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      item slot_0: -1347913675
-      item slot_1: 193920737
-      item slot_2: -419567856
-      item slot_3: -1046099358
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
