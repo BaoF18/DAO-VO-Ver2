@@ -348,7 +348,7 @@ Transform:
   m_GameObject: {fileID: 16832423}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.24, y: -1.16, z: -31.9}
+  m_LocalPosition: {x: 7.3, y: -1.16, z: -33.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8671,7 +8671,7 @@ Transform:
   m_GameObject: {fileID: 551560610}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.16, y: -1.16, z: -5.65}
+  m_LocalPosition: {x: 8.16, y: -1.16, z: -7.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24815,7 +24815,7 @@ Transform:
   m_GameObject: {fileID: 1603767890}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 1.01, z: 28.3}
+  m_LocalPosition: {x: 6, y: 1.01, z: 28.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34192,7 +34192,7 @@ GameObject:
   - component: {fileID: 976770905}
   - component: {fileID: 976770904}
   m_Layer: 0
-  m_Name: chay tai cho
+  m_Name: ChuTu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
