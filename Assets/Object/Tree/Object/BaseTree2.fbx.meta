@@ -1,9 +1,49 @@
 fileFormatVersion: 2
-guid: be652ad97c4e1d547a460718e28dec08
+guid: bd858523aa1b13a49832f3e63402346e
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaves
+    second: {fileID: 2100000, guid: 7ce419412e471c040b0136142d439ace, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaves.001
+    second: {fileID: 2100000, guid: 976ccb6e1d22eb34d8ea83d952375c6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 420dce4b1b4478843add6872e6f0c9db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 792e5e007e8038540b20c4a21af6a4a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 329a9d8566253d34b88f76fa2febd88e, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Brick
+    second: {fileID: 2800000, guid: ae294183ef4bbe243b4ace03a581e945, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Untitled-1
+    second: {fileID: 2800000, guid: cc2106b42d5a9de49afa4113aeb3b7bb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Untitled-2
+    second: {fileID: 2800000, guid: 9ce770fe1e1d9b7498153a02b7e5c6c6, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
