@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class NPCInteractable : Interactable
 {
     public DialogueData dialogueData;
+    [SerializeField] private NPC_TaskTrigger npcTaskTrigger;
 
     [Header("Events")]
     [SerializeField] private UnityEvent onInteractStarted;
@@ -22,6 +23,11 @@ public class NPCInteractable : Interactable
     void Awake()
     {
         npcMovement = GetComponent<NPCMovement>();
+
+        if (npcTaskTrigger == null)
+        {
+            npcTaskTrigger = GetComponent<NPC_TaskTrigger>();
+        }
 
         // NPC tĩnh (không có NPCMovement, ví dụ ngồi):
         // - Rigidbody kinematic để physics không xung đột với Animator
@@ -75,6 +81,8 @@ public class NPCInteractable : Interactable
             {
                 npcMovement.Pause();
             }
+
+            npcTaskTrigger?.Interact();
 
             DialogueManager.Instance.StartDialogue(dialogueData);
             waitingForDialogueEnd = true;

@@ -12,6 +12,7 @@ public class PlayerInteract : MonoBehaviour
     public LayerMask interactLayerMask = ~0;
     public TextMeshProUGUI promptText;
     public string promptMessage = "Press E";
+    [SerializeField] private bool autoAssignPromptText = true;
 
     private Camera cam;
     private IInteractable currentInteractable;
@@ -22,18 +23,21 @@ public class PlayerInteract : MonoBehaviour
     {
         interactAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/e");
         interactAction.Enable();
+
+        TryAutoAssignPromptText();
     }
 
     void Start()
     {
         cam = Camera.main;
-        if (promptText != null)
-            promptText.text = string.Empty;
+        TryAutoAssignPromptText();
+        SetPrompt(string.Empty);
     }
 
     void OnEnable()
     {
         interactAction.Enable();
+        TryAutoAssignPromptText();
     }
 
     void OnDisable()
@@ -61,6 +65,7 @@ public class PlayerInteract : MonoBehaviour
         // Để player quay mặt đi vẫn tương tác, nhưng rời xa thì ngừng
         if (currentInteractable != null && currentInteractable.IsInteracting)
         {
+            SetPrompt(string.Empty);
             Component comp = currentInteractable as Component;
             if (comp != null)
             {
@@ -69,8 +74,7 @@ public class PlayerInteract : MonoBehaviour
                 {
                     currentInteractable.OnInteractEnd();
                     currentInteractable = null;
-                    if (promptText != null)
-                        promptText.text = string.Empty;
+                    SetPrompt(string.Empty);
                 }
             }
             return;
@@ -85,14 +89,102 @@ public class PlayerInteract : MonoBehaviour
             if (interactable != null)
             {
                 currentInteractable = interactable;
-                if (promptText != null)
-                    promptText.text = promptMessage;
+                SetPrompt(promptMessage);
                 return;
             }
         }
         currentInteractable = null;
-        if (promptText != null)
-            promptText.text = string.Empty;
+        SetPrompt(string.Empty);
+    }
+
+    private void SetPrompt(string value)
+    {
+        EnsurePromptTarget();
+
+        if (promptText == null)
+        {
+            return;
+        }
+
+        promptText.text = value;
+    }
+
+    private void EnsurePromptTarget()
+    {
+        if (promptText == null || !promptText.gameObject.activeInHierarchy)
+        {
+            TryAutoAssignPromptText();
+        }
+    }
+
+    private void TryAutoAssignPromptText()
+    {
+        if (!autoAssignPromptText && promptText != null)
+        {
+            return;
+        }
+
+        if (promptText != null && promptText.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
+        TextMeshProUGUI[] allTexts = FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        TextMeshProUGUI fallback = null;
+
+        for (int i = 0; i < allTexts.Length; i++)
+        {
+            TextMeshProUGUI candidate = allTexts[i];
+            if (candidate == null)
+            {
+                continue;
+            }
+
+            string lowerName = candidate.name.ToLowerInvariant();
+            bool looksLikePrompt = lowerName.Contains("press") || lowerName.Contains("interact");
+            if (!looksLikePrompt)
+            {
+                continue;
+            }
+
+            if (IsUnderDialoguePanel(candidate.transform))
+            {
+                continue;
+            }
+
+            if (fallback == null)
+            {
+                fallback = candidate;
+            }
+
+            if (candidate.gameObject.activeInHierarchy)
+            {
+                promptText = candidate;
+                return;
+            }
+        }
+
+        if (promptText == null)
+        {
+            promptText = fallback;
+        }
+    }
+
+    private bool IsUnderDialoguePanel(Transform target)
+    {
+        Transform current = target;
+        while (current != null)
+        {
+            string lowerName = current.name.ToLowerInvariant();
+            if (lowerName.Contains("dialoguepanel") || lowerName == "dialogue" || lowerName.Contains("dialogue"))
+            {
+                return true;
+            }
+
+            current = current.parent;
+        }
+
+        return false;
     }
 
     void TryInteract()
