@@ -9,7 +9,6 @@ public class EnemyHealth : MonoBehaviour
     private int currentHealth;
     [Header("UI")]
     public Image healthBarFill;
-    public GameObject damagePopupPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,17 +20,20 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damageAmount;
         UpdateHealthBar();
-        if (damagePopupPrefab != null)
+        if (UIManager.Instance != null && UIManager.Instance.damagePopupPrefab != null)
         {
-            Vector3 popupPos = transform.position + Vector3.up * 0.5f;
+            // Vị trí nảy số
+            Vector3 popupPos = transform.position + Vector3.up * 1.5f;
 
-            GameObject popupObj = Instantiate(damagePopupPrefab, popupPos, Quaternion.identity);
+            // Sinh ra cục Text
+            GameObject popupObj = Instantiate(UIManager.Instance.damagePopupPrefab, popupPos, Quaternion.identity);
 
-            //DamagePopup popupScript = popupObj.GetComponent<DamagePopup>();
-            //if (popupScript != null)
-            //{
-            //    popupScript.Setup(damageAmount);
-            //}
+            // Gắn số sát thương vào Text
+            DamagePopup popupScript = popupObj.GetComponent<DamagePopup>();
+            if (popupScript != null)
+            {
+                popupScript.Setup(damageAmount);
+            }
         }
         Debug.Log("💥 Enemy lost " + damageAmount + " Health. Remains" + currentHealth + " ❤");
 
