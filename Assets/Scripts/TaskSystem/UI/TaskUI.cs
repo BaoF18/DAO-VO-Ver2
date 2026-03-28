@@ -29,6 +29,8 @@ public class TaskUI : MonoBehaviour
 
     private void Awake()
     {
+        AutoAssignMissingReferences();
+
         if (panelToggle == null)
         {
             panelToggle = GetComponentInParent<TaskPanelClickToggle>(true);
@@ -42,7 +44,62 @@ public class TaskUI : MonoBehaviour
 
     private void OnEnable()
     {
+        AutoAssignMissingReferences();
         SyncFromManager(startDisplayFlow: false, source: "OnEnable");
+    }
+
+    private void AutoAssignMissingReferences()
+    {
+        if (panelToggle == null)
+        {
+            panelToggle = GetComponentInParent<TaskPanelClickToggle>(true);
+        }
+
+        if (taskDescriptionText != null && taskStateText != null)
+        {
+            return;
+        }
+
+        TMP_Text[] textCandidates = GetComponentsInChildren<TMP_Text>(true);
+        for (int i = 0; i < textCandidates.Length; i++)
+        {
+            TMP_Text candidate = textCandidates[i];
+            if (candidate == null)
+            {
+                continue;
+            }
+
+            string lowerName = candidate.name.ToLowerInvariant();
+
+            if (taskDescriptionText == null && (lowerName.Contains("description") || lowerName.Contains("desc")))
+            {
+                taskDescriptionText = candidate;
+                continue;
+            }
+
+            if (taskStateText == null && lowerName.Contains("state"))
+            {
+                taskStateText = candidate;
+            }
+        }
+
+        if (taskDescriptionText == null && textCandidates.Length > 0)
+        {
+            taskDescriptionText = textCandidates[0];
+        }
+
+        if (taskStateText == null)
+        {
+            for (int i = 0; i < textCandidates.Length; i++)
+            {
+                TMP_Text candidate = textCandidates[i];
+                if (candidate != null && candidate != taskDescriptionText)
+                {
+                    taskStateText = candidate;
+                    break;
+                }
+            }
+        }
     }
 
     private void OnDestroy()

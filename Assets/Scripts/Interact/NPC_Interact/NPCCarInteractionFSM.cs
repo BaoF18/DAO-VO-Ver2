@@ -55,6 +55,7 @@ public class NPCCarInteractionFSM : Interactable
     [SerializeField] private UnityEvent onInteractStarted;
     [SerializeField] private UnityEvent onDialogueFinished;
     [SerializeField] private UnityEvent onMiniGameCompleted;
+    [SerializeField] private NPC_TaskTrigger npcTaskTrigger;
 
     private NPCState state = NPCState.DrivingToPoint; // FIX
     private bool interactLocked;
@@ -82,6 +83,11 @@ public class NPCCarInteractionFSM : Interactable
 
     private void Awake()
     {
+        if (npcTaskTrigger == null)
+        {
+            npcTaskTrigger = GetComponent<NPC_TaskTrigger>();
+        }
+
         HideThanksText();
     }
 
@@ -177,6 +183,7 @@ public class NPCCarInteractionFSM : Interactable
 
             interactLocked = true; // FIX: chống spam interact
             onInteractStarted?.Invoke();
+            npcTaskTrigger?.Interact();
             DialogueManager.Instance.StartDialogue(dialogueData);
         }
         finally
