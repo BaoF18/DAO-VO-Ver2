@@ -31,25 +31,10 @@ MonoBehaviour:
     text: "c\u01B0\u1EDDi kh\u1EA9y\r\nCh\u01B0a c\xF3 em \u0103n n\xEAn m\u1EDBi
       \u1EBF \u0111\u1EA5y.\r\nTi\u1EC7n th\u1EC3 l\u1EA5y em 1 b\u1ECBch \u0111em
       v\u1EC1 nh\xE9."
-  - speakerName: "Ch\xFA Long"
-    text: "R\u1ED3i \u0111\u1EE3i m\u1ED9t t\xED."
   - speakerName: 'Nam '
     text: "\xC0 h\u1EE7 ti\u1EBFu kh\xF4 b\xF2 vi\xEAn kh\xF4ng h\xE0nh nhi\u1EC1u
       phi \xEDt cay nhi\u1EC1u salach \xEDt gi\xE1 kh\xF4ng h\u1EB9 nhi\u1EC1u h\u1EE7
       ti\u1EBFu m\u1ED7i b\xF2 vi\xEAn nha."
   - speakerName: ' '
-    text: "B\u1ED7ng dung con trai ch\xFA Long t\u1EDBi "
-  - speakerName: "Ch\xFA Long"
-    text: "tao kh\xF4ng c\xF3, s\xE1ng kh\xF4ng \u1EDF nh\xE0 ph\u1EE5 gi\xFAp gia
-      \u0111\xECnh m\xE0 \u0111i long nhong \u0111\xE2u \u0111\u1EA5y."
-  - speakerName: "B\u1EA3o"
-    text: "Th\xF4i \xF4ng \u0111\u1EEBng nhi\u1EC1u l\u1EDDi N\xF3i r\u1ED3i B\u1EA3o
-      \u0111\u1EA9y \xF4ng  ra m\u1EDF ng\u0103n h\u1EE7 ti\u1EBFu l\u1EA5y ti\u1EC1n"
-  - speakerName: Nam
-    text: "N\xE0y v\u1EEBa ph\u1EA3i th\xF4i ch\u1EE9, m\u1EB9 anh l\xE0m s\xE1ng
-      gi\u1EDD m\u1EC7t l\xF2i r\u1ED3i, ch\u1EC9 v\xEC kh\xF4ng \u0111\u01B0a ti\u1EC1n
-      m\xE0 anh x\xF4 ba anh v\u1EADy \xE0. "
-  - speakerName: "B\u1EA3o"
-    text: "th\u1EB1ng n\xE0y l\xE1o nh\u1EC9 , vi\u1EC7c nh\xE0 m\xE0y \xE0"
-  - speakerName: 
-    text: "N\xF3i r\u1ED3i b\u1EA3o lao v\xE0o \u0111\xE1nh nhau v\u1EDBi nam"
+    text: "B\u1ED7ng dung con m\u1ED9t th\u1EB1ng c\xF4n \u0111\u1ED3 b\u1ECB ng\xE1o
+      \u0111\xE1 xu\u1EA5t hi\u1EC7n "

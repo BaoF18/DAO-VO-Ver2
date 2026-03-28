@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class PlayerHitbox : MonoBehaviour
 {
     private int currentDamage = 0;
@@ -8,22 +9,52 @@ public class PlayerHitbox : MonoBehaviour
     [Header("Hitbox Stats")]
     public float baseKnockback = 5f;
 
-    void Start()
+    private void Awake()
     {
-        hitboxCollider = GetComponent<Collider>();
-        hitboxCollider.isTrigger = true;
-        hitboxCollider.enabled = false;
+        EnsureCollider();
+        DisableHitbox();
     }
 
     public void EnableHitbox(int damageAmount)
     {
+        if (!EnsureCollider())
+        {
+            return;
+        }
+
         currentDamage = damageAmount;
         hitboxCollider.enabled = true;
     }
 
     public void DisableHitbox()
     {
+        if (!EnsureCollider())
+        {
+            return;
+        }
+
         hitboxCollider.enabled = false;
+    }
+
+    private bool EnsureCollider()
+    {
+        if (hitboxCollider == null)
+        {
+            hitboxCollider = GetComponent<Collider>();
+        }
+
+        if (hitboxCollider == null)
+        {
+            Debug.LogError($"[PlayerHitbox] Missing Collider on {name}.", this);
+            return false;
+        }
+
+        if (!hitboxCollider.isTrigger)
+        {
+            hitboxCollider.isTrigger = true;
+        }
+
+        return true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,7 +64,6 @@ public class PlayerHitbox : MonoBehaviour
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
-                float appliedKnockback = baseKnockback * (currentDamage / 25f);
                 enemy.TakeDamage(currentDamage, transform.root.position);
 
                 if (Camera.main != null)

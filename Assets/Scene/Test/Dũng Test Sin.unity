@@ -2654,6 +2654,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   promptText: {fileID: 1652114592}
   promptMessage: Press E
+  autoAssignPromptText: 1
 --- !u!4 &1917256514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8323816171193277156, guid: ee1050ac4ec19e44dae6f2657006fb59, type: 3}
@@ -2805,6 +2806,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
   dialogueData: {fileID: 11400000, guid: 7ec34120f6823a74d9688e935f32566b, type: 2}
+  npcTaskTrigger: {fileID: 0}
+  onInteractStarted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1942044176
 MonoBehaviour:
   m_ObjectHideFlags: 0
