@@ -31537,7 +31537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefab: {fileID: 3092905538832846116, guid: 9c2c8736a9c7622499297b5ea3a59835, type: 3}
-  delayTime: 10
+  delayTime: 60
 --- !u!4 &1829516864
 Transform:
   m_ObjectHideFlags: 0
