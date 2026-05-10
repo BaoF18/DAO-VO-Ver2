@@ -29698,7 +29698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f84200631d73944b6486361f859441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  comboWindow: 0.8
+  comboWindow: 0.5
+  minClickDelay: 0.25
   autoFaceRange: 3
   InputActions: {fileID: -944628639613478452, guid: 3ebcc216e7c8bcd439abd9366cd50f9e, type: 3}
 --- !u!1001 &1669363368

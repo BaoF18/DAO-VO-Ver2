@@ -5,7 +5,9 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("Combo settings")]
     [Tooltip("Time maximum that player can continously click to release combo 2 or 3...")]
-    public float comboWindow = 0.8f;
+    public float comboWindow = 0.5f;
+    [Tooltip("Minimum time between clicks to avoid spamming")]
+    public float minClickDelay = 0.25f; // (0.2 -> 0.4)
 
     [Header("Auto Target Settings")]
     public float autoFaceRange = 3f; // Bán kính hút quái khi đánh
@@ -37,6 +39,12 @@ public class PlayerAttack : MonoBehaviour
         // 2. Lắng nghe từng nhát Click chuột
         if (m_attackAction.WasPressedThisFrame())
         {
+            // Chặn click nếu khoảng cách giữa 2 lần bấm quá ngắn
+            if (Time.time - lastClickTime < minClickDelay && comboStep > 0)
+            {
+                return; // Bỏ qua nhát click này, không làm gì cả
+            }
+
             lastClickTime = Time.time;
 
             // Giới hạn tối đa là 3 hit (chuỗi 3 combo)
