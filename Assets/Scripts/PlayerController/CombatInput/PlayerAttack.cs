@@ -3,6 +3,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Combat System Toggle")]
+    [Tooltip("Combat State")]
+    public bool isCombatUnlocked = false;
+    [Tooltip("Skill Panel")]
+    public GameObject combatUIPanel;
+    [Tooltip("Health Panel")]
+    public GameObject healthUIPanel;
     [Header("Combo settings")]
     [Tooltip("Time maximum that player can continously click to release combo 2 or 3...")]
     public float comboWindow = 0.5f;
@@ -24,12 +31,18 @@ public class PlayerAttack : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_attackAction = InputActions.FindActionMap("Player").FindAction("Attack");
     }
+    private void Start()
+    {
+        // Khi mới bắt đầu game, tự động cập nhật UI (ẩn đi)
+        SetCombatState(isCombatUnlocked);
+    }
 
     private void OnEnable() => m_attackAction.Enable();
     private void OnDisable() => m_attackAction.Disable();
 
     private void Update()
     {
+        if (!isCombatUnlocked) return;
         // 1. Kiểm tra xem người chơi có dừng bấm quá lâu không
         if (comboStep > 0 && Time.time - lastClickTime > comboWindow)
         {
@@ -153,5 +166,26 @@ public class PlayerAttack : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, autoFaceRange);
+    }
+    // ==========================================
+    // BẬT/TẮT CHẾ ĐỘ CHIẾN ĐẤU VÀ UI
+    // ==========================================
+    public void SetCombatState(bool isActive)
+    {
+        isCombatUnlocked = isActive;
+
+        // Bật/tắt giao diện UI Nút bấm
+        if (combatUIPanel != null)
+        {
+            combatUIPanel.SetActive(isActive);
+        }
+
+        // Bật/tắt giao diện UI Máu & Stamina
+        if (healthUIPanel != null)
+        {
+            healthUIPanel.SetActive(isActive);
+        }
+
+        Debug.Log("Combat state: " + (isActive ? "ON" : "OFF"));
     }
 }
