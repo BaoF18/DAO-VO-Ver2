@@ -103,7 +103,19 @@ public class PlayerInteract : MonoBehaviour
 
         if (promptText == null)
         {
+            Debug.LogWarning("[PlayerInteract] promptText is NULL. Cannot render prompt.");
             return;
+        }
+
+        bool hasValue = !string.IsNullOrEmpty(value);
+        if (promptText.gameObject.activeSelf != hasValue)
+        {
+            promptText.gameObject.SetActive(hasValue);
+        }
+
+        if (promptText.enabled != hasValue)
+        {
+            promptText.enabled = hasValue;
         }
 
         promptText.text = value;
@@ -115,6 +127,37 @@ public class PlayerInteract : MonoBehaviour
         {
             TryAutoAssignPromptText();
         }
+
+        EnsurePromptNotUnderDialoguePanel();
+    }
+
+    private void EnsurePromptNotUnderDialoguePanel()
+    {
+        if (promptText == null)
+        {
+            return;
+        }
+
+        DialogueManager dialogueManager = DialogueManager.Instance;
+        if (dialogueManager == null || dialogueManager.dialoguePanel == null)
+        {
+            return;
+        }
+
+        if (!promptText.transform.IsChildOf(dialogueManager.dialoguePanel.transform))
+        {
+            return;
+        }
+
+        Transform newParent = dialogueManager.dialoguePanel.transform.parent;
+        if (newParent == null)
+        {
+            Debug.LogWarning("[PlayerInteract] Prompt text is under DialoguePanel with no parent. Cannot reparent.");
+            return;
+        }
+
+        promptText.transform.SetParent(newParent, true);
+        Debug.LogWarning($"[PlayerInteract] Prompt text moved out of DialoguePanel to '{newParent.name}'.");
     }
 
     private void TryAutoAssignPromptText()
@@ -168,20 +211,31 @@ public class PlayerInteract : MonoBehaviour
         {
             promptText = fallback;
         }
+
+        if (promptText != null)
+        {
+            Debug.Log($"[PlayerInteract] Auto-assign promptText => {promptText.name}");
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerInteract] Auto-assign promptText failed. No candidate found.");
+        }
     }
 
     private bool IsUnderDialoguePanel(Transform target)
     {
-        Transform current = target;
-        while (current != null)
+        DialogueManager dialogueManager = DialogueManager.Instance;
+        if (dialogueManager != null)
         {
-            string lowerName = current.name.ToLowerInvariant();
-            if (lowerName.Contains("dialoguepanel") || lowerName == "dialogue" || lowerName.Contains("dialogue"))
+            if (dialogueManager.nameText == target || dialogueManager.dialogueText == target)
             {
                 return true;
             }
 
-            current = current.parent;
+            if (dialogueManager.dialoguePanel != null && target.IsChildOf(dialogueManager.dialoguePanel.transform))
+            {
+                return true;
+            }
         }
 
         return false;

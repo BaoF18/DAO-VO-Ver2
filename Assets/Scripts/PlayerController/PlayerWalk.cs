@@ -61,6 +61,11 @@ public class PlayerWalk : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
+        {
+            m_animator.SetFloat("moveAmount", 0f, 0.1f, Time.deltaTime);
+            return;
+        }
         //Stop character movement if currently in a "LockMove" animation state (e.g. attacking, dodging, etc.)
         if (m_animator.GetCurrentAnimatorStateInfo(0).IsTag("LockMove"))
         {
