@@ -12294,7 +12294,7 @@ GameObject:
   - component: {fileID: 663447640}
   - component: {fileID: 663447639}
   m_Layer: 5
-  m_Name: Press E
+  m_Name: press
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53260,6 +53260,7 @@ SceneRoots:
   - {fileID: 483981556}
   - {fileID: 1038678367}
   - {fileID: 1572657590}
+  - {fileID: 1348475256}
   - {fileID: 5521635370714337850}
   - {fileID: 526616577}
   - {fileID: 840533828}
@@ -53267,7 +53268,6 @@ SceneRoots:
   - {fileID: 227505546}
   - {fileID: 21048386}
   - {fileID: 1752114280}
-  - {fileID: 1348475256}
   - {fileID: 3677807093393235700}
   - {fileID: 1920982121}
   - {fileID: 587856535}
