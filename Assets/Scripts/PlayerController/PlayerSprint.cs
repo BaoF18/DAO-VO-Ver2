@@ -66,28 +66,44 @@ public class PlayerSprint : MonoBehaviour
             return;
         }
         bool wantsSprint = false;
+        bool sprintPressedThisFrame = false;
+
         if (Keyboard.current != null)
         {
             wantsSprint = Keyboard.current.leftShiftKey.isPressed || Keyboard.current.rightShiftKey.isPressed;
+            sprintPressedThisFrame = Keyboard.current.leftShiftKey.wasPressedThisFrame || Keyboard.current.rightShiftKey.wasPressedThisFrame;
         }
         else if (m_sprintAction != null)
         {
             wantsSprint = m_sprintAction.IsPressed();
+            sprintPressedThisFrame = m_sprintAction.WasPressedThisFrame();
         }
-        if (wantsSprint && !isSprintActive)
+
+        if (holdToSprint)
         {
-            isSprintActive = true;
-            if (m_animator != null)
+            if (wantsSprint && !isSprintActive)
             {
-                m_animator.SetFloat("moveAmount", 1f);
+                isSprintActive = true;
+                if (m_animator != null)
+                {
+                    m_animator.SetFloat("moveAmount", 1f);
+                }
+            }
+            else if (!wantsSprint && isSprintActive)
+            {
+                isSprintActive = false;
+                if (m_animator != null)
+                {
+                    m_animator.SetFloat("moveAmount", 0f, 0.2f, Time.deltaTime);
+                }
             }
         }
-        else if (!wantsSprint && isSprintActive)
+        else if (sprintPressedThisFrame)
         {
-            isSprintActive = false;
+            isSprintActive = !isSprintActive;
             if (m_animator != null)
             {
-                m_animator.SetFloat("moveAmount", 0f, 0.2f, Time.deltaTime);
+                m_animator.SetFloat("moveAmount", isSprintActive ? 1f : 0f, 0.2f, Time.deltaTime);
             }
         }
     }

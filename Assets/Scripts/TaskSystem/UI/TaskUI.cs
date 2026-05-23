@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TaskUI : MonoBehaviour
 {
+    [SerializeField] private TMP_Text headerTaskText;
     [SerializeField] private TMP_Text taskDescriptionText;
     [SerializeField] private TMP_Text taskStateText;
     [SerializeField] private TaskPanelClickToggle panelToggle;
@@ -18,6 +19,7 @@ public class TaskUI : MonoBehaviour
 
     [Header("State Labels")]
     [SerializeField] private string completedStateLabel = "Completed";
+    [SerializeField] private string activeStateLabel = "In Progress";
 
     private Coroutine displayRoutine;
     private int displayRoutineToken;
@@ -55,7 +57,7 @@ public class TaskUI : MonoBehaviour
             panelToggle = GetComponentInParent<TaskPanelClickToggle>(true);
         }
 
-        if (taskDescriptionText != null && taskStateText != null)
+        if (headerTaskText != null && taskDescriptionText != null && taskStateText != null)
         {
             return;
         }
@@ -70,6 +72,24 @@ public class TaskUI : MonoBehaviour
             }
 
             string lowerName = candidate.name.ToLowerInvariant();
+
+            if (taskDescriptionText == null && (lowerName == "taskdescriptiontext" || lowerName.Contains("taskdescription")))
+            {
+                taskDescriptionText = candidate;
+                continue;
+            }
+
+            if (taskStateText == null && (lowerName == "taskstatetext" || lowerName.Contains("taskstate")))
+            {
+                taskStateText = candidate;
+                continue;
+            }
+
+            if (headerTaskText == null && (lowerName.Contains("headertask") || (lowerName.Contains("header") && lowerName.Contains("task")) || lowerName == "text (tmp)"))
+            {
+                headerTaskText = candidate;
+                continue;
+            }
 
             if (taskDescriptionText == null && (lowerName.Contains("description") || lowerName.Contains("desc")))
             {
@@ -99,6 +119,16 @@ public class TaskUI : MonoBehaviour
                     break;
                 }
             }
+        }
+
+        if ((taskDescriptionText != null || taskStateText != null) && headerTaskText == taskDescriptionText)
+        {
+            headerTaskText = null;
+        }
+
+        if ((taskDescriptionText != null || taskStateText != null) && headerTaskText == taskStateText)
+        {
+            headerTaskText = null;
         }
     }
 
@@ -257,6 +287,11 @@ public class TaskUI : MonoBehaviour
 
     private void RenderUnavailable()
     {
+        if (headerTaskText != null && taskDescriptionText == null && taskStateText == null)
+        {
+            headerTaskText.text = unavailableDescription;
+        }
+
         if (taskDescriptionText != null)
         {
             taskDescriptionText.text = unavailableDescription;
@@ -270,9 +305,26 @@ public class TaskUI : MonoBehaviour
 
     private void Render(TaskData task)
     {
-        if (taskDescriptionText == null && taskStateText == null)
+        if (taskDescriptionText == null && taskStateText == null && headerTaskText == null)
         {
             return;
+        }
+
+        bool hasSeparateFields = (taskDescriptionText != null || taskStateText != null) && taskDescriptionText != taskStateText;
+        bool hideStateText = hasSeparateFields && ShouldHideStateTextForLayout();
+
+        if (!hasSeparateFields && headerTaskText != null)
+        {
+            headerTaskText.text = FormatHeaderTask(task);
+        }
+
+        if (hasSeparateFields && headerTaskText != null)
+        {
+            headerTaskText.text = string.Empty;
+            if (headerTaskText.gameObject.activeSelf)
+            {
+                headerTaskText.gameObject.SetActive(false);
+            }
         }
 
         if (taskDescriptionText != null && taskStateText != null && taskDescriptionText == taskStateText)
@@ -305,7 +357,7 @@ public class TaskUI : MonoBehaviour
 
             if (taskStateText != null)
             {
-                taskStateText.text = completedStateLabel;
+                taskStateText.text = hideStateText ? string.Empty : completedStateLabel;
             }
 
             return;
@@ -342,6 +394,35 @@ public class TaskUI : MonoBehaviour
         }
 
         taskDescriptionText.text = task.Description;
+    }
+
+    private string FormatHeaderTask(TaskData task)
+    {
+        if (task == null)
+        {
+            return "All tasks completed\n✔";
+        }
+
+        string status = task.State == TaskState.Completed ? completedStateLabel : activeStateLabel;
+        return string.Concat(task.Description, "\n", status);
+    }
+
+    private bool ShouldHideStateTextForLayout()
+    {
+        if (taskDescriptionText == null || taskStateText == null)
+        {
+            return false;
+        }
+
+        RectTransform descRect = taskDescriptionText.rectTransform;
+        RectTransform stateRect = taskStateText.rectTransform;
+        if (descRect == null || stateRect == null)
+        {
+            return false;
+        }
+
+        return descRect.anchoredPosition == stateRect.anchoredPosition
+            && descRect.sizeDelta == stateRect.sizeDelta;
     }
 
     private bool HasTaskChanged(TaskData task)

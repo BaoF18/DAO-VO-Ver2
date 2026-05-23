@@ -28,13 +28,17 @@ public class PlayerWalk : MonoBehaviour
     private Animator m_animator;
     private Rigidbody m_rigidbody;
     private PlayerSprint playerSprint;
+    private bool inputLocked;
 
     // Reference to the CameraController script
     CameraController cameraController;
 
     private void OnEnable()
     {
-        InputActions.FindActionMap("Player").Enable();
+        if (!inputLocked)
+        {
+            InputActions.FindActionMap("Player").Enable();
+        }
     }
     
     private void OnDisable()
@@ -54,8 +58,26 @@ public class PlayerWalk : MonoBehaviour
         playerSprint = GetComponent<PlayerSprint>();
     }
 
+    private void Start()
+    {
+        DialogueManager.DialogueStarted += HandleDialogueStarted;
+        DialogueManager.DialogueEnded += HandleDialogueEnded;
+    }
+
+    private void OnDestroy()
+    {
+        DialogueManager.DialogueStarted -= HandleDialogueStarted;
+        DialogueManager.DialogueEnded -= HandleDialogueEnded;
+    }
+
     private void Update()
     {
+        if (inputLocked)
+        {
+            m_moveAmt = Vector2.zero;
+            return;
+        }
+
         m_moveAmt = m_moveAction.ReadValue<Vector2>();
     }
 
@@ -105,5 +127,21 @@ public class PlayerWalk : MonoBehaviour
             m_animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
         }
 
+    }
+
+    private void HandleDialogueStarted()
+    {
+        inputLocked = true;
+        InputActions.FindActionMap("Player").Disable();
+        if (m_animator != null)
+        {
+            m_animator.SetFloat("moveAmount", 0f, 0.1f, Time.deltaTime);
+        }
+    }
+
+    private void HandleDialogueEnded()
+    {
+        inputLocked = false;
+        InputActions.FindActionMap("Player").Enable();
     }
 }
