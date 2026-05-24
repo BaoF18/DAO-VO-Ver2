@@ -20,6 +20,10 @@ public class NPCNavigationAgent : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.updateRotation = false;
+        }
 
         // NavMeshAgent + Rigidbody conflict: Rigidbody PHẢI là kinematic.
         // Nếu không, gravity kéo NPC rời NavMesh → isOnNavMesh = false → MoveTo() không hoạt động.
@@ -86,7 +90,8 @@ public class NPCNavigationAgent : MonoBehaviour
         // Có lệnh MoveTo đang chờ agent sẵn sàng → chưa đến đích
         if (pendingDestination.HasValue) return false;
 
-        if (agent == null || !agent.isOnNavMesh) return true;
+        if (agent == null) return true;
+        if (!agent.isOnNavMesh) return false;
 
         // Đang tính toán đường đi -> chưa đến
         if (agent.pathPending) return false;
@@ -150,6 +155,14 @@ public class NPCNavigationAgent : MonoBehaviour
     public Vector3 GetVelocity()
     {
         return agent != null ? agent.velocity : Vector3.zero;
+    }
+
+    /// <summary>
+    /// Lấy vận tốc mong muốn (desired) từ NavMeshAgent
+    /// </summary>
+    public Vector3 GetDesiredVelocity()
+    {
+        return agent != null ? agent.desiredVelocity : Vector3.zero;
     }
 
     /// <summary>
