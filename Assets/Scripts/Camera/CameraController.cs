@@ -32,6 +32,7 @@ public class CameraController : MonoBehaviour
 
     private float rotationY;
     private float rotationX;
+    private bool inputLocked;
 
 
 
@@ -57,10 +58,23 @@ public class CameraController : MonoBehaviour
         // Lock the cursor to the center of the screen
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        DialogueManager.DialogueStarted += HandleDialogueStarted;
+        DialogueManager.DialogueEnded += HandleDialogueEnded;
+    }
+
+    private void OnDestroy()
+    {
+        DialogueManager.DialogueStarted -= HandleDialogueStarted;
+        DialogueManager.DialogueEnded -= HandleDialogueEnded;
     }
 
     void Update()
     {
+        if (inputLocked)
+        {
+            return;
+        }
 
         Vector2 delta = Vector2.zero;
         // Read input from the look action
@@ -102,5 +116,15 @@ public class CameraController : MonoBehaviour
     {
         shakeDuration = duration;
         shakeMagnitude = magnitude;
+    }
+
+    private void HandleDialogueStarted()
+    {
+        inputLocked = true;
+    }
+
+    private void HandleDialogueEnded()
+    {
+        inputLocked = false;
     }
 }

@@ -2132,14 +2132,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77ce7fff1a2e2b428ea4f928b95925e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskUI
-  taskDescriptionText: {fileID: 465062253}
-  taskStateText: {fileID: 1583761750}
+  headerTaskText: {fileID: 0}
+  taskDescriptionText: {fileID: 0}
+  taskStateText: {fileID: 0}
   panelToggle: {fileID: 0}
   displayDuration: 3
   completedDisplayDuration: 1.5
   unavailableDescription: Task system not ready
   unavailableState: '-'
   completedStateLabel: Complete
+  activeStateLabel: In Progress
 --- !u!1001 &124182792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3936,6 +3938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43df10d9cb3e5544b9fa158150b3c8a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskManager
+  taskDatabase: {fileID: 0}
   tasks:
   - id: 1
     description: "Mua h\u1EE7 ti\u1EBFu c\u1EE7a Ch\xFA Long"
@@ -3943,7 +3946,7 @@ MonoBehaviour:
     targetId: NPC_Tri
     state: 0
   - id: 2
-    description: "B\u1EA3o v\u1EC7 b\u1EA3n th\xE2n kh\u1ECFi B\u1EA3o"
+    description: "Ch\xE0o ch\xFA Long"
     type: 0
     targetId: NPC_Tri
     state: 0
@@ -10367,6 +10370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PatrolBehavior
   waypointPath: {fileID: 1535761805}
   useRunning: 0
+  idleOnlyAtPathEnd: 0
 --- !u!114 &569082108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10419,6 +10423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
   dialogueData: {fileID: 11400000, guid: 83e43e2f90f536549a18dd434c0d215a, type: 2}
+  dialogueOverrides: []
   npcTaskTrigger: {fileID: 0}
   onInteractStarted:
     m_PersistentCalls:
@@ -10508,6 +10513,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_TaskTrigger
   npcId: NPC_Thuy
+  taskOverride:
+    id: 
+    description: 
+    type: 0
+    targetId: 
+    state: 0
 --- !u!1 &573306916
 GameObject:
   m_ObjectHideFlags: 0
@@ -11739,7 +11750,7 @@ Transform:
   m_GameObject: {fileID: 635352740}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0.94, z: 7.8}
+  m_LocalPosition: {x: 5.68, y: 0.94, z: 7.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12294,7 +12305,7 @@ GameObject:
   - component: {fileID: 663447640}
   - component: {fileID: 663447639}
   m_Layer: 5
-  m_Name: Press E
+  m_Name: press
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13219,7 +13230,7 @@ Transform:
   m_GameObject: {fileID: 715758689}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0.94, z: 7.8}
+  m_LocalPosition: {x: 4.74, y: 0.94, z: 7.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15181,6 +15192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PatrolBehavior
   waypointPath: {fileID: 1968636844}
   useRunning: 0
+  idleOnlyAtPathEnd: 0
 --- !u!114 &848694616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15232,8 +15244,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c890b92277e9f1948997c57751b59738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
-  dialogueData: {fileID: 11400000, guid: a9aed5550078fdd4895adabd7fa666bd, type: 2}
-  npcTaskTrigger: {fileID: 0}
+  dialogueData: {fileID: 0}
+  dialogueOverrides:
+  - taskId: 1
+    targetId: NPC_Tri
+    dialogue: {fileID: 11400000, guid: 673fcf4ed3fbb0e4687f65cba3ca2733, type: 2}
+  - taskId: 2
+    targetId: NPC_Tri
+    dialogue: {fileID: 11400000, guid: 0caf5f01868110749bbd2faf3b5528be, type: 2}
+  npcTaskTrigger: {fileID: 9158619916593731052}
   onInteractStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -17540,6 +17559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PatrolBehavior
   waypointPath: {fileID: 756555411}
   useRunning: 0
+  idleOnlyAtPathEnd: 0
 --- !u!114 &980321863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17592,6 +17612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
   dialogueData: {fileID: 11400000, guid: da2610bc21532854caf7d1f48617bdb0, type: 2}
+  dialogueOverrides: []
   npcTaskTrigger: {fileID: 0}
   onInteractStarted:
     m_PersistentCalls:
@@ -22596,6 +22617,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295409769}
   m_CullTransparentMesh: 1
+--- !u!1001 &1305547722
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5521635370714337850}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.76
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.95
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.55
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      propertyPath: m_Name
+      value: NPC Idle1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689733001}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689733007}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689733006}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689733005}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689733004}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689733003}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689733002}
+  m_SourcePrefab: {fileID: 100100000, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
 --- !u!1 &1307791811
 GameObject:
   m_ObjectHideFlags: 0
@@ -28238,7 +28349,7 @@ Transform:
   m_GameObject: {fileID: 1597800675}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.82, y: 0.94, z: 6.95}
+  m_LocalPosition: {x: 2.75, y: 0.94, z: 6.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30180,6 +30291,149 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5859505246589164098, guid: 2a4bd5025cfc34b408186dc4453a8024, type: 3}
+--- !u!1 &1689732999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+  m_PrefabInstance: {fileID: 1305547722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1689733000 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6167acca59b24e14bb3f102cabdd1a55, type: 3}
+  m_PrefabInstance: {fileID: 1305547722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1689733001
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689732999}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe2e9d97ce5d97848803ebca2658668b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1689733002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689732999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f42ac08205ba044b8bef277fbf05847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PatrolBehavior
+  waypointPath: {fileID: 1968636844}
+  useRunning: 0
+  idleOnlyAtPathEnd: 1
+--- !u!114 &1689733003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689732999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523e5f977bfa05a4ea45b06b643f7635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BikerAnimatorParams
+  animator: {fileID: 1689733001}
+  npcMovement: {fileID: 1689733004}
+  runSpeedThreshold: 0.1
+  turnSpeedThreshold: 0.05
+  turnAngleThreshold: 15
+  autoSyncRunIdle: 1
+  allowIdleWhenStopped: 1
+  isRunParam: IsRun
+  isTurnLeftParam: IsTurnLeft
+  isTurnRightParam: IsTurnRight
+  isIdleParam: IsIdle
+  leaveInParam: LeaveIn
+  leaveOutParam: LeaveOut
+--- !u!114 &1689733004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689732999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a79b2746dc3d44ebce6cecbd2f920b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCMovement
+  config: {fileID: 11400000, guid: ec5734b562c569b499c191514eac8a6f, type: 2}
+  defaultBehavior: {fileID: 1689733002}
+--- !u!114 &1689733005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689732999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e63ac656ed4a2342bc18a7a52e518b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCNavigationAgent
+--- !u!195 &1689733006
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689732999}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!136 &1689733007
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689732999}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1690421348
 GameObject:
   m_ObjectHideFlags: 0
@@ -33286,6 +33540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
   dialogueData: {fileID: 11400000, guid: 6e1043027f90d4841ad2f662686c123e, type: 2}
+  dialogueOverrides: []
   npcTaskTrigger: {fileID: 0}
   onInteractStarted:
     m_PersistentCalls:
@@ -33365,6 +33620,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_TaskTrigger
   npcId: NPC_Thao
+  taskOverride:
+    id: 
+    description: 
+    type: 0
+    targetId: 
+    state: 0
 --- !u!1 &1928443800
 GameObject:
   m_ObjectHideFlags: 0
@@ -33796,7 +34057,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 98e8fe7791a536f40b8c15fb3949479c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 717767e64c1b2c14681291ffec669bd5, type: 2}
   m_BuildHeightMesh: 0
 --- !u!64 &1952344522
 MeshCollider:
@@ -36986,6 +37247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77ce7fff1a2e2b428ea4f928b95925e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskUI
+  headerTaskText: {fileID: 0}
   taskDescriptionText: {fileID: 918090835}
   taskStateText: {fileID: 1658785419}
   panelToggle: {fileID: 0}
@@ -36994,6 +37256,7 @@ MonoBehaviour:
   unavailableDescription: Task system not ready
   unavailableState: '-'
   completedStateLabel: Complete
+  activeStateLabel: In Progress
 --- !u!114 &2145502563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46202,7 +46465,7 @@ Transform:
   m_GameObject: {fileID: 8616354157859941274}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 1.49, z: -0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46730,6 +46993,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1689733000}
   - {fileID: 9158619916593731050}
   - {fileID: 780964614885943190}
   - {fileID: 8394079280872290036}
@@ -53048,6 +53312,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_TaskTrigger
   npcId: NPC_Tri
+  taskOverride:
+    id: 
+    description: 
+    type: 0
+    targetId: 
+    state: 0
 --- !u!4 &9163166418132088201
 Transform:
   m_ObjectHideFlags: 0
@@ -53376,14 +53646,13 @@ SceneRoots:
   - {fileID: 483981556}
   - {fileID: 1038678367}
   - {fileID: 1572657590}
+  - {fileID: 1348475256}
   - {fileID: 5521635370714337850}
   - {fileID: 526616577}
   - {fileID: 840533828}
-  - {fileID: 1138763286}
   - {fileID: 227505546}
   - {fileID: 21048386}
   - {fileID: 1752114280}
-  - {fileID: 1348475256}
   - {fileID: 3677807093393235700}
   - {fileID: 1920982121}
   - {fileID: 587856535}
@@ -53392,3 +53661,4 @@ SceneRoots:
   - {fileID: 1921942621}
   - {fileID: 1829516864}
   - {fileID: 233044387}
+  - {fileID: 1138763286}

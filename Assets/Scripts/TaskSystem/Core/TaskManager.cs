@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 
 public class TaskManager : MonoBehaviour
 {
+    [Header("Database")]
+    [SerializeField] private TaskDatabase taskDatabase;
+
     [Header("Task Chain")]
     [SerializeField] private List<TaskData> tasks = new List<TaskData>();
 
@@ -85,7 +88,26 @@ public class TaskManager : MonoBehaviour
 
     private void Start()
     {
+        LoadTasksFromDatabase();
         InitializeChain();
+    }
+
+    private void LoadTasksFromDatabase()
+    {
+        if (taskDatabase == null || taskDatabase.Tasks == null || taskDatabase.Tasks.Count == 0)
+        {
+            return;
+        }
+
+        tasks.Clear();
+        for (int i = 0; i < taskDatabase.Tasks.Count; i++)
+        {
+            TaskData task = taskDatabase.Tasks[i];
+            if (task != null)
+            {
+                tasks.Add(task);
+            }
+        }
     }
 
     [ContextMenu("Load Example Task Chain")]

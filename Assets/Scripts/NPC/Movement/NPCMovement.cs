@@ -9,6 +9,9 @@ using UnityEngine;
 [RequireComponent(typeof(NPCNavigationAgent))]
 public class NPCMovement : MonoBehaviour
 {
+    private const float TurnThresholdDegrees = 25f;
+    private const float TurnMovementMinSpeed = 0.1f;
+    private const float TurnResetSeconds = 1f;
     [Header("=== CẤU HÌNH ===")]
     [Tooltip("Kéo ScriptableObject NPCMovementConfig vào đây")]
     [SerializeField] private NPCMovementConfig config;
@@ -81,6 +84,8 @@ public class NPCMovement : MonoBehaviour
 
         // Luôn đồng bộ animation (để hiện idle animation khi pause)
         SyncAnimation();
+        SyncRotation();
+        SyncTurnAnimation();
     }
 
     /// <summary>
@@ -102,6 +107,69 @@ public class NPCMovement : MonoBehaviour
         if (animController == null) return;
         float state = navAgent.GetCurrentSpeed() > 0.1f ? 1f : 0f;
         animController.UpdateAnimation(state);
+    }
+
+    /// <summary>
+    /// Đồng bộ animation rẽ trái/phải theo hướng di chuyển
+    /// </summary>
+    private void SyncTurnAnimation()
+    {
+        if (animController == null) return;
+
+        Vector3 desiredVelocity = navAgent.GetDesiredVelocity();
+        if (desiredVelocity.sqrMagnitude <= TurnMovementMinSpeed * TurnMovementMinSpeed)
+        {
+            animController.UpdateTurn(false, false, TurnResetSeconds);
+            return;
+        }
+
+        Vector3 desiredDirection = desiredVelocity.normalized;
+        Vector3 currentForward = transform.forward;
+        float signedAngle = Vector3.SignedAngle(currentForward, desiredDirection, Vector3.up);
+
+        bool isTurnLeft = signedAngle <= -TurnThresholdDegrees;
+        bool isTurnRight = signedAngle >= TurnThresholdDegrees;
+        animController.UpdateTurn(isTurnLeft, isTurnRight, TurnResetSeconds);
+    }
+
+    public void SetIdle(bool isIdle)
+    {
+        if (animController == null) return;
+        animController.SetIdle(isIdle);
+    }
+
+    public void PlayLeaveIn()
+    {
+        if (animController == null) return;
+        animController.PlayLeaveIn();
+    }
+
+    public void PlayLeaveOut()
+    {
+        if (animController == null) return;
+        animController.PlayLeaveOut();
+    }
+
+    /// <summary>
+    /// Xoay NPC theo hướng di chuyển khi NavMeshAgent không auto-rotate
+    /// </summary>
+    private void SyncRotation()
+    {
+        if (navAgent == null) return;
+
+        Vector3 desiredVelocity = navAgent.GetDesiredVelocity();
+        if (desiredVelocity.sqrMagnitude <= TurnMovementMinSpeed * TurnMovementMinSpeed)
+        {
+            return;
+        }
+
+        Vector3 desiredDirection = desiredVelocity.normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
+        float rotationSpeed = config != null ? config.rotationSpeed : 120f;
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime);
     }
 
     // ============================
@@ -213,5 +281,21 @@ public class NPCMovement : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return navAgent.GetCurrentSpeed();
+    }
+
+    /// <summary>
+    /// Lấy vận tốc hiện tại (vector) - dùng để xác định hướng rẽ
+    /// </summary>
+    public Vector3 GetVelocity()
+    {
+        return navAgent.GetVelocity();
+    }
+
+    /// <summary>
+    /// Lấy vận tốc mong muốn (desired) để xác định hướng rẽ trước khi agent quay xong
+    /// </summary>
+    public Vector3 GetDesiredVelocity()
+    {
+        return navAgent.GetDesiredVelocity();
     }
 }

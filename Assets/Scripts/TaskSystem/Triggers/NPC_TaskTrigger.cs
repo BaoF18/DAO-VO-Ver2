@@ -3,11 +3,16 @@ using UnityEngine;
 public class NPC_TaskTrigger : MonoBehaviour
 {
     [SerializeField] private string npcId;
-    private Coroutine waitForDialogueCoroutine;
+    [SerializeField] private TaskData taskOverride;
+    private bool waitingForDialogueEnd;
 
     private void OnDisable()
     {
-        StopWaitCoroutine();
+        if (waitingForDialogueEnd)
+        {
+            DialogueManager.DialogueEnded -= HandleDialogueEnded;
+            waitingForDialogueEnd = false;
+        }
     }
 
     public void Interact()
@@ -18,37 +23,34 @@ public class NPC_TaskTrigger : MonoBehaviour
             return;
         }
 
-        StopWaitCoroutine();
-        waitForDialogueCoroutine = StartCoroutine(WaitForDialogueThenRaiseRequest());
-    }
-
-    private System.Collections.IEnumerator WaitForDialogueThenRaiseRequest()
-    {
-        yield return null;
-
-        while (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
-        {
-            yield return null;
-        }
-
-        waitForDialogueCoroutine = null;
-        RaiseNpcTalkRequest();
-    }
-
-    private void StopWaitCoroutine()
-    {
-        if (waitForDialogueCoroutine == null)
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
         {
             return;
         }
 
-        StopCoroutine(waitForDialogueCoroutine);
-        waitForDialogueCoroutine = null;
+        if (!waitingForDialogueEnd)
+        {
+            waitingForDialogueEnd = true;
+            DialogueManager.DialogueEnded += HandleDialogueEnded;
+        }
     }
 
-    private void RaiseNpcTalkRequest()
+    private void HandleDialogueEnded()
     {
-        Debug.Log($"[NPC_TaskTrigger] Interact => {npcId}");
+        if (!waitingForDialogueEnd)
+        {
+            return;
+        }
+
+        waitingForDialogueEnd = false;
+        DialogueManager.DialogueEnded -= HandleDialogueEnded;
+
+        Debug.Log($"[NPC_TaskTrigger] Dialogue complete => {npcId}");
         TaskEvents.RaiseTalkToNpcRequested(npcId);
+
+        if (taskOverride != null && TaskManager.Instance != null)
+        {
+            TaskManager.Instance.CompleteTask(taskOverride);
+        }
     }
 }

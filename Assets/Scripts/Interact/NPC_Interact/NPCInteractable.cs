@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +11,7 @@ using UnityEngine.Events;
 public class NPCInteractable : Interactable
 {
     public DialogueData dialogueData;
+    [SerializeField] private List<DialogueByTask> dialogueOverrides = new List<DialogueByTask>();
     [SerializeField] private NPC_TaskTrigger npcTaskTrigger;
 
     [Header("Events")]
@@ -16,6 +19,18 @@ public class NPCInteractable : Interactable
 
     private NPCMovement npcMovement;
     private bool waitingForDialogueEnd;
+
+    [Serializable]
+    private class DialogueByTask
+    {
+        [SerializeField] private string taskId;
+        [SerializeField] private string targetId;
+        [SerializeField] private DialogueData dialogue;
+
+        public string TaskId => taskId;
+        public string TargetId => targetId;
+        public DialogueData Dialogue => dialogue;
+    }
 
     public override bool IsInteracting =>
         DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive && waitingForDialogueEnd;
@@ -73,7 +88,8 @@ public class NPCInteractable : Interactable
     {
         onInteractStarted?.Invoke();
 
-        if (dialogueData == null || DialogueManager.Instance == null) return;
+        DialogueData activeDialogue = GetDialogueForCurrentTask();
+        if (activeDialogue == null || DialogueManager.Instance == null) return;
 
         if (!DialogueManager.Instance.IsDialogueActive)
         {
@@ -84,9 +100,49 @@ public class NPCInteractable : Interactable
 
             npcTaskTrigger?.Interact();
 
-            DialogueManager.Instance.StartDialogue(dialogueData);
+            DialogueManager.Instance.StartDialogue(activeDialogue);
             waitingForDialogueEnd = true;
         }
+    }
+
+    private DialogueData GetDialogueForCurrentTask()
+    {
+        TaskData currentTask = TaskManager.Instance != null ? TaskManager.Instance.CurrentTask : null;
+        if (currentTask != null && dialogueOverrides.Count > 0)
+        {
+            for (int i = 0; i < dialogueOverrides.Count; i++)
+            {
+                DialogueByTask entry = dialogueOverrides[i];
+                if (entry == null || entry.Dialogue == null)
+                {
+                    continue;
+                }
+
+                if (!string.IsNullOrWhiteSpace(entry.TaskId)
+                    && string.Equals(entry.TaskId, currentTask.Id, StringComparison.Ordinal))
+                {
+                    return entry.Dialogue;
+                }
+            }
+
+            for (int i = 0; i < dialogueOverrides.Count; i++)
+            {
+                DialogueByTask entry = dialogueOverrides[i];
+                if (entry == null || entry.Dialogue == null)
+                {
+                    continue;
+                }
+
+                if (string.IsNullOrWhiteSpace(entry.TaskId)
+                    && !string.IsNullOrWhiteSpace(entry.TargetId)
+                    && string.Equals(entry.TargetId, currentTask.TargetId, StringComparison.Ordinal))
+                {
+                    return entry.Dialogue;
+                }
+            }
+        }
+
+        return dialogueData;
     }
 
     public override void OnInteractContinue()

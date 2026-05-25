@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e048829dd91dc47498cde6f504b11987, type: 3}
+  m_Name: Dialogue_5
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  lines:
+  - speakerName: "\u0110\u1EA1i C\u01B0\u1EDDng"
+    text: "Th\u0103\u0300ng ch\xF3 kia n\u01A1\u0323 ti\xEA\u0300n tu\u0323i tao,
+      gi\u1EDD tao mu\xF4\u0301n l\xE2\u0301y ca\u0301i xe na\u0300y la\u0300m v\xE2\u0323t
+      th\xEA\u0301 ch\xE2\u0301p\r\n"
+  - speakerName: 'Nam '
+    text: "Nh\u01B0ng \xF4ng kia ch\u01B0a tra\u0309 ti\xEA\u0300n cho chi\xEA\u0301c
+      xe na\u0300y "
+  - speakerName: "\u0110\u1EA1i C\u01B0\u1EDDng "
+    text: "Bi\u1EBFt b\u1ED1 m\xE0y l\xE0 ai kh\xF4ng, gi\u1EDD b\u1ED1 m\xE0y pha\u0309i
+      l\xE2\u0301y xe, m\xE0y kh\xF4ng mu\xF4\u0301n \u0103n \u0111o\u0300n ko thi\u0300
+      l\xE9 ra ! "
+  - speakerName: 'Ba Nam '
+    text: "chuy\xEA\u0323n cu\u0309a m\xE2\u0301y anh thi\u0300 l\xEAn ph\u01B0\u01A1\u0300ng
+      l\xE0m gi\u1EA5y m\xE0 k\xED t\xEAn, \u0111\xE2y la\u0300 ch\xF4\u0303 b\u1ED1
+      m\xE0y ki\u1EBFm c\u01A1m "
+  - speakerName: "Giang H\u1ED3 "
+    text: "chuy\xEA\u0323n cu\u0309a m\xE2\u0301y anh thi\u0300 l\xEAn ph\u01B0\u01A1\u0300ng
+      l\xE0m gi\u1EA5y m\xE0 k\xED t\xEAn, \u0111\xE2y la\u0300 ch\xF4\u0303 b\u1ED1
+      m\xE0y ki\u1EBFm c\u01A1m "

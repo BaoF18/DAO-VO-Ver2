@@ -17,10 +17,21 @@ public class PatrolBehavior : NPCBehaviorBase
     [Tooltip("NPC chạy thay vì đi bộ khi tuần tra")]
     [SerializeField] private bool useRunning = false;
 
+    [Tooltip("Chỉ cho phép idle khi đến waypoint cuối (không loop)")]
+    [SerializeField] private bool idleOnlyAtPathEnd = false;
+
     // Trạng thái nội bộ
     private int currentWaypointIndex;
     private float waitTimer;
     private bool isWaiting;
+    private bool hasReachedPathEnd;
+
+    public bool HasCompletedPath()
+    {
+        if (waypointPath == null || waypointPath.isLoop) return false;
+        if (waypointPath.Count == 0) return false;
+        return hasReachedPathEnd;
+    }
 
     public override void Enter()
     {
@@ -31,6 +42,7 @@ public class PatrolBehavior : NPCBehaviorBase
         currentWaypointIndex = 0;
         isWaiting = false;
         waitTimer = 0f;
+        hasReachedPathEnd = false;
 
         npcMovement.SetRunning(useRunning);
         MoveToCurrentWaypoint();
@@ -70,6 +82,7 @@ public class PatrolBehavior : NPCBehaviorBase
         base.Exit();
         isWaiting = false;
         waitTimer = 0f;
+        hasReachedPathEnd = false;
     }
 
     private void MoveToCurrentWaypoint()
@@ -88,6 +101,7 @@ public class PatrolBehavior : NPCBehaviorBase
         // Hết path và không loop → dừng hẳn
         if (nextIndex == -1)
         {
+            hasReachedPathEnd = true;
             npcMovement.Stop();
             return;
         }
