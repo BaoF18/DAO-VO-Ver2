@@ -1,49 +1,9 @@
 fileFormatVersion: 2
-guid: be995996e643c204ba44056442e7c9b2
+guid: 45c7b7d107f625c48901bb92eb06aedd
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__body2
-    second: {fileID: 2100000, guid: 7a080cdb43e5d6a4a846f2ae3b53a27e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__es_body1
-    second: {fileID: 2100000, guid: 9a34b9d46455d7e40a5f7414039392d7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__es_glass1
-    second: {fileID: 2100000, guid: 4fb95b5f9e0cdb24ab3d640fe060b88a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__es_wheel1
-    second: {fileID: 2100000, guid: 638775a2051f5464389b97d07901c069, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__head2
-    second: {fileID: 2100000, guid: d024561bb1b053c42854f1776a2a00c5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__lambert3
-    second: {fileID: 2100000, guid: ae36865042987164e853b48d2f67dcb2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__lambert7
-    second: {fileID: 2100000, guid: e1dc3499a4caa204b9c3274ddc262c57, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__lambert8
-    second: {fileID: 2100000, guid: 47f38bd9ef6e7d34a835c022c5e52627, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

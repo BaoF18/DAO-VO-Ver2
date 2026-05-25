@@ -3889,12 +3889,7 @@ MonoBehaviour:
   taskDatabase: {fileID: 0}
   tasks:
   - id: 1
-    description: "Mua h\u1EE7 ti\u1EBFu c\u1EE7a Ch\xFA Long"
-    type: 0
-    targetId: NPC_Tri
-    state: 0
-  - id: 2
-    description: "Ch\xE0o ch\xFA Long"
+    description: "N\xF3i chuy\u1EC7n v\u1EDBi cha"
     type: 0
     targetId: NPC_Tri
     state: 0
@@ -14843,7 +14838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &840533828
 Transform:
   m_ObjectHideFlags: 0
@@ -15157,7 +15152,7 @@ MonoBehaviour:
   dialogueOverrides:
   - taskId: 1
     targetId: NPC_Tri
-    dialogue: {fileID: 11400000, guid: 673fcf4ed3fbb0e4687f65cba3ca2733, type: 2}
+    dialogue: {fileID: 11400000, guid: 98d79174834c1b040b660d1234d5bf47, type: 2}
   - taskId: 2
     targetId: NPC_Tri
     dialogue: {fileID: 11400000, guid: 0caf5f01868110749bbd2faf3b5528be, type: 2}
@@ -24018,8 +24013,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: -0.05, y: 0.42, z: 0.09949517}
-  m_Center: {x: -0.1, y: -0.09, z: 0.05}
+  m_Size: {x: 0.05000002, y: 0.36360073, z: 0.100155115}
+  m_Center: {x: -0.1000002, y: -0.118200034, z: 0.05032998}
 --- !u!1 &1389529698
 GameObject:
   m_ObjectHideFlags: 0
@@ -29355,8 +29350,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: -0.05, y: 0.42, z: 0.09949517}
-  m_Center: {x: -0.1, y: -0.09, z: 0.05}
+  m_Size: {x: 0.013660372, y: 0.2774861, z: 0.09949514}
+  m_Center: {x: -0.081833914, y: -0.16125621, z: 0.04999999}
 --- !u!1 &1658785417
 GameObject:
   m_ObjectHideFlags: 0
@@ -49846,8 +49841,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8381802429767962448}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0057088104, y: 0.7276327, z: -0.004020596, w: 0.6859315}
-  m_LocalPosition: {x: -1.5864942, y: 2.2801085, z: -28.10992}
+  m_LocalRotation: {x: -0.006759074, y: -0.05234539, z: 0.0017523156, w: 0.99860466}
+  m_LocalPosition: {x: 8.92, y: 2.45, z: -17.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49859,7 +49854,7 @@ Transform:
   - {fileID: 4366055679702995674}
   - {fileID: 3695668066150872446}
   m_Father: {fileID: 5521635370714337850}
-  m_LocalEulerAnglesHint: {x: -0.113, y: 93.38, z: -0.792}
+  m_LocalEulerAnglesHint: {x: -0.763, y: -6.003, z: 0.241}
 --- !u!114 &9158619916593731051
 MonoBehaviour:
   m_ObjectHideFlags: 0

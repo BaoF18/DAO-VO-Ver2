@@ -18,7 +18,19 @@ MonoBehaviour:
       nhi\u1EC1u n\u0103m r\u1ED3i\u2026 \r\nT\u1EEB ng\xE0y m\u1EB9 g\u1EB7p tai
       n\u1EA1n.\r\nCon v\u1EDBi ba v\u1EABn \u1ED5n\u2026 m\u1EB9 \u0111\u1EEBng
       lo.\r\n"
-  - speakerName: Cha Nam
-    text: "Nam, ra ph\u1EE5 ba ch\xFAt \u0111i con. C\xF3 kh\xE1ch s\u1EEDa xe.\r\n\r\n"
   - speakerName: Nam
-    text: "D\u1EA1, con ra ngay."
+    text: "Ch\xE0o cha, sao n\xE0y b\u1ED1 d\u1EADy s\u1EDBm v\u1EADy"
+  - speakerName: Cha Nam
+    text: "Cu\u1ED9c s\u1ED1ng m\u01B0u sinh con trai "
+  - speakerName: Cha Nam
+    text: "T\u1EEB ng\xE0y m\u1EB9 m\u1EA5t , nh\xE0 m\xECnh c\u0169ng \xEDt \u0111i
+      mi\u1EBFng \u0103n nh\u01B0ng v\u1EABn ph\u1EA3i c\u1ED1 g\u1EAFng l\xE0m "
+  - speakerName: Cha Nam
+    text: "Kh\xF4ng d\u1EADy l\xE0m th\xEC kh\xF4ng c\xF3 c\u1EE9t m\xE0 \u0103n
+      con \xE0"
+  - speakerName: Nam
+    text: "Ph\u1EE5 th\xE2n n\xF3i chi ph\u1EA3i\r\n\r\n"
+  - speakerName: Cha Nam
+    text: "Th\xF4i ra s\u1EEDa gi\xFAp t\xEDa c\xE1i xe \r\n\r\n"
+  - speakerName: Nam
+    text: "V\xE2ng ... "
