@@ -17,6 +17,9 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
+    [Header("Audio")]
+    public AudioSource typingSource;
+
     [Header("Settings")]
     public float typeSpeed = 0.03f;
 
@@ -88,6 +91,7 @@ public class DialogueManager : MonoBehaviour
             StopCoroutine(typeCoroutine);
 
         typeCoroutine = StartCoroutine(TypeText(line.text));
+        RestartTypingSfx();
     }
 
     IEnumerator TypeText(string text)
@@ -102,6 +106,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         isTyping = false;
+        // The sound will stop on the next action (NextLine or EndDialogue)
+        // Or when skipping. If we stop it here, it might feel abrupt.
+        // Let's follow the prompt and stop it in NextLine/Skip/End.
     }
 
     void SkipTyping()
@@ -111,10 +118,12 @@ public class DialogueManager : MonoBehaviour
 
         dialogueText.text = currentData.lines[currentLine].text;
         isTyping = false;
+        StopTypingSfx();
     }
 
     void NextLine()
     {
+        StopTypingSfx();
         currentLine++;
 
         if (currentLine < currentData.lines.Length)
@@ -138,6 +147,33 @@ public class DialogueManager : MonoBehaviour
             StopCoroutine(typeCoroutine);
 
         isTyping = false;
+
+        StopTypingSfx();
+        if (typingSource != null)
+        {
+            typingSource.loop = false;
+        }
+
         DialogueEnded?.Invoke();
+    }
+
+    private void PlayTypingSfx()
+    {
+        if (typingSource != null) typingSource.Play();
+    }
+
+    private void StopTypingSfx()
+    {
+        if (typingSource != null) typingSource.Stop();
+    }
+
+    private void RestartTypingSfx()
+    {
+        if (typingSource != null)
+        {
+            typingSource.time = 0;
+            typingSource.loop = true;
+            typingSource.Play();
+        }
     }
 }
