@@ -1,35 +1,39 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class NPCWaypointSpawner : MonoBehaviour
 {
-    [Header("Bản mẫu NPC (Phải có NPCMovement)")]
-    [SerializeField] private GameObject npcPrefab;
-    [SerializeField] private bool useExistingNpcIfInScene = true;
+    [Header("Danh sách xe khách (Kéo nhiều xe vào đây)")]
+    [SerializeField] private GameObject[] npcPrefabs;
+    public bool spawnAutomatically = true;
+    public bool loopQueue = true;
 
     [Header("Thiết lập Spawn")]
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private WaypointPath waypointPath;
 
+    [Header("KỊCH BẢN ĐÁNH TRÁO (SWAP)")]
+    public bool pauseAndHideAtFirstPath = false;
+
+    [Tooltip("KÉO OBJECT TRẠM SỬA XE VÀO ĐÂY (Thay cho cái Event rườm rà)")]
+    public RepairStation repairStation;
+
     [Header("Waypoint tiếp theo")]
     [SerializeField] private bool useNextPathAndDespawn = false;
     [SerializeField] private WaypointPath nextWaypointPath;
-
-    [Header("Despawn")]
     [SerializeField] private bool despawnAtPathEnd = false;
 
-    [Header("Thời gian chờ sau input (giây)")]
-    [SerializeField] private float spawnDelaySeconds = 15f;
-
-    [Header("Test: bật để spawn ngay")]
+    [Header("Thời gian chờ giữa các lần đẻ xe (giây)")]
+    [SerializeField] private float spawnDelaySeconds = 60f;
     [SerializeField] private bool testSpawnNow = false;
 
-    private float idleTimer;
+    private float spawnTimer;
     private bool hasSpawned;
     private NPCMovement activeMovement;
     private PatrolBehavior activePatrol;
     private bool hasSwitchedToNextPath;
-    private bool usingExistingNpc;
+    private bool isPaused = false;
+    private int currentNpcIndex = 0;
+    private bool isFirstSpawn = true;
 
     void Update()
     {
@@ -42,23 +46,38 @@ public class NPCWaypointSpawner : MonoBehaviour
                 return;
             }
 
-            if (AnyInputThisFrame())
+            if (spawnAutomatically)
             {
-                idleTimer = 0f;
-            }
-            else
-            {
-                idleTimer += Time.deltaTime;
-                if (idleTimer >= spawnDelaySeconds)
+                if (isFirstSpawn)
                 {
                     SpawnNpc();
+                    isFirstSpawn = false;
+                }
+                else
+                {
+                    spawnTimer += Time.deltaTime;
+                    if (spawnTimer >= spawnDelaySeconds) SpawnNpc();
                 }
             }
         }
-        else
+        else if (!isPaused)
         {
             if (activePatrol != null && activePatrol.HasCompletedPath())
             {
+                if (pauseAndHideAtFirstPath && !hasSwitchedToNextPath)
+                {
+                    activePatrol.gameObject.SetActive(false);
+                    isPaused = true;
+
+                    // LẤY HỒ SƠ TỪ XE VÀ ĐƯA CHO TRẠM SỬA CHỮA
+                    if (repairStation != null)
+                    {
+                        VehicleJobConfig config = activePatrol.GetComponent<VehicleJobConfig>();
+                        repairStation.SetupAndShowJob(config);
+                    }
+                    return;
+                }
+
                 if (useNextPathAndDespawn && !hasSwitchedToNextPath && nextWaypointPath != null)
                 {
                     hasSwitchedToNextPath = true;
@@ -66,53 +85,59 @@ public class NPCWaypointSpawner : MonoBehaviour
                     activePatrol.SetPath(nextWaypointPath);
                     activeMovement.SetBehavior(activePatrol);
                 }
-                else if (despawnAtPathEnd)
+                else if (despawnAtPathEnd || (useNextPathAndDespawn && hasSwitchedToNextPath))
                 {
-                    if (usingExistingNpc)
-                    {
-                        activePatrol.gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        Destroy(activePatrol.gameObject);
-                    }
+                    Destroy(activePatrol.gameObject);
 
                     activeMovement = null;
                     activePatrol = null;
-                    usingExistingNpc = false;
+                    hasSpawned = false;
+                    spawnTimer = 0f;
+
+                    currentNpcIndex++;
+                    if (currentNpcIndex >= npcPrefabs.Length)
+                    {
+                        if (loopQueue) currentNpcIndex = 0;
+                        else spawnAutomatically = false;
+                    }
                 }
             }
         }
     }
 
-    private void SpawnNpc()
+    public void ResumeHiddenNPCAndDriveAway()
     {
-        if (npcPrefab == null || waypointPath == null)
+        if (isPaused && activePatrol != null && nextWaypointPath != null)
         {
-            Debug.LogWarning("Thiếu thông tin! Không thể spawn NPC.");
-            return;
+            Transform startOfPath2 = nextWaypointPath.GetWaypoint(0).transform;
+            activePatrol.transform.position = startOfPath2.position;
+            activePatrol.transform.rotation = startOfPath2.rotation;
+
+            activePatrol.gameObject.SetActive(true);
+            isPaused = false;
+            hasSwitchedToNextPath = true;
+            nextWaypointPath.isLoop = false;
+            activePatrol.SetPath(nextWaypointPath);
+            activeMovement.SetBehavior(activePatrol);
         }
+    }
+
+    public void SpawnNpc()
+    {
+        if (npcPrefabs == null || npcPrefabs.Length == 0 || waypointPath == null) return;
+        if (currentNpcIndex >= npcPrefabs.Length) return;
 
         Transform spawnTransform = ResolveSpawnTransform();
-        GameObject newNpc = ResolveNpcInstance(spawnTransform.position, spawnTransform.rotation);
-        if (newNpc == null)
-        {
-            Debug.LogWarning("Không thể tạo hoặc dùng NPC instance.");
-            return;
-        }
+        GameObject prefabToSpawn = npcPrefabs[currentNpcIndex];
+        if (prefabToSpawn == null) return;
+
+        GameObject newNpc = Instantiate(prefabToSpawn, spawnTransform.position, spawnTransform.rotation);
+
         NPCMovement movement = newNpc.GetComponent<NPCMovement>();
-        if (movement == null)
-        {
-            Debug.LogWarning("NPC prefab thiếu NPCMovement.");
-            Destroy(newNpc);
-            return;
-        }
+        if (movement == null) { Destroy(newNpc); return; }
 
         PatrolBehavior patrol = newNpc.GetComponent<PatrolBehavior>();
-        if (patrol == null)
-        {
-            patrol = newNpc.AddComponent<PatrolBehavior>();
-        }
+        if (patrol == null) patrol = newNpc.AddComponent<PatrolBehavior>();
 
         waypointPath.isLoop = false;
         patrol.SetPath(waypointPath);
@@ -121,71 +146,19 @@ public class NPCWaypointSpawner : MonoBehaviour
         activeMovement = movement;
         activePatrol = patrol;
         hasSpawned = true;
-        idleTimer = 0f;
+        isPaused = false;
         hasSwitchedToNextPath = false;
+        spawnTimer = 0f;
     }
 
     private Transform ResolveSpawnTransform()
     {
-        if (spawnPoint != null)
-        {
-            return spawnPoint;
-        }
-
+        if (spawnPoint != null) return spawnPoint;
         if (waypointPath != null)
         {
             Waypoint firstWaypoint = waypointPath.GetWaypoint(0);
-            if (firstWaypoint != null)
-            {
-                return firstWaypoint.transform;
-            }
+            if (firstWaypoint != null) return firstWaypoint.transform;
         }
-
         return transform;
-    }
-
-    private GameObject ResolveNpcInstance(Vector3 position, Quaternion rotation)
-    {
-        if (npcPrefab == null)
-        {
-            return null;
-        }
-
-        if (useExistingNpcIfInScene && npcPrefab.scene.IsValid())
-        {
-            usingExistingNpc = true;
-            npcPrefab.transform.SetPositionAndRotation(position, rotation);
-            if (!npcPrefab.activeSelf)
-            {
-                npcPrefab.SetActive(true);
-            }
-
-            return npcPrefab;
-        }
-
-        usingExistingNpc = false;
-        return Instantiate(npcPrefab, position, rotation);
-    }
-
-    private bool AnyInputThisFrame()
-    {
-        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
-        {
-            return true;
-        }
-
-        if (Mouse.current != null && (Mouse.current.leftButton.wasPressedThisFrame ||
-                                      Mouse.current.rightButton.wasPressedThisFrame ||
-                                      Mouse.current.middleButton.wasPressedThisFrame))
-        {
-            return true;
-        }
-
-        if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
-        {
-            return true;
-        }
-
-        return false;
     }
 }
