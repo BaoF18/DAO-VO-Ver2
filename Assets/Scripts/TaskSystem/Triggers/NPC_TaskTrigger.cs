@@ -3,7 +3,6 @@ using UnityEngine;
 public class NPC_TaskTrigger : MonoBehaviour
 {
     [SerializeField] private string npcId;
-    [SerializeField] private TaskData taskOverride;
     private bool waitingForDialogueEnd;
 
     private void OnDisable()
@@ -47,10 +46,5 @@ public class NPC_TaskTrigger : MonoBehaviour
 
         Debug.Log($"[NPC_TaskTrigger] Dialogue complete => {npcId}");
         TaskEvents.RaiseTalkToNpcRequested(npcId);
-
-        if (taskOverride != null && TaskManager.Instance != null)
-        {
-            TaskManager.Instance.CompleteTask(taskOverride);
-        }
     }
 }

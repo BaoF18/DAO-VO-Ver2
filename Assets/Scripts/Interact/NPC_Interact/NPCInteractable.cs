@@ -88,7 +88,8 @@ public class NPCInteractable : Interactable
     {
         onInteractStarted?.Invoke();
 
-        DialogueData activeDialogue = GetDialogueForCurrentTask();
+        bool shouldTriggerTask;
+        DialogueData activeDialogue = GetDialogueForCurrentTask(out shouldTriggerTask);
         if (activeDialogue == null || DialogueManager.Instance == null) return;
 
         if (!DialogueManager.Instance.IsDialogueActive)
@@ -98,15 +99,19 @@ public class NPCInteractable : Interactable
                 npcMovement.Pause();
             }
 
-            npcTaskTrigger?.Interact();
+            if (shouldTriggerTask)
+            {
+                npcTaskTrigger?.Interact();
+            }
 
             DialogueManager.Instance.StartDialogue(activeDialogue);
             waitingForDialogueEnd = true;
         }
     }
 
-    private DialogueData GetDialogueForCurrentTask()
+    private DialogueData GetDialogueForCurrentTask(out bool shouldTriggerTask)
     {
+        shouldTriggerTask = false;
         TaskData currentTask = TaskManager.Instance != null ? TaskManager.Instance.CurrentTask : null;
         if (currentTask != null && dialogueOverrides.Count > 0)
         {
@@ -121,6 +126,7 @@ public class NPCInteractable : Interactable
                 if (!string.IsNullOrWhiteSpace(entry.TaskId)
                     && string.Equals(entry.TaskId, currentTask.Id, StringComparison.Ordinal))
                 {
+                    shouldTriggerTask = true;
                     return entry.Dialogue;
                 }
             }
@@ -137,6 +143,7 @@ public class NPCInteractable : Interactable
                     && !string.IsNullOrWhiteSpace(entry.TargetId)
                     && string.Equals(entry.TargetId, currentTask.TargetId, StringComparison.Ordinal))
                 {
+                    shouldTriggerTask = true;
                     return entry.Dialogue;
                 }
             }
