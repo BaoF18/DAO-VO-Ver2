@@ -3898,11 +3898,6 @@ MonoBehaviour:
     type: 0
     targetId: NPC_Tri
     state: 0
-  - id: 2
-    description: "Ch\xE0o ch\xFA Long"
-    type: 0
-    targetId: NPC_Tri
-    state: 0
   nextTaskDelayAfterComplete: 2
   panelRevealDelayAfterFirstActivity: 5
 --- !u!4 &227505546
@@ -10452,12 +10447,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_TaskTrigger
   npcId: NPC_Thuy
-  taskOverride:
-    id: 
-    description: 
-    type: 0
-    targetId: 
-    state: 0
 --- !u!1 &573306916
 GameObject:
   m_ObjectHideFlags: 0
@@ -20568,6 +20557,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 1679010955}
   nameText: {fileID: 1295409771}
   dialogueText: {fileID: 1655337419}
+  typingSource: {fileID: 0}
   typeSpeed: 0.03
 --- !u!1001 &1193834074
 PrefabInstance:
@@ -33735,12 +33725,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_TaskTrigger
   npcId: NPC_Thao
-  taskOverride:
-    id: 
-    description: 
-    type: 0
-    targetId: 
-    state: 0
 --- !u!1 &1928443800
 GameObject:
   m_ObjectHideFlags: 0
@@ -50441,12 +50425,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_TaskTrigger
   npcId: NPC_Tri
-  taskOverride:
-    id: 
-    description: 
-    type: 0
-    targetId: 
-    state: 0
 --- !u!1 &9166533939717450830
 GameObject:
   m_ObjectHideFlags: 0

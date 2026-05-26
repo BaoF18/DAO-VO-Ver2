@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5370dac41ad57954fb14d00b2b872540, type: 3}
   m_Name: NPC_Default_Config
   m_EditorClassIdentifier: Assembly-CSharp::NPCMovementConfig
-  walkSpeed: 2
-  runSpeed: 5
-  stoppingDistance: 0.5
-  rotationSpeed: 120
+  walkSpeed: 500
+  runSpeed: 500
+  stoppingDistance: 0.1
+  rotationSpeed: 300
