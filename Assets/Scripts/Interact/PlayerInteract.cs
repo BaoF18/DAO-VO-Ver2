@@ -61,8 +61,6 @@ public class PlayerInteract : MonoBehaviour
 
     void CheckForInteractable()
     {
-        // Khi đang tương tác, kiểm tra khoảng cách thay vì raycast
-        // Để player quay mặt đi vẫn tương tác, nhưng rời xa thì ngừng
         if (currentInteractable != null && currentInteractable.IsInteracting)
         {
             SetPrompt(string.Empty);
@@ -80,21 +78,38 @@ public class PlayerInteract : MonoBehaviour
             return;
         }
 
-        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * interactRange, Color.red);
+        // --- CÁCH MỚI DÀNH CHO GAME GÓC NHÌN THỨ 3 ---
+        // Quét một vòng tròn quanh chân Player thay vì bắn từ Camera
+        Collider[] hits = Physics.OverlapSphere(transform.position, interactRange, interactLayerMask, QueryTriggerInteraction.Collide);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactLayerMask, QueryTriggerInteraction.Collide))
+        IInteractable closestInteractable = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Collider hit in hits)
         {
-            IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
+            IInteractable interactable = hit.GetComponentInParent<IInteractable>();
             if (interactable != null)
             {
-                currentInteractable = interactable;
-                SetPrompt(promptMessage);
-                return;
+                // Ưu tiên cái nào gần Player nhất
+                float dist = Vector3.Distance(transform.position, hit.transform.position);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                    closestInteractable = interactable;
+                }
             }
         }
-        currentInteractable = null;
-        SetPrompt(string.Empty);
+
+        if (closestInteractable != null)
+        {
+            currentInteractable = closestInteractable;
+            SetPrompt(promptMessage); // Bật chữ "Press E"
+        }
+        else
+        {
+            currentInteractable = null;
+            SetPrompt(string.Empty);
+        }
     }
 
     private void SetPrompt(string value)
