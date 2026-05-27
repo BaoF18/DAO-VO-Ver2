@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Dialogue_2 4
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   lines:
-  - speakerName: "Ch\xFA Grab"
-    text: "Con xem giu\u0301p chu\u0301 ca\u0301i ba\u0301nh "
+  - speakerName: "Anh h\xE0ng x\xF3m"
+    text: " Cu xem gi\xFAp anh c\xE1i xe  "
+  - speakerName: "Anh h\xE0ng x\xF3m"
+    text: "D\u1EA1o n\xE0y b\u1ECB g\xEC m\xE0 c\u1EE9 \u0111\u1EC1 m\xE1y l\xE0
+      ch\u1EA1y \u0111\u01B0\u1EE3c "
   - speakerName: Nam
-    text: "Da\u0323, con la\u0300m li\xEA\u0300n\r\n\r\n"
+    text: '?????? '
   - speakerName: Nam
-    text: "Nh\xECn....\nQuan s\xE1t...... \nPh\xE1t hi\u1EC7n "
-  - speakerName: Nam
-    text: "Xe ch\xFA b\u1ECB x\xEC l\u1ED1p \u0111\u1EC3 ch\xE1u s\u1EEDa "
+    text: "V\u1EADy \u0111\u1EC3 em xem nh\u01B0 n\xE0o "

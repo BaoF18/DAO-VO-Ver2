@@ -14,8 +14,9 @@ public enum TaskType
 public enum TaskState
 {
     Locked = 0,
-    Active = 1,
-    Completed = 2
+    Displaying = 1,
+    Active = 2,
+    Completed = 3
 }
 
 [Serializable]
