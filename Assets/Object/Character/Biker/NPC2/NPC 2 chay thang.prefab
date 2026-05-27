@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a79b2746dc3d44ebce6cecbd2f920b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCMovement
-  config: {fileID: 11400000, guid: ec5734b562c569b499c191514eac8a6f, type: 2}
+  config: {fileID: 11400000, guid: d74ce315379e27a49b98d1153f4fab0c, type: 2}
   defaultBehavior: {fileID: 0}
 --- !u!114 &-5960098037627075981
 MonoBehaviour:
@@ -202,5 +202,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VehicleJobConfig
   jobName: "V\xE1 xe"
-  preRepairDialogue: {fileID: 11400000, guid: 8dfe565aa31ac194eb61dcd1a9527245, type: 2}
-  postRepairDialogue: {fileID: 11400000, guid: db950964a09bbcc4c9fed93ed6a3d595, type: 2}
+  preRepairDialogue: {fileID: 11400000, guid: 224d523dfc31b8049b8f1f9692fcccd2, type: 2}
+  postRepairDialogue: {fileID: 11400000, guid: 34d3df0524f7cc349be0a9f1d84ba700, type: 2}
