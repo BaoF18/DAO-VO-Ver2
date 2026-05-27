@@ -347,7 +347,7 @@ MonoBehaviour:
     m_Value: 0.816
   shapeScale:
     m_OverrideState: 1
-    m_Value: 5.15
+    m_Value: 5.6
   shapeOffset:
     m_OverrideState: 1
     m_Value: {x: 0.87, y: 0, z: 0}
@@ -382,7 +382,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value:
       mode: 0
-      customValue: 1000
+      customValue: 200
       additiveValue: 0
       multiplyValue: 1
   orientation:
@@ -546,7 +546,7 @@ MonoBehaviour:
     m_Value: 20000
   groundTint:
     m_OverrideState: 1
-    m_Value: {r: 0.36425808, g: 0.67317796, b: 0.6515288, a: 1}
+    m_Value: {r: 0.66062975, g: 0.79706734, b: 0.8562991, a: 1}
   groundColorTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -579,7 +579,7 @@ MonoBehaviour:
     m_Value: 0
   horizonTint:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0.63620657, b: 0.7264151, a: 1}
+    m_Value: {r: 0, g: 0.35997844, b: 1, a: 1}
   zenithTint:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0.8776374, b: 1, a: 1}
