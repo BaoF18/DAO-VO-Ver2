@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e048829dd91dc47498cde6f504b11987, type: 3}
+  m_Name: Dialogue_Gangster
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  lines:
+  - speakerName: Nam
+    text: "m l\xE0 ai "
+  - speakerName: Long
+    text: "Tao l\xE0 ch\xFA Long, \u0111\xE0n em c\u1EE7a T\xE0i ch\xF3 \u0111i\xEAn"
+  - speakerName: Nam
+    text: "t\xE0i ch\xF3 \u0111i\xEAn \xE0?"
+  - speakerName: Long
+    text: "m th\u1EA5y t\u1EA1i sao t l\u1EA1i th\xEDch \u0103n m\xEC g\xF3i?"
+  - speakerName: Nam
+    text: "L\xE0 t\u1EA1i z\xEC, m \u0111 th\xEDch \u0103n m\xEC ly "
+  - speakerName: Long
+    text: "\u0111\u1EADu ph\u1ED9ng \u1EBFu ph\u1EA3i, t h\u1EBFt ti\u1EC1n \u0111\u01B0a
+      ti\u1EC1n m \u0111\xE2y cho tttt"
+  - speakerName: Nam
+    text: "\u0110eo"
+  - speakerName: Long
+    text: "M d\xE1m kh\xE1ng l\u1EC7nh t"
+  - speakerName: Long
+    text: "Ph\xE2n th\xE2n chi thu\u1EADt"
+  - speakerName: Long
+    text: Bu shin no jut su!
