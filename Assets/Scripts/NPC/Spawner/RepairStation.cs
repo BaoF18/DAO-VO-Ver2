@@ -140,16 +140,11 @@ public class RepairStation : Interactable
 
         if (staticBikeModel != null) staticBikeModel.SetActive(false);
         if (staticNpcModel != null) staticNpcModel.SetActive(false);
-
-        // Sửa xong, tắt Collider đi để hết bấm bậy
         if (stationCollider != null) stationCollider.enabled = false;
 
-        if (TaskManager.Instance != null && TaskManager.Instance.CurrentTask != null)
-        {
-            TaskManager.Instance.CompleteTask(TaskManager.Instance.CurrentTask);
-        }
-
         currentJob = null;
+
+        // Chỉ việc hét lên "Xong rồi!" thông qua Event, để Spawner tự đi mà đếm
         onRepairComplete?.Invoke();
     }
 

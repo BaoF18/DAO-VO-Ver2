@@ -1,7 +1,16 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NPCWaypointSpawner : MonoBehaviour
 {
+    [Header("Liên kết Nhiệm vụ (Task)")]
+    [Tooltip("ID của Task sửa xe (Task ID 3)")]
+    public string requiredTaskId = "3";
+    [Tooltip("Số lượng xe cần sửa để hoàn thành Task")]
+    public int requiredRepairs = 3;
+    private int currentRepairCount = 0;
+    private bool isTaskCompleted = false;
+
     [Header("Danh sách xe khách (Kéo nhiều xe vào đây)")]
     [SerializeField] private GameObject[] npcPrefabs;
     public bool spawnAutomatically = true;
@@ -13,8 +22,6 @@ public class NPCWaypointSpawner : MonoBehaviour
 
     [Header("KỊCH BẢN ĐÁNH TRÁO (SWAP)")]
     public bool pauseAndHideAtFirstPath = false;
-
-    [Tooltip("KÉO OBJECT TRẠM SỬA XE VÀO ĐÂY (Thay cho cái Event rườm rà)")]
     public RepairStation repairStation;
 
     [Header("Waypoint tiếp theo")]
@@ -37,6 +44,19 @@ public class NPCWaypointSpawner : MonoBehaviour
 
     void Update()
     {
+        // ==========================================================
+        // KHÓA AN TOÀN: CHỈ CHẠY KHI ĐÚNG TASK SỬA XE VÀ CHƯA SỬA ĐỦ 3 CHIẾC
+        if (TaskManager.Instance != null && TaskManager.Instance.CurrentTask != null)
+        {
+            if (TaskManager.Instance.CurrentTask.Id != requiredTaskId) return; // Chưa tới Task này -> Đứng im
+            if (isTaskCompleted) return; // Sửa đủ số lượng rồi -> Đóng cửa xưởng
+        }
+        else
+        {
+            if (!testSpawnNow && !spawnAutomatically) return;
+        }
+        // ==========================================================
+
         if (!hasSpawned)
         {
             if (testSpawnNow)
@@ -69,7 +89,6 @@ public class NPCWaypointSpawner : MonoBehaviour
                     activePatrol.gameObject.SetActive(false);
                     isPaused = true;
 
-                    // LẤY HỒ SƠ TỪ XE VÀ ĐƯA CHO TRẠM SỬA CHỮA
                     if (repairStation != null)
                     {
                         VehicleJobConfig config = activePatrol.GetComponent<VehicleJobConfig>();
@@ -104,6 +123,31 @@ public class NPCWaypointSpawner : MonoBehaviour
             }
         }
     }
+
+    // ==========================================================
+    // HÀM MỚI: NHẬN BÁO CÁO TỪ TRẠM SỬA XE VÀ ĐẾM SỐ LƯỢNG
+    public void RecordOneRepairFinished()
+    {
+        currentRepairCount++;
+        Debug.Log($"Đã sửa xong {currentRepairCount} / {requiredRepairs} chiếc xe.");
+
+        // Bật chiếc xe cho nó chạy đi
+        ResumeHiddenNPCAndDriveAway();
+
+        // Kiểm tra xem đã đủ chỉ tiêu chưa
+        if (currentRepairCount >= requiredRepairs && !isTaskCompleted)
+        {
+            isTaskCompleted = true; // Chốt sổ, đóng cửa xưởng
+
+            // Báo cho TaskManager biết đã xong chuỗi sửa xe
+            if (TaskManager.Instance != null && TaskManager.Instance.CurrentTask != null)
+            {
+                TaskManager.Instance.CompleteTask(TaskManager.Instance.CurrentTask);
+                Debug.Log("Hoàn thành Task sửa 3 xe! Chuyển sang Task tiếp theo.");
+            }
+        }
+    }
+    // ==========================================================
 
     public void ResumeHiddenNPCAndDriveAway()
     {
