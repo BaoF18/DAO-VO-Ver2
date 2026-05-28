@@ -9,32 +9,35 @@ public class RepairStation : Interactable
     private enum StationState { Hidden, WaitPreTalk, WaitRepair, WaitPostTalk }
     private StationState currentState = StationState.Hidden;
 
-    [Header("Giao diện & Mô hình tĩnh")]
+    [Header("Static models")]
     public GameObject staticBikeModel;
     public GameObject staticNpcModel;
     public TextMeshPro overheadLabel;
 
-    [Header("UI Minigame")]
-    public float repairDuration = 2.5f;
+    [Header("UI Minigame (Spam Phím)")]
+    [Tooltip("Tổng điểm/thời gian cần đạt để sửa xong")]
+    public float repairDuration = 5f;
+    [Tooltip("Mỗi lần bấm F sẽ tăng bao nhiêu tiến độ")]
+    public float fillPerTap = 0.5f;
+    [Tooltip("Tốc độ tụt tiến độ mỗi giây nếu lười bấm")]
+    public float drainRate = 1.0f;
+
     public GameObject repairUIPanel;
     public Image fillImage;
 
-    [Header("Sự kiện hoàn thành")]
+    [Header("Completion Event")]
     public UnityEvent onRepairComplete;
 
     private float holdTimer = 0f;
     private bool isWaitingForDialogueEnd = false;
 
     private VehicleJobConfig currentJob;
-
-    // THÊM BIẾN QUẢN LÝ COLLIDER
     private Collider stationCollider;
 
     public override bool IsInteracting => DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive && isWaitingForDialogueEnd;
 
     void Awake()
     {
-        // Tự động tìm Sphere Collider và tắt nó đi lúc mới vào game
         stationCollider = GetComponent<Collider>();
         if (stationCollider != null) stationCollider.enabled = false;
     }
@@ -55,7 +58,6 @@ public class RepairStation : Interactable
         if (staticBikeModel != null) staticBikeModel.SetActive(true);
         if (staticNpcModel != null) staticNpcModel.SetActive(true);
 
-        // Bật Collider lên để người chơi có thể tương tác
         if (stationCollider != null) stationCollider.enabled = true;
 
         ChangeState(StationState.WaitPreTalk);
@@ -72,7 +74,7 @@ public class RepairStation : Interactable
             switch (newState)
             {
                 case StationState.WaitPreTalk: overheadLabel.text = "Nói chuyện (E)"; break;
-                case StationState.WaitRepair: overheadLabel.text = "Cần sửa: " + currentJob.jobName; break;
+                case StationState.WaitRepair: overheadLabel.text = "Cần sửa: " + currentJob.jobName + " (Spam F)"; break;
                 case StationState.WaitPostTalk: overheadLabel.text = "Tính tiền (E)"; break;
                 case StationState.Hidden: overheadLabel.gameObject.SetActive(false); break;
             }
@@ -113,24 +115,33 @@ public class RepairStation : Interactable
     {
         if (currentState != StationState.WaitRepair) return;
 
-        if (Keyboard.current != null && Keyboard.current.fKey.isPressed)
+        // Sử dụng wasPressedThisFrame để bắt sự kiện nhấp phím (không tính giữ phím)
+        if (Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame)
         {
-            holdTimer += Time.deltaTime;
+            holdTimer += fillPerTap;
             if (repairUIPanel != null) repairUIPanel.SetActive(true);
-            if (fillImage != null) fillImage.fillAmount = holdTimer / repairDuration;
-
-            if (holdTimer >= repairDuration)
-            {
-                holdTimer = 0f;
-                if (repairUIPanel != null) repairUIPanel.SetActive(false);
-                ChangeState(StationState.WaitPostTalk);
-            }
         }
         else
         {
-            holdTimer = Mathf.Max(0f, holdTimer - Time.deltaTime);
-            if (fillImage != null) fillImage.fillAmount = holdTimer / repairDuration;
-            if (holdTimer <= 0 && repairUIPanel != null) repairUIPanel.SetActive(false);
+            // Trừ dần thanh tiến độ theo thời gian nếu không thao tác
+            holdTimer -= drainRate * Time.deltaTime;
+        }
+
+        // Ép giá trị holdTimer không được tụt xuống dưới 0 và không vượt quá repairDuration
+        holdTimer = Mathf.Clamp(holdTimer, 0f, repairDuration);
+
+        // Cập nhật UI thanh máu/tiến độ
+        if (fillImage != null) fillImage.fillAmount = holdTimer / repairDuration;
+
+        // Ẩn panel nếu tiến độ tuột về 0
+        if (holdTimer <= 0 && repairUIPanel != null) repairUIPanel.SetActive(false);
+
+        // Kiểm tra điều kiện thắng minigame
+        if (holdTimer >= repairDuration)
+        {
+            holdTimer = 0f;
+            if (repairUIPanel != null) repairUIPanel.SetActive(false);
+            ChangeState(StationState.WaitPostTalk);
         }
     }
 
@@ -143,8 +154,6 @@ public class RepairStation : Interactable
         if (stationCollider != null) stationCollider.enabled = false;
 
         currentJob = null;
-
-        // Chỉ việc hét lên "Xong rồi!" thông qua Event, để Spawner tự đi mà đếm
         onRepairComplete?.Invoke();
     }
 

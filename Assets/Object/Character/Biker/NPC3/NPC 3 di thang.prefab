@@ -201,6 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfba159e26d162b42975d431e9165da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VehicleJobConfig
-  jobName: "V\xE1 xe"
+  jobName: ???
   preRepairDialogue: {fileID: 11400000, guid: 418b91434db822d40baf7a2b70163e6e, type: 2}
   postRepairDialogue: {fileID: 11400000, guid: c86efe8aab2817c45811762f56bf0932, type: 2}

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   lines:
   - speakerName: Nam
-    text: "Anh l\xE0 ai sao l\u1EA1i t\u1EDBi \u0111\xE2y "
+    text: "Anh l\xE0 ai t\u1EEB \u0111\xE2u b\u01B0\u1EDBc \u0111\u1EBFn n\u01A1i
+      \u0111\xE2y ng\u1ECDt ng\xE0o trong s\u01B0\u01A1ng"
   - speakerName: 'Nam '
     text: "Kh\xF4ng l\u1EBD l\xE0 Stalker dang mu\u1ED1n h\xE3m hi\u1EBFp t\xF4i"
   - speakerName: Long
