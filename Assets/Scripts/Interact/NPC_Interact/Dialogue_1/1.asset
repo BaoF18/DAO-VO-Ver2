@@ -10,10 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e048829dd91dc47498cde6f504b11987, type: 3}
-  m_Name: 1 1
+  m_Name: 1
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   lines:
   - speakerName: Nam
-    text: ye
-  - speakerName: "Tr\xED"
-    text: "C\u1EB7c clmmm "
+    text: "Ch\xE0o bu\u1ED1i s\xE1ng\nnay l\xE3o gia d\u1EADy s\u1EDBm v\xE2y"
+  - speakerName: Cha Nam
+    text: "Con \u0111o\xE1n xem "
+  - speakerName: Nam
+    text: "C\xF3 ph\u1EA3i v\xEC nh\xE0 m\xECnh ngh\xE8o n\xEAn ph\u1EA3i d\u1EADy
+      s\u1EDBm ki\u1EBFm c\u01A1m h\u1EA3 ba "
+  - speakerName: ' Cha Nam'
+    text: "Hahaha \n "

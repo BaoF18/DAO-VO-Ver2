@@ -20,6 +20,10 @@ MonoBehaviour:
   - speakerName: Nam
     text: "C\u1EE7a ch\xFA 1 t\u1EF7 2"
   - speakerName: "Ch\xFA Grab"
+    text: "hahaha\nTh\u1EB1ng n\xE0y h\xE0i d\xF3n  "
+  - speakerName: Nam
+    text: "kkk...cho con xin 2 ch\u1EE5c \u1EA1"
+  - speakerName: "Ch\xFA Grab"
     text: "\u0110\xE2y con"
   - speakerName: Nam
     text: "Kh\xE0 kh\xE0 con thanh k\u1EC1u ch\xFA, t\u1EA1m bi\u1EC7t ch\xFA!"
