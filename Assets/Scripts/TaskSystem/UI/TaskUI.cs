@@ -29,6 +29,8 @@ public class TaskUI : MonoBehaviour
     private bool lastRenderedWasNull;
     private bool hasRendered;
 
+    public float DisplayDuration => displayDuration;
+
     private void Awake()
     {
         AutoAssignMissingReferences();

@@ -25,6 +25,7 @@ public class TaskManager : MonoBehaviour
     private Coroutine activateNextTaskCoroutine;
     private Coroutine revealPanelCoroutine;
     private bool revealTriggered;
+    private float interactionLockedUntilTime;
 
 #if ENABLE_INPUT_SYSTEM
     private InputAction anyKeyAction;
@@ -175,6 +176,7 @@ public class TaskManager : MonoBehaviour
         TaskEvents.RaiseTaskStart(CurrentTask);
         TaskEvents.RaiseTaskActivated(CurrentTask);
         TaskEvents.RaiseTaskUpdated(CurrentTask);
+        LockInteractionForTaskDisplay();
     }
 
     private void HandleTalkToNpc(string npcId)
@@ -252,6 +254,12 @@ public class TaskManager : MonoBehaviour
         if (CurrentTask == null)
         {
             Debug.Log($"[TaskManager] Ignore action {actionType} ({targetId}) because there is no active task.");
+            return;
+        }
+
+        if (Time.time < interactionLockedUntilTime)
+        {
+            Debug.Log($"[TaskManager] Ignore action {actionType} ({targetId}) because task display is still showing.");
             return;
         }
 
@@ -373,5 +381,20 @@ public class TaskManager : MonoBehaviour
         TaskEvents.RaiseTaskStart(CurrentTask);
         TaskEvents.RaiseTaskActivated(CurrentTask);
         TaskEvents.RaiseTaskUpdated(CurrentTask);
+        LockInteractionForTaskDisplay();
+    }
+
+    private void LockInteractionForTaskDisplay()
+    {
+        TaskUI taskUI = FindObjectOfType<TaskUI>();
+        if (taskUI == null)
+        {
+            interactionLockedUntilTime = 0f;
+            return;
+        }
+
+        float displayDelay = Mathf.Max(0f, taskUI.DisplayDuration);
+        float revealDelay = Mathf.Max(0f, panelRevealDelayAfterFirstActivity);
+        interactionLockedUntilTime = Time.time + revealDelay + displayDelay;
     }
 }

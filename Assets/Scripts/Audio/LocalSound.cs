@@ -25,6 +25,7 @@ public class LocalSound : MonoBehaviour
     public Transform listener;
 
     private AudioSource audioSource;
+    private bool isDialogueTyping;
 
     void Start()
     {
@@ -44,9 +45,30 @@ public class LocalSound : MonoBehaviour
             listener = Camera.main.transform;
     }
 
+    private void OnEnable()
+    {
+        DialogueManager.DialogueLineTypingStarted += HandleDialogueLineTypingStarted;
+        DialogueManager.DialogueLineTypingEnded += HandleDialogueLineTypingEnded;
+    }
+
+    private void OnDisable()
+    {
+        DialogueManager.DialogueLineTypingStarted -= HandleDialogueLineTypingStarted;
+        DialogueManager.DialogueLineTypingEnded -= HandleDialogueLineTypingEnded;
+    }
+
     void Update()
     {
         if (listener == null) return;
+
+        if (isDialogueTyping)
+        {
+            if (audioSource != null && audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+            return;
+        }
 
         float distance = Vector3.Distance(transform.position, listener.position);
 
@@ -63,6 +85,20 @@ public class LocalSound : MonoBehaviour
         {
             float t = 1f - ((distance - minDistance) / (maxDistance - minDistance));
             audioSource.volume = maxVolume * t;
+        }
+    }
+
+    private void HandleDialogueLineTypingStarted()
+    {
+        isDialogueTyping = true;
+    }
+
+    private void HandleDialogueLineTypingEnded()
+    {
+        isDialogueTyping = false;
+        if (audioSource != null && soundClip != null && !audioSource.isPlaying)
+        {
+            audioSource.Play();
         }
     }
 }

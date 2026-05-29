@@ -4,6 +4,9 @@ public class NPC_TaskTrigger : MonoBehaviour
 {
     [SerializeField] private string npcId;
     private bool waitingForDialogueEnd;
+    private float interactBlockUntilTime;
+    private bool isBlockingInteraction;
+    private bool hasTriggeredTask;
 
     private void OnDisable()
     {
@@ -21,6 +24,18 @@ public class NPC_TaskTrigger : MonoBehaviour
             Debug.LogWarning("[NPC_TaskTrigger] npcId is empty. Event ignored.");
             return;
         }
+
+        if (hasTriggeredTask)
+        {
+            return;
+        }
+
+        if (isBlockingInteraction && Time.time < interactBlockUntilTime)
+        {
+            return;
+        }
+
+        isBlockingInteraction = false;
 
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive)
         {
@@ -44,7 +59,27 @@ public class NPC_TaskTrigger : MonoBehaviour
         waitingForDialogueEnd = false;
         DialogueManager.DialogueEnded -= HandleDialogueEnded;
 
+        hasTriggeredTask = true;
         Debug.Log($"[NPC_TaskTrigger] Dialogue complete => {npcId}");
         TaskEvents.RaiseTalkToNpcRequested(npcId);
+        StartInteractionBlockForTaskDisplay();
+    }
+
+    private void StartInteractionBlockForTaskDisplay()
+    {
+        TaskManager taskManager = TaskManager.Instance;
+        if (taskManager == null || taskManager.CurrentTask == null)
+        {
+            return;
+        }
+
+        TaskUI taskUI = FindObjectOfType<TaskUI>();
+        if (taskUI == null)
+        {
+            return;
+        }
+
+        interactBlockUntilTime = Time.time + taskUI.DisplayDuration;
+        isBlockingInteraction = true;
     }
 }

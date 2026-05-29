@@ -11,6 +11,8 @@ public class DialogueManager : MonoBehaviour
     // === EVENTS: để các hệ thống khác lắng nghe mà không cần tham chiếu trực tiếp ===
     public static event Action DialogueStarted;
     public static event Action DialogueEnded;
+    public static event Action DialogueLineTypingStarted;
+    public static event Action DialogueLineTypingEnded;
 
     [Header("UI")]
     public GameObject dialoguePanel;
@@ -92,6 +94,7 @@ public class DialogueManager : MonoBehaviour
 
         typeCoroutine = StartCoroutine(TypeText(line.text));
         RestartTypingSfx();
+        DialogueLineTypingStarted?.Invoke();
     }
 
     IEnumerator TypeText(string text)
@@ -106,9 +109,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         isTyping = false;
-        // The sound will stop on the next action (NextLine or EndDialogue)
-        // Or when skipping. If we stop it here, it might feel abrupt.
-        // Let's follow the prompt and stop it in NextLine/Skip/End.
+        DialogueLineTypingEnded?.Invoke();
+        StopTypingSfx();
     }
 
     void SkipTyping()
@@ -118,6 +120,7 @@ public class DialogueManager : MonoBehaviour
 
         dialogueText.text = currentData.lines[currentLine].text;
         isTyping = false;
+        DialogueLineTypingEnded?.Invoke();
         StopTypingSfx();
     }
 
@@ -153,6 +156,8 @@ public class DialogueManager : MonoBehaviour
         {
             typingSource.loop = false;
         }
+
+        DialogueLineTypingEnded?.Invoke();
 
         DialogueEnded?.Invoke();
     }
