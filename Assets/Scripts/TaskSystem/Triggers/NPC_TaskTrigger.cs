@@ -6,7 +6,6 @@ public class NPC_TaskTrigger : MonoBehaviour
     private bool waitingForDialogueEnd;
     private float interactBlockUntilTime;
     private bool isBlockingInteraction;
-    private bool hasTriggeredTask;
 
     private void OnDisable()
     {
@@ -25,10 +24,7 @@ public class NPC_TaskTrigger : MonoBehaviour
             return;
         }
 
-        if (hasTriggeredTask)
-        {
-            return;
-        }
+        // ĐÃ XÓA KHÚC CHẶN HÀNH VI Ở ĐÂY
 
         if (isBlockingInteraction && Time.time < interactBlockUntilTime)
         {
@@ -59,9 +55,13 @@ public class NPC_TaskTrigger : MonoBehaviour
         waitingForDialogueEnd = false;
         DialogueManager.DialogueEnded -= HandleDialogueEnded;
 
-        hasTriggeredTask = true;
+        // ĐÃ XÓA DÒNG SET TRUE Ở ĐÂY
+
         Debug.Log($"[NPC_TaskTrigger] Dialogue complete => {npcId}");
+
+        // Bắn tín hiệu về cho Sếp TaskManager
         TaskEvents.RaiseTalkToNpcRequested(npcId);
+
         StartInteractionBlockForTaskDisplay();
     }
 

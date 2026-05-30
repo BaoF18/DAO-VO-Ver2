@@ -1225,8 +1225,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   player: {fileID: 0}
-  attackRange: 1.5
-  timeBetweenAttacks: 2
+  attackRange: 0.8
+  timeBetweenAttacks: 0.5
 --- !u!114 &1300264405961367041
 MonoBehaviour:
   m_ObjectHideFlags: 0
