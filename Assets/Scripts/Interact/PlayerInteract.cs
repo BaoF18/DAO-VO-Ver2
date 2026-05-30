@@ -114,6 +114,7 @@ public class PlayerInteract : MonoBehaviour
 
     private void SetPrompt(string value)
     {
+        return; // Tạm tắt
         EnsurePromptTarget();
 
         if (promptText == null)

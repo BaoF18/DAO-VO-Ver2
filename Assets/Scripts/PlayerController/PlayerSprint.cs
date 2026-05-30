@@ -58,13 +58,11 @@ public class PlayerSprint : MonoBehaviour
             if (isSprintActive)
             {
                 isSprintActive = false;
-                if (m_animator != null)
-                {
-                    m_animator.SetFloat("moveAmount", 0f, 0.2f, Time.deltaTime);
-                }
+                if (m_animator != null) m_animator.SetFloat("moveAmount", 0f, 0.2f, Time.deltaTime);
             }
             return;
         }
+
         bool wantsSprint = false;
         bool sprintPressedThisFrame = false;
 
@@ -79,32 +77,33 @@ public class PlayerSprint : MonoBehaviour
             sprintPressedThisFrame = m_sprintAction.WasPressedThisFrame();
         }
 
+        // =========================================================
+        // CHỐT CHẶN: Hỏi PlayerHealth xem còn Thể Lực (Stamina) không?
+        // Nếu không còn giọt nào -> Ép wantsSprint về false để bắt đi bộ!
+        if (PlayerHealth.Instance != null && !PlayerHealth.Instance.CanRun())
+        {
+            wantsSprint = false;
+            sprintPressedThisFrame = false;
+        }
+        // =========================================================
+
         if (holdToSprint)
         {
             if (wantsSprint && !isSprintActive)
             {
                 isSprintActive = true;
-                if (m_animator != null)
-                {
-                    m_animator.SetFloat("moveAmount", 1f);
-                }
+                if (m_animator != null) m_animator.SetFloat("moveAmount", 1f);
             }
             else if (!wantsSprint && isSprintActive)
             {
                 isSprintActive = false;
-                if (m_animator != null)
-                {
-                    m_animator.SetFloat("moveAmount", 0f, 0.2f, Time.deltaTime);
-                }
+                if (m_animator != null) m_animator.SetFloat("moveAmount", 0f, 0.2f, Time.deltaTime);
             }
         }
         else if (sprintPressedThisFrame)
         {
             isSprintActive = !isSprintActive;
-            if (m_animator != null)
-            {
-                m_animator.SetFloat("moveAmount", isSprintActive ? 1f : 0f, 0.2f, Time.deltaTime);
-            }
+            if (m_animator != null) m_animator.SetFloat("moveAmount", isSprintActive ? 1f : 0f, 0.2f, Time.deltaTime);
         }
     }
 

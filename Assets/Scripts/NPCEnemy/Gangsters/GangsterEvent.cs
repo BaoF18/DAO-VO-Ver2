@@ -13,10 +13,15 @@ public class GangsterEvent : Interactable
     [Header("Dữ Liệu Thoại")]
     public DialogueData gangsterDialogue;
 
+    [Header("Giao diện trên đầu (Chữ E)")]
+    public GameObject overheadUI;
+    public float showDistance = 4f; // Đứng cách 4 mét thì hiện
+
     private NavMeshAgent agent;
     private Collider gangsterCollider;
     private GameObject visualMesh;
-    private Animator gangsterAnimator; //ANIMATOR
+    private Animator gangsterAnimator;
+    private Transform playerTransform; // Đo khoảng cách với Player
 
     private bool isSpawned = false;
     private bool hasArrived = false;
@@ -32,13 +37,22 @@ public class GangsterEvent : Interactable
         if (transform.childCount > 0)
         {
             visualMesh = transform.GetChild(0).gameObject;
-            // TỰ ĐỘNG TÌM ANIMATOR TRÊN CƠ THỂ ĐỨA CON
             gangsterAnimator = visualMesh.GetComponent<Animator>();
         }
 
         if (visualMesh != null) visualMesh.SetActive(false);
         if (gangsterCollider != null) gangsterCollider.enabled = false;
         if (agent != null) agent.enabled = false;
+    }
+
+    void Start()
+    {
+        // Tự động tìm người chơi
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null) playerTransform = player.transform;
+
+        // Tắt chữ E lúc mới vào game
+        if (overheadUI != null) overheadUI.SetActive(false);
     }
 
     void OnEnable() { DialogueManager.DialogueEnded += OnDialogueFinished; }
@@ -58,30 +72,35 @@ public class GangsterEvent : Interactable
         {
             float distanceToDoor = Vector3.Distance(transform.position, doorDestination.position);
 
-            // ==========================================================
-            // LOGIC ANIMATION: NẾU ĐANG DI CHUYỂN THÌ ĐỔI THOẠI WALK
             if (gangsterAnimator != null)
             {
-                // Lấy tốc độ thực tế của NavMeshAgent
                 float currentSpeed = agent.velocity.magnitude;
-                // Truyền tốc độ vào biến "Speed" trong Animator
-                // (Nếu Speed > 0.1 -> Chuyển sang Walk, nếu = 0 -> Về Idle)
                 gangsterAnimator.SetFloat("Speed", currentSpeed);
             }
-            // ==========================================================
 
             if (distanceToDoor <= 1.5f)
             {
                 hasArrived = true;
                 if (gangsterCollider != null) gangsterCollider.enabled = true;
-
-                // Dừng agent
                 agent.isStopped = true;
-
-                // ÉP VỀ IDLE LÚC TỚI NƠI
                 if (gangsterAnimator != null) gangsterAnimator.SetFloat("Speed", 0f);
+            }
+        }
 
-                Debug.Log("[GangsterEvent] Giang hồ đã đến điểm hẹn và đang đứng đợi!");
+        // ==========================================
+        // LOGIC CHỮ E HIỆN TRÊN ĐẦU GIANG HỒ
+        // ==========================================
+        if (hasArrived && overheadUI != null && playerTransform != null)
+        {
+            float distToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+            // Chỉ hiện chữ E khi: Đứng gần + Đang chưa vào hội thoại
+            bool shouldShow = (distToPlayer <= showDistance) && !IsInteracting;
+            overheadUI.SetActive(shouldShow);
+
+            if (shouldShow && Camera.main != null)
+            {
+                overheadUI.transform.rotation = Camera.main.transform.rotation;
             }
         }
     }
@@ -111,6 +130,10 @@ public class GangsterEvent : Interactable
     public override void OnInteract()
     {
         if (!hasArrived || DialogueManager.Instance == null || gangsterDialogue == null) return;
+
+        // Tắt chữ E ngay khi bắt đầu nói chuyện
+        if (overheadUI != null) overheadUI.SetActive(false);
+
         isWaitingForDialogueEnd = true;
         DialogueManager.Instance.StartDialogue(gangsterDialogue);
     }
@@ -129,14 +152,9 @@ public class GangsterEvent : Interactable
         {
             if (TaskManager.Instance.CurrentTask.Id == requiredTaskId)
             {
-                // 1. Báo cáo hoàn thành Task 4
                 TaskManager.Instance.CompleteTask(TaskManager.Instance.CurrentTask);
-                Debug.Log("[GangsterEvent] Hoàn thành Task 4 thành công!");
 
-                // 2. Tắt ngay Collider để người chơi không thể spam phím E được nữa
                 if (gangsterCollider != null) gangsterCollider.enabled = false;
-
-                // 3. Cho hắn tàng hình/bốc hơi khỏi game sau 1 giây (để đỡ bị giật cục)
                 Destroy(gameObject, 1f);
             }
         }
