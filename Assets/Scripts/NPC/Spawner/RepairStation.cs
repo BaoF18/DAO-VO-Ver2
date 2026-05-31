@@ -10,18 +10,18 @@ public class RepairStation : Interactable
     private StationState currentState = StationState.Hidden;
 
     [Header("Static models")]
-    public GameObject staticBikeModel;
-    public GameObject staticNpcModel;
+    [Tooltip("Danh sách các mô hình xe tĩnh (Element 0: Xe 1, Element 1: Xe 2...)")]
+    public GameObject[] staticBikeModels;
+
+    [Tooltip("Danh sách các mô hình NPC tĩnh (Element 0: Khách 1, Element 1: Khách 2...)")]
+    public GameObject[] staticNpcModels;
+
     public TextMeshPro overheadLabel;
 
     [Header("UI Minigame (Spam Phím)")]
-    [Tooltip("Tổng điểm/thời gian cần đạt để sửa xong")]
     public float repairDuration = 5f;
-    [Tooltip("Mỗi lần bấm F sẽ tăng bao nhiêu tiến độ")]
     public float fillPerTap = 0.5f;
-    [Tooltip("Tốc độ tụt tiến độ mỗi giây nếu lười bấm")]
     public float drainRate = 1.0f;
-
     public GameObject repairUIPanel;
     public Image fillImage;
 
@@ -33,6 +33,11 @@ public class RepairStation : Interactable
 
     private VehicleJobConfig currentJob;
     private Collider stationCollider;
+
+    // =========================================================
+    // BIẾN ĐẾM TỰ ĐỘNG: Chiếc đầu tiên sẽ là 0, xong tăng lên 1, 2...
+    private int currentJobIndex = 0;
+    // =========================================================
 
     public override bool IsInteracting => DialogueManager.Instance != null && DialogueManager.Instance.IsDialogueActive && isWaitingForDialogueEnd;
 
@@ -55,8 +60,19 @@ public class RepairStation : Interactable
 
         currentJob = jobConfig;
 
-        if (staticBikeModel != null) staticBikeModel.SetActive(true);
-        if (staticNpcModel != null) staticNpcModel.SetActive(true);
+        // CHỈ BẬT ĐÚNG chiếc xe tương ứng với thứ tự hiện tại
+        if (staticBikeModels != null && currentJobIndex < staticBikeModels.Length)
+        {
+            if (staticBikeModels[currentJobIndex] != null)
+                staticBikeModels[currentJobIndex].SetActive(true);
+        }
+
+        // CHỈ BẬT ĐÚNG ông NPC tương ứng với thứ tự hiện tại
+        if (staticNpcModels != null && currentJobIndex < staticNpcModels.Length)
+        {
+            if (staticNpcModels[currentJobIndex] != null)
+                staticNpcModels[currentJobIndex].SetActive(true);
+        }
 
         if (stationCollider != null) stationCollider.enabled = true;
 
@@ -115,7 +131,6 @@ public class RepairStation : Interactable
     {
         if (currentState != StationState.WaitRepair) return;
 
-        // Sử dụng wasPressedThisFrame để bắt sự kiện nhấp phím (không tính giữ phím)
         if (Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame)
         {
             holdTimer += fillPerTap;
@@ -123,20 +138,15 @@ public class RepairStation : Interactable
         }
         else
         {
-            // Trừ dần thanh tiến độ theo thời gian nếu không thao tác
             holdTimer -= drainRate * Time.deltaTime;
         }
 
-        // Ép giá trị holdTimer không được tụt xuống dưới 0 và không vượt quá repairDuration
         holdTimer = Mathf.Clamp(holdTimer, 0f, repairDuration);
 
-        // Cập nhật UI thanh máu/tiến độ
         if (fillImage != null) fillImage.fillAmount = holdTimer / repairDuration;
 
-        // Ẩn panel nếu tiến độ tuột về 0
         if (holdTimer <= 0 && repairUIPanel != null) repairUIPanel.SetActive(false);
 
-        // Kiểm tra điều kiện thắng minigame
         if (holdTimer >= repairDuration)
         {
             holdTimer = 0f;
@@ -149,12 +159,29 @@ public class RepairStation : Interactable
     {
         ChangeState(StationState.Hidden);
 
-        if (staticBikeModel != null) staticBikeModel.SetActive(false);
-        if (staticNpcModel != null) staticNpcModel.SetActive(false);
+        // TẮT ĐÚNG chiếc xe vừa sửa xong
+        if (staticBikeModels != null && currentJobIndex < staticBikeModels.Length)
+        {
+            if (staticBikeModels[currentJobIndex] != null)
+                staticBikeModels[currentJobIndex].SetActive(false);
+        }
+
+        // TẮT ĐÚNG ông NPC vừa tính tiền xong
+        if (staticNpcModels != null && currentJobIndex < staticNpcModels.Length)
+        {
+            if (staticNpcModels[currentJobIndex] != null)
+                staticNpcModels[currentJobIndex].SetActive(false);
+        }
+
         if (stationCollider != null) stationCollider.enabled = false;
 
         currentJob = null;
         onRepairComplete?.Invoke();
+
+        // =========================================================
+        // TĂNG BIẾN ĐẾM: Sửa xong xe này thì lượt sau sẽ gọi xe + NPC kế tiếp
+        currentJobIndex++;
+        // =========================================================
     }
 
     public override void OnInteractEnd() { }

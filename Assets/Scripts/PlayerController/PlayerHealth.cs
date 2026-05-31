@@ -13,20 +13,22 @@ public class PlayerHealth : MonoBehaviour
     private Rigidbody rb;
     private bool isDead = false;
 
-    [Header("--- HEALTH (Xanh Lá) ---")]
+    [Header("--- HEALTH (Đỏ) ---")]
     public int maxHealth = 100;
     private int currentHealth;
     public Image healthBarFill;
 
-    [Header("--- STAMINA (Đỏ) ---")]
+    [Header("--- STAMINA (Xanh Biển) ---")]
     public float maxStamina = 100f;
     private float currentStamina;
     public Image staminaBarFill;
     public float staminaDrainRate = 20f; // Trừ khi chạy
     public float staminaRegenRate = 15f; // Hồi khi nghỉ
     private PlayerSprint playerSprint;
+    public float staminaRegenDelay = 3f; // Đợi 3 giây mới bắt đầu hồi
+    private float regenTimer = 0f;       // Bộ đếm thời gian
 
-    [Header("--- MANA (Xanh Biển) ---")]
+    [Header("--- MANA (Xanh Lục) ---")]
     public float maxMana = 100f;
     private float currentMana;
     public Image manaBarFill;
@@ -69,11 +71,20 @@ public class PlayerHealth : MonoBehaviour
 
         if (isRunning && currentStamina > 0)
         {
+            // ĐANG CHẠY: Trừ thể lực và reset đồng hồ chờ về 0
             currentStamina -= staminaDrainRate * Time.deltaTime;
+            regenTimer = 0f;
         }
         else if (!isRunning && currentStamina < maxStamina)
         {
-            currentStamina += staminaRegenRate * Time.deltaTime;
+            // ĐANG NGHỈ: Bắt đầu bấm giờ
+            regenTimer += Time.deltaTime;
+
+            // CHỐT CHẶN: Chỉ khi nào nghỉ đủ 3 giây mới cho phép hồi máu
+            if (regenTimer >= staminaRegenDelay)
+            {
+                currentStamina += staminaRegenRate * Time.deltaTime;
+            }
         }
 
         currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
@@ -99,6 +110,8 @@ public class PlayerHealth : MonoBehaviour
     }
     // Tiện ích để các script Di chuyển / Combat hỏi xem có đủ sức không
     public bool CanRun() => currentStamina > 0;
+    // Báo hiệu đang cạn kiệt thể lực (dưới 1 điểm)
+    public bool IsExhausted() => currentStamina <= 1f;
 
     // Yêu cầu Mana hiện tại phải lớn hơn hoặc bằng 30% của Max Mana
     public bool CanAttack() => currentMana >= (maxMana * 0.3f);
