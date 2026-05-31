@@ -15,4 +15,4 @@ MonoBehaviour:
   walkSpeed: 50
   runSpeed: 50
   stoppingDistance: 0.1
-  rotationSpeed: 50
+  rotationSpeed: 1000

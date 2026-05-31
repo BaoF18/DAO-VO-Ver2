@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCMovementConfig
   walkSpeed: 3
   runSpeed: 7
-  stoppingDistance: 0.3
-  rotationSpeed: 50
+  stoppingDistance: 0.1
+  rotationSpeed: 1000
