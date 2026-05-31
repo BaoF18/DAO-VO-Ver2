@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scene/Test/Menu.unity
     guid: 83e8d36b00c374f419967224278403d5
   - enabled: 1
+    path: Assets/Scene/Test/Intro.unity
+    guid: 1c6984381fb824e4dbb3912365efccb0
+  - enabled: 1
     path: Assets/Scene/Test/Dung 5.unity
     guid: 10c5d261285a68347950d437f4348db9
   - enabled: 0
