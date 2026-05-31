@@ -7,6 +7,9 @@ public class PlayerWalk : MonoBehaviour
     [Tooltip("Speed of player movement in units per second (frame-independent).")]
     [SerializeField] public float WalkSpeed = 3.0f;
 
+    [Tooltip("Tốc độ lết bộ khi nhân vật cạn kiệt thể lực.")]
+    [SerializeField] public float ExhaustedSpeed = 1.0f; // <--- THÊM BIẾN NÀY ĐỂ SẾP TÙY CHỈNH
+
     [Tooltip("Speed of player rotation in degrees per second (frame-independent).")]
     [SerializeField] public float RotateSpeed = 5.0f;
 
@@ -16,11 +19,11 @@ public class PlayerWalk : MonoBehaviour
     public float smoothAmin = 0.1f;
 
     public InputActionAsset InputActions;
-    
+
     private InputAction m_moveAction;
     private InputAction m_lookAction;
     private InputAction m_jumpAction;
-    
+
     private Vector2 m_moveAmt;
     private Vector2 m_lookAmt;
 
@@ -40,7 +43,7 @@ public class PlayerWalk : MonoBehaviour
             InputActions.FindActionMap("Player").Enable();
         }
     }
-    
+
     private void OnDisable()
     {
         InputActions.FindActionMap("Player").Disable();
@@ -92,22 +95,34 @@ public class PlayerWalk : MonoBehaviour
         if (m_animator.GetCurrentAnimatorStateInfo(0).IsTag("LockMove"))
         {
             m_animator.SetFloat("moveAmount", 0f, 0.1f, Time.deltaTime);
-            return; 
+            return;
         }
+
+        // =======================================================
+        // TÍNH TOÁN TỐC ĐỘ DI CHUYỂN
+        // =======================================================
         float currentSpeed = WalkSpeed; // Default to walk speed
 
-        if (playerSprint != null && playerSprint.IsSprintActive)
+        // Ưu tiên 1: Đang cạn kiệt thể lực thì ép tốc độ về cực chậm
+        if (PlayerHealth.Instance != null && PlayerHealth.Instance.IsExhausted())
         {
-            currentSpeed = playerSprint.SprintSpeed; // Use sprint speed if sprinting
+            currentSpeed = ExhaustedSpeed;
         }
+        // Ưu tiên 2: Nếu còn thể lực và đang bấm Shift thì mới cho chạy nhanh
+        else if (playerSprint != null && playerSprint.IsSprintActive)
+        {
+            currentSpeed = playerSprint.SprintSpeed;
+        }
+        // =======================================================
+
         float moveAmount = Mathf.Clamp(Mathf.Abs(m_moveAmt.x) + Mathf.Abs(m_moveAmt.y), 0, 0.2f);
-        
+
         if (moveAmount > 0f) // Check if moving
         {
             // Calculate movement direction in WORLD space (camera-relative, not player-relative)
             Vector3 cameraForward = cameraController.planarRotation * Vector3.forward;
             Vector3 cameraRight = cameraController.planarRotation * Vector3.right;
-            
+
             Vector3 moveDirection = (cameraForward * m_moveAmt.y) + (cameraRight * m_moveAmt.x);
 
             // Apply movement
