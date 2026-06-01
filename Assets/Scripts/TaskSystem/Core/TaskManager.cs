@@ -105,6 +105,18 @@ public class TaskManager : MonoBehaviour
             TaskData task = taskDatabase.Tasks[i];
             if (task != null)
             {
+                // =======================================================
+                // TỰ ĐỘNG RESET TRẠNG THÁI TASK KHI BẮT ĐẦU GAME
+                if (i == 0)
+                {
+                    task.State = TaskState.Active; // Task đầu tiên mở
+                }
+                else
+                {
+                    task.State = TaskState.Locked; // Các task sau khóa lại
+                }
+                // =======================================================
+
                 tasks.Add(task);
             }
         }

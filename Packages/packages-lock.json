@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.occasoftware.fireworks": {
+      "version": "file:com.occasoftware.fireworks",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.visualeffectgraph": "14.0.7"
+      }
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

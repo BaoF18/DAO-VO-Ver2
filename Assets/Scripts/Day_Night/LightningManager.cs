@@ -11,8 +11,8 @@ public class LightningManager : MonoBehaviour
     [SerializeField] private Material DaySkybox;
     [SerializeField] private Material NightSkybox;
     //Variables
-    [SerializeField, Range(0, 24)] private float TimeOfDay;
-    [SerializeField, Range(0, 10)] private float SpeedOfDay = 1f;
+    [SerializeField, Range(0, 24)] public float TimeOfDay;
+    [SerializeField, Range(0, 10)] public float SpeedOfDay = 1f;
     [SerializeField] private float StartSunRiseTemperature = 4000f;
     [SerializeField] private float AfternoonSunTemperature = 15000f;
     [SerializeField] private float SunsetTemperature = 15000f;

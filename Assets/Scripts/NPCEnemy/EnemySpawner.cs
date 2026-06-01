@@ -107,5 +107,14 @@ public class EnemySpawner : MonoBehaviour
             TaskManager.Instance.CompleteTask(TaskManager.Instance.CurrentTask);
             Debug.Log("[EnemySpawner] Trùm cuối đã bị hạ! HOÀN THÀNH TASK 5 CỐT TRUYỆN!");
         }
+        if (DemoEndingController.Instance != null)
+        {
+            Debug.Log("✅ [EnemySpawner] Gọi Đạo diễn chiếu Ending!");
+            DemoEndingController.Instance.PlayEndingCinematic();
+        }
+        else
+        {
+            Debug.LogError("❌ [EnemySpawner] Gọi Đạo diễn thất bại: Cục EndingManager trên Scene đang bị tắt hoặc chưa gắn script!");
+        }
     }
 }
