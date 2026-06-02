@@ -5,30 +5,105 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Colum
+    second: {fileID: 2100000, guid: 8704e02d6bcde3243be0e826ac3e42fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Colum1
+    second: {fileID: 2100000, guid: 8ba7cbd263aad14498d27ebc632b678e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 725bf1941ab779546ac3296ff1640a05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MainSign
+    second: {fileID: 2100000, guid: 0e97d66ca5c706a49bddf5e7e548e948, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof
+    second: {fileID: 2100000, guid: 8c350a910e2777746b6062bec238740d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign
+    second: {fileID: 2100000, guid: d6c8333e93774d24e88dd9c617be8b1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign1
+    second: {fileID: 2100000, guid: 55a3d567baf8bac48ba500c71d6d4a4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign2
+    second: {fileID: 2100000, guid: e4711cfc24ae3c142a6ef9ce79b8621c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign3
+    second: {fileID: 2100000, guid: a8938001d8062b54fb9181cec0514e14, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sign4
+    second: {fileID: 2100000, guid: 7bafa51c997465441aca070029a2dfbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall
+    second: {fileID: 2100000, guid: 72360ee230416b24c90f7af50af91d95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall1
+    second: {fileID: 2100000, guid: aaffc3721ffc6924890d76467f8a5ccd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall2
+    second: {fileID: 2100000, guid: e2e78388c104e6b49a9147532b509123, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall4
+    second: {fileID: 2100000, guid: 32a5fc314f9a6bd4b8f08ca170c83d8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: all5
+    second: {fileID: 2100000, guid: 6890e8f1505a0bd458177c290170a922, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: 2a338029-cbe3-4ae0-82b4-e4d9823f4358
-    second: {fileID: 2800000, guid: 3ef5f069e4e21f044b8765a8203a7d9f, type: 3}
+    second: {fileID: 2800000, guid: c7627c4546a477a4abd594cc63d04527, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: 775871f9-fd4c-40e6-9df6-6c561e77674f
-    second: {fileID: 2800000, guid: b8d21adeb53620343ac61f85de29cfcf, type: 3}
+    second: {fileID: 2800000, guid: db82d9f994f837144a3fc3910ff3d242, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Glass
-    second: {fileID: 2800000, guid: dfdb9d03db0d16a458003ca134fe13db, type: 3}
+    second: {fileID: 2800000, guid: 0d1e57970c94d374ebadecab1dca7c87, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: WallRock
-    second: {fileID: 2800000, guid: b2033ca8e302dd74f91811f4f70a09f0, type: 3}
+    second: {fileID: 2800000, guid: f248fcab49265ed4c823bce2b36638c0, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: eb8a7aa1-45ec-4164-a929-424b9d3c55fc
-    second: {fileID: 2800000, guid: 9b4d3b9acf62d4544954627b0ab553a9, type: 3}
+    second: {fileID: 2800000, guid: 6753d453cd22cb04387b621f2125720b, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
