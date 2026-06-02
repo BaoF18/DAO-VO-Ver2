@@ -2560,9 +2560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77ce7fff1a2e2b428ea4f928b95925e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskUI
-  headerTaskText: {fileID: 0}
-  taskDescriptionText: {fileID: 0}
-  taskStateText: {fileID: 0}
+  headerTaskText: {fileID: 1826905670}
+  taskDescriptionText: {fileID: 465062253}
+  taskStateText: {fileID: 1583761750}
   panelToggle: {fileID: 0}
   taskAppearSource: {fileID: 115601807}
   displayDuration: 3
