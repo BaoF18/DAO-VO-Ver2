@@ -9,8 +9,11 @@ public class TaskUI : MonoBehaviour
     [SerializeField] private TMP_Text taskStateText;
     [SerializeField] private TaskPanelClickToggle panelToggle;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource taskAppearSource;
+
     [Header("Display Durations")]
-    [SerializeField] [Min(0f)] private float displayDuration = 3f;
+    [SerializeField] [Min(0f)] private float displayDuration = 6f;
     [SerializeField] [Min(0f)] private float completedDisplayDuration = 1.5f;
 
     [Header("Fallback")]
@@ -34,6 +37,17 @@ public class TaskUI : MonoBehaviour
     private void Awake()
     {
         AutoAssignMissingReferences();
+
+        if (displayDuration < 6f)
+        {
+            displayDuration = 6f;
+        }
+
+        if (string.Equals(completedStateLabel, "Completed", System.StringComparison.Ordinal)
+            || string.Equals(completedStateLabel, "Complete", System.StringComparison.Ordinal))
+        {
+            completedStateLabel = "Hoàn thành";
+        }
 
         if (panelToggle == null)
         {
@@ -220,6 +234,7 @@ public class TaskUI : MonoBehaviour
         StopDisplayRoutine($"Restart from {source}");
 
         ShowPanel();
+        PlayTaskAppearSfx();
         Render(task);
         UpdateRenderCache(task);
 
@@ -230,11 +245,21 @@ public class TaskUI : MonoBehaviour
             Debug.Log("[TaskUI] Duration <= 0, skip auto hide.");
             return;
         }
-
         displayRoutineToken++;
         int token = displayRoutineToken;
         displayRoutine = StartCoroutine(HidePanelAfterDelay(duration, token));
         Debug.Log($"[TaskUI] Start display coroutine token={token}");
+    }
+
+    private void PlayTaskAppearSfx()
+    {
+        if (taskAppearSource == null)
+        {
+            return;
+        }
+
+        taskAppearSource.loop = false;
+        taskAppearSource.Play();
     }
 
     private IEnumerator HidePanelAfterDelay(float delay, int token)
@@ -339,7 +364,7 @@ public class TaskUI : MonoBehaviour
         {
             if (taskDescriptionText != null)
             {
-                taskDescriptionText.text = "All tasks completed";
+                taskDescriptionText.text = "Đã hoàn thành tất cả";
             }
 
             if (taskStateText != null)
@@ -385,7 +410,7 @@ public class TaskUI : MonoBehaviour
 
         if (task == null)
         {
-            taskDescriptionText.text = "All tasks completed\n✔";
+            taskDescriptionText.text = "Đã hoàn thành tất cả\n✔";
             return;
         }
 
@@ -402,7 +427,7 @@ public class TaskUI : MonoBehaviour
     {
         if (task == null)
         {
-            return "All tasks completed\n✔";
+            return "Đã hoàn thành tất cả\n✔";
         }
 
         string status = task.State == TaskState.Completed ? completedStateLabel : activeStateLabel;
