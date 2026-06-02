@@ -208,9 +208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfba159e26d162b42975d431e9165da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VehicleJobConfig
-  jobName: ???
-  preRepairDialogue: {fileID: 11400000, guid: 418b91434db822d40baf7a2b70163e6e, type: 2}
-  postRepairDialogue: {fileID: 11400000, guid: c86efe8aab2817c45811762f56bf0932, type: 2}
+  jobName: "V\xE1 Xe"
+  preRepairDialogue: {fileID: 11400000, guid: 8dfe565aa31ac194eb61dcd1a9527245, type: 2}
+  postRepairDialogue: {fileID: 11400000, guid: db950964a09bbcc4c9fed93ed6a3d595, type: 2}
 --- !u!82 &3218101018207869039
 AudioSource:
   m_ObjectHideFlags: 0

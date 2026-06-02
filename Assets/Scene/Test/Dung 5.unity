@@ -4990,7 +4990,7 @@ MonoBehaviour:
   - id: 3
     description: "S\u1EEDa 3 xe"
     type: 0
-    targetId: Sua_Xe
+    targetId: Dung_Sua_Xe
     state: 0
   - id: 4
     description: "\u0110\xF9, ai \u0111\u1EE9ng tr\u01B0\u1EDBc nh\xE0 th\u1EBF kia?"
@@ -6007,9 +6007,9 @@ MonoBehaviour:
   requiredTaskId: 3
   requiredRepairs: 3
   npcPrefabs:
-  - {fileID: 5295412176090265953, guid: 5640be4f4d607644693f428b8c3717c3, type: 3}
-  - {fileID: 8921353018710831378, guid: 8de0d140db623504ba05617a78f55486, type: 3}
   - {fileID: 6285730754335074943, guid: 4a8c5ce36f389f84abf40ca77434ca6c, type: 3}
+  - {fileID: 8921353018710831378, guid: 8de0d140db623504ba05617a78f55486, type: 3}
+  - {fileID: 5295412176090265953, guid: 5640be4f4d607644693f428b8c3717c3, type: 3}
   spawnAutomatically: 1
   loopQueue: 0
   spawnPoint: {fileID: 0}
@@ -10802,7 +10802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b8e2f18b5351c594c81aa4aa4ae8307e, type: 3}
       propertyPath: m_Name
-      value: NPC 1 indie
+      value: NPC 3 idle
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b8e2f18b5351c594c81aa4aa4ae8307e, type: 3}
       propertyPath: m_IsActive
@@ -17695,7 +17695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d4efc6c41884d064184a33ee1db4b841, type: 3}
       propertyPath: m_Name
-      value: NPC 3 indie 1
+      value: NPC 1 idle
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d4efc6c41884d064184a33ee1db4b841, type: 3}
       propertyPath: m_IsActive
@@ -34983,6 +34983,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4724732762564663171, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1662372051}
+    - targetCorrespondingSourceObject: {fileID: 4724732762564663171, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1662372064}
     - targetCorrespondingSourceObject: {fileID: 6901071521145380159, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 246703391}
@@ -39112,6 +39115,14 @@ MonoBehaviour:
   manaBarFill: {fileID: 1723405303}
   manaCostPerAttack: 20
   manaRegenRate: 5
+  audioSource: {fileID: 1662372064}
+  hurtSounds:
+  - {fileID: 8300000, guid: eee6902faefb2944b889731ba230f29a, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 3ec6774aa7326194e915fa0ce32caabd, type: 3}
+  - {fileID: 8300000, guid: c787573d89c61fb44bc5bc864b4fee55, type: 3}
+  - {fileID: 8300000, guid: 28415bcf5f2515f4198a73c620cf4fd6, type: 3}
+  - {fileID: 8300000, guid: d1f25135863716d4cb015ac815692451, type: 3}
 --- !u!114 &1662372052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39208,6 +39219,103 @@ MonoBehaviour:
   minClickDelay: 0.2
   autoFaceRange: 3
   InputActions: {fileID: -944628639613478452, guid: 3ebcc216e7c8bcd439abd9366cd50f9e, type: 3}
+--- !u!82 &1662372064
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155481863}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1662724186
 GameObject:
   m_ObjectHideFlags: 0
@@ -47493,9 +47601,9 @@ MonoBehaviour:
   - {fileID: 1422677570}
   - {fileID: 1422677570}
   staticNpcModels:
-  - {fileID: 497280546}
-  - {fileID: 1678445648}
   - {fileID: 302724042}
+  - {fileID: 1678445648}
+  - {fileID: 497280546}
   overheadLabel: {fileID: 1294462157}
   repairDuration: 10
   fillPerTap: 0.5

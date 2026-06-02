@@ -35,6 +35,12 @@ public class PlayerHealth : MonoBehaviour
     public float manaCostPerAttack = 20f; // Trừ khi đánh
     public float manaRegenRate = 5f;      // Tự động hồi từ từ
 
+    [Header("--- SOUND EFFECTS ---")]
+    [Tooltip("Kéo AudioSource của Player vào đây")]
+    public AudioSource audioSource;
+    [Tooltip("Kéo các file âm thanh tiếng la (Scream/Hurt) vào đây, có thể kéo nhiều file để random")]
+    public AudioClip[] hurtSounds;
+    public AudioClip[] deathSounds;
 
     void Awake()
     {
@@ -117,7 +123,7 @@ public class PlayerHealth : MonoBehaviour
     public bool CanAttack() => currentMana >= (maxMana * 0.3f);
 
     // ==========================================
-    // LOGIC MÁU VÀ HỒI SINH (Giữ nguyên của bạn)
+    // LOGIC MÁU VÀ HỒI SINH
     // ==========================================
     public void TakeDamage(int damage)
     {
@@ -135,11 +141,19 @@ public class PlayerHealth : MonoBehaviour
             if (popupScript != null) popupScript.Setup(damage);
         }
 
-        Debug.Log("Player bị đấm! Máu còn: " + currentHealth);
-
         if (currentHealth <= 0)
         {
+            // NẾU HẾT MÁU: Gọi hàm chết
             StartCoroutine(HandlePlayerDeath());
+        }
+        else
+        {
+            // NẾU CÒN SỐNG
+            if (audioSource != null && hurtSounds != null && hurtSounds.Length > 0)
+            {
+                AudioClip randomScream = hurtSounds[Random.Range(0, hurtSounds.Length)];
+                audioSource.PlayOneShot(randomScream);
+            }
         }
     }
 
@@ -154,6 +168,12 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("💀 WASTED!");
+        //random tiếng la chết
+        if (audioSource != null && deathSounds != null && deathSounds.Length > 0)
+        {
+            AudioClip randomDeath = deathSounds[Random.Range(0, deathSounds.Length)];
+            audioSource.PlayOneShot(randomDeath);
+        }
 
         if (rb != null) rb.linearVelocity = Vector3.zero;
 
