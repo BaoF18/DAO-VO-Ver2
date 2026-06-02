@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__body1
-    second: {fileID: 2100000, guid: f8be650877b7e8f4aab9d751f28eb080, type: 2}
+    second: {fileID: 2100000, guid: f5e30a49d1738c14a8599acf006b5b9f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -43,7 +43,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: pasted__lambert6
-    second: {fileID: 2100000, guid: a9009e42f8f63c044a1adcb43dbbeb61, type: 2}
+    second: {fileID: 2100000, guid: c6481099383afd749931c18cc56903cd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
