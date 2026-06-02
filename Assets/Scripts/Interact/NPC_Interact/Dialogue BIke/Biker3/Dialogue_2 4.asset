@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Dialogue_2 4
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   lines:
-  - speakerName: "Anh h\xE0ng x\xF3m"
+  - speakerName: "B\xECnh ch\xED c\u1ED1t"
     text: " Cu xem gi\xFAp anh c\xE1i xe  "
-  - speakerName: "Anh h\xE0ng x\xF3m"
+  - speakerName: "B\xECnh ch\xED c\u1ED1t"
     text: "D\u1EA1o n\xE0y b\u1ECB g\xEC m\xE0 c\u1EE9 \u0111\u1EC1 m\xE1y l\xE0
       kh\xF4ng ch\u1EA1y \u0111\u01B0\u1EE3c "
   - speakerName: Nam

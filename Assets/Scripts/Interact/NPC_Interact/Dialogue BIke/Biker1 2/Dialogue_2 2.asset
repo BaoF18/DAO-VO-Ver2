@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue_2 2
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   lines:
-  - speakerName: "Ch\xFA Bee"
+  - speakerName: "Ch\xFA T\u01B0 Bee"
     text: "Con xem giu\u0301p chu\u0301 ca\u0301i \u0111\u1EA7u xe"
   - speakerName: Nam
     text: "k\xEA ch\xFA \r\n"
