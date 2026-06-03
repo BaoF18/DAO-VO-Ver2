@@ -16,15 +16,14 @@ MonoBehaviour:
   - speakerName: "Long \u0110\u1EA1i Ca"
     text: "\xCA th\u1EB1ng B\xECnh c\xF3 \u1EDF \u0111\xE2y kh\xF4ng "
   - speakerName: 'Nam '
-    text: "D\u1EA1 v\xE2ng , anh l\xE0 ai t\xECm B\xECnh c\xF3 vi\u1EC7c g\xEC kh\xF4ng
-      ?"
+    text: "D\u1EA1 v\xE2ng, anh l\xE0 ai t\xECm B\xECnh c\xF3 vi\u1EC7c g\xEC ?"
   - speakerName: Nam
-    text: "Xin t\u1EF1 gi\u1EDBi thi\u1EC7u , tao l\xE0 Long \u0111\u1EB9p trai \u0111\xE0n
-      em c\u1EE7a t\xE0i ch\xF3 \u0111i\xEAn"
+    text: "Xin t\u1EF1 gi\u1EDBi thi\u1EC7u, tao l\xE0 Long \u0111\u1EB9p trai \u0111\xE0n
+      em c\u1EE7a T\xE0i ch\xF3 \u0111i\xEAn"
   - speakerName: Nam
-    text: "t\xE0i ch\xF3 \u0111i\xEAn \xE0?"
+    text: "T\xE0i ch\xF3 \u0111i\xEAn \xE0?"
   - speakerName: "Long \u0110\u1EA1i Ca"
-    text: "N\xF3 n\u1EE3 ti\u1EC1n tao , n\xE3y tao th\u1EA5y n\xF3 v\u1EEBa \u1EDF
+    text: "N\xF3 n\u1EE3 ti\u1EC1n tao, n\xE3y tao th\u1EA5y n\xF3 v\u1EEBa \u1EDF
       \u0111\xE2y xong "
   - speakerName: "Long \u0110\u1EA1i Ca"
     text: "Bi\u1EBFt \u0111i\u1EC1u th\xEC khai ra mau c\xF2n \u0111\u01B0\u1EE3c
@@ -32,11 +31,13 @@ MonoBehaviour:
   - speakerName: Nam
     text: "Ch\u01B0a bao gi\u1EDD b\u1ECF b\u1EA1n \n\u0110\xE1nh ch\u1EBFt c\u0169ng
       kh\xF4ng khai"
-  - speakerName: Long
+  - speakerName: "Long \u0110\u1EA1i Ca"
     text: "M\xE0y c\u1EF1 ?"
   - speakerName: 'Nam '
-    text: "Sao l\u1EA1i kh\xF4ng"
-  - speakerName: Long
+    text: "Sao l\u1EA1i kh\xF4ng ?"
+  - speakerName: "Long \u0110\u1EA1i Ca"
+    text: "Th\u1EBF th\xEC m ch\u1EBFt cmmr"
+  - speakerName: "Long \u0110\u1EA1i Ca"
     text: "Ph\xE2n th\xE2n chi thu\u1EADt"
-  - speakerName: Long
+  - speakerName: "Long \u0110\u1EA1i Ca"
     text: Bu shin no jut su!

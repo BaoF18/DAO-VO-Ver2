@@ -14,16 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   lines:
   - speakerName: Nam
-    text: "oke xong r\u1ED3i "
+    text: "Oke xong r\u1ED3i "
   - speakerName: "Ch\xFA T\u01B0 Bee"
     text: "Ch\xFA h\u1EBFt nhi\xEAu \r\n"
   - speakerName: Nam
-    text: "D\u1EA1 gi\xE1 t\xECnh c\u1EA3m 1tr1 "
-  - speakerName: "Ch\xFA T\u01B0 Bee"
-    text: "haha\nL\u1EA1i tr\xEAu n\u1EEFa r\u1ED3i "
+    text: "D\u1EA1 200 ng\xE0n \u1EA1 "
   - speakerName: Nam
-    text: "kkkk. D\u1EA1 110 ng\xE0n \u1EA1 "
+    text: "Nh\u01B0ng b\xEAn con \u0111ang c\xF3 discount 80% cho kh\xE1ch h\xE0ng
+      \u0111\u1EB9p trai nh\u1EA5t  "
   - speakerName: "Ch\xFA T\u01B0 Bee"
-    text: "\u0110\xE2y ch\xFA g\u1EEDi ti\u1EC1n.."
+    text: "Haha, th\u1EB1ng n\xE0y  "
+  - speakerName: "Ch\xFA T\u01B0 Bee"
+    text: "V\u1EADy n\u1ED5 cho ch\xFA c\xE1i gi\xE1 ph\u1EA3i tr\u1EA3 \u0111i"
   - speakerName: Nam
-    text: "Xie xie ch\xFA .."
+    text: "V\u1EABn l\xE0 200 \u1EA1 "
+  - speakerName: "Ch\xFA T\u01B0 Bee"
+    text: ".......Ng\xE0y x\u01B0a c\u0169ng c\xF3 th\u1EB1ng h\xE0i d\xF3n gi\u1ED1ng
+      con v\u1EADy"
+  - speakerName: "Ch\xFA T\u01B0 Bee"
+    text: "Mai ch\xFA ph\u1EA3i \u0111i gi\u1ED7 c\u1EE7a n\xF3 n\xE8"
+  - speakerName: Nam
+    text: 'Hahahahaha '
+  - speakerName: "Ch\xFA T\u01B0 Bee"
+    text: "Ti\u1EC1n \u0111\xE2y, ch\xFA g\u1EEDi "
+  - speakerName: Nam
+    text: "V\xE2ng, ch\xFA th\u01B0\u1EE3ng l\u1ED9 b\xECnh an "

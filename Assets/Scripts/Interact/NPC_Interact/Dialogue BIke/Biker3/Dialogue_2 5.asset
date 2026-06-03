@@ -16,14 +16,26 @@ MonoBehaviour:
   - speakerName: Nam
     text: "Em xong r\u1ED3i anh "
   - speakerName: "B\xECnh ch\xED c\u1ED1t"
-    text: "K\xEA , v\u1EADy xe anh b\u1ECB g\xEC v\u1EADy\r\n"
+    text: "K\xEA, v\u1EADy xe anh b\u1ECB g\xEC v\u1EADy\r\n"
   - speakerName: Nam
     text: "Xe anh b\u1ECB h\u1ECFng bugi r\xF4i"
   - speakerName: "B\xECnh ch\xED c\u1ED1t"
-    text: "K\xEA th\u1EBF bao nhi\xEAu th\xEC ghi v\xE0o s\u1ED5 cho anh nha  "
+    text: "H\u1EA3, th\u1EBF bao nhi\xEAu th\xEC ghi v\xE0o s\u1ED5 cho anh nha  "
   - speakerName: Nam
-    text: "Ok anhng\u01B0\u1EDDi nh\xE0 c\u1EA3 m\xE0"
+    text: "Ok anh g\u01B0\u1EDDi nh\xE0 c\u1EA3 m\xE0"
   - speakerName: "B\xECnh ch\xED c\u1ED1t"
-    text: "hahahahha ... anh ch\xE0o ku em nh\xE1\n"
+    text: 'hahahahha
+
+'
+  - speakerName: "B\xECnh ch\xED c\u1ED1t"
+    text: "Th\xF4i anh c\xF3 vi\u1EC7c g\u1EA5p"
+  - speakerName: "B\xECnh ch\xED c\u1ED1t"
+    text: "Kh\xF4ng \u0111i nhanh th\xEC ch\xED c\u1ED1t th\xE0nh h\u1EE7 c\u1ED1t
+      m\u1EA5t"
   - speakerName: Nam
     text: "V\u1EA7ng Ku anh \u0111i c\u1EA9n th\u1EADn"
+  - speakerName: Nam
+    text: "C\xF3 g\u1EB7p n\u1EA1n th\xEC \u0111\u1EEBng g\u1ECDi em, em kh\xF3a
+      s\u1ED1 anh r\u1ED3i"
+  - speakerName: "B\xECnh ch\xED c\u1ED1t"
+    text: "Hehehe, ch\xED c\u1ED1t, c\u1ED1t ai n\u1EA5y h\u1ED1t"

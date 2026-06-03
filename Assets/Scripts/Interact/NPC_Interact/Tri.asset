@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e048829dd91dc47498cde6f504b11987, type: 3}
+  m_Name: Tri
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  lines:
+  - speakerName: Nam
+    text: "Anh Tr\xED...."
+  - speakerName: "Tr\xED ve ch\xF3"
+    text: "Sao ku em m\u1EDBi s\xE1ng s\u1EDBm ra \u0111\xE3 l\xE0m \u1EA7m l\xEAn
+      v\u1EADy"
+  - speakerName: "Tr\xED ve ch\xF3"
+    text: "C\xF3 mu\u1ED1n l\xE0m m\u1ED9t b\xE1t ch\xE1o l\xF2ng cho \u1EA5m l\xF2ng
+      ng\u01B0\u1EDDi thanh ni\xEAn kh\xF4ng ?"
+  - speakerName: Nam
+    text: "\u0110\u1EC3 sau \u0111i \u1EA1, em gi\u1EDD l\xE0 b\u1EADn l\u1EAFm kh\xF4ng
+      c\xF3 th\u1EDDi gian \u0103n "
+  - speakerName: 'Nam '
+    text: "Th\u1EDDi gian n\xF3i chuy\u1EC7n v\u1EDBi anh l\xE0 em ki\u1EBFm \u0111\u01B0\u1EE3c
+      bao nhi\xEAu ti\u1EC1n r\u1ED3i"
+  - speakerName: "Tr\xED ve ch\xF3 "
+    text: "Gh\xEA, d\xEDnh t\xED t\xED n\u01B0\u1EDBc bi\u1EC3n t\u01B0\u1EDFng m\xECnh
+      l\xE0 h\u1EA3i s\u1EA3n"
+  - speakerName: "Tr\xED ve ch\xF3 "
+    text: "S\u1EEDa wave l\u1ECF m\xE0 t\u01B0\u1EDFng Roll royce"
