@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SwitchPanel : MonoBehaviour
 {
@@ -19,6 +20,14 @@ public class SwitchPanel : MonoBehaviour
     [Tooltip("N?u true thì s? b?t ??u ? tr?ng thái open (panelsToOpen active)")]
     public bool startOpen = false;
 
+    [Header("Cursor")]
+    [Tooltip("N?u true thì khi m? panel s? hi?n con tr? chu?t (unlock + visible). Khi ?óng panel s? ?n và khóa con tr? (lock + invisible).")]
+    public bool unlockCursorOnOpen = true;
+
+    [Header("UI Buttons")]
+    [Tooltip("Danh sách các Button UI mà khi b?n nh?n s? ?n và khoá con tr? ?? tr? v? gameplay.")]
+    public List<Button> uiButtonsHideCursor = new List<Button>();
+
     // Internal state
     private bool isOpen = false;
 
@@ -26,6 +35,29 @@ public class SwitchPanel : MonoBehaviour
     {
         // Set initial state according to startOpen
         SetOpenState(startOpen);
+
+        // Register click listeners for configured UI buttons
+        if (uiButtonsHideCursor != null)
+        {
+            foreach (var btn in uiButtonsHideCursor)
+            {
+                if (btn == null) continue;
+                btn.onClick.AddListener(OnUiButtonClicked);
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Unregister listeners to avoid memory leaks
+        if (uiButtonsHideCursor != null)
+        {
+            foreach (var btn in uiButtonsHideCursor)
+            {
+                if (btn == null) continue;
+                btn.onClick.RemoveListener(OnUiButtonClicked);
+            }
+        }
     }
 
     private void Update()
@@ -109,6 +141,32 @@ public class SwitchPanel : MonoBehaviour
                 }
             }
         }
+
+        // Handle cursor visibility/lock if enabled
+        if (unlockCursorOnOpen)
+        {
+            if (isOpen)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+    }
+
+    // Called when any configured UI button is clicked
+    private void OnUiButtonClicked()
+    {
+        // Hide and lock cursor to return control to gameplay
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        // Optionally close panels if your workflow requires it
+        // SetOpenState(false);
     }
 
     // Public getters
