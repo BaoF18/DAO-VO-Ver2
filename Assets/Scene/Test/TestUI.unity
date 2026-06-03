@@ -3971,7 +3971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DynamicButton
   hoverClip: {fileID: 8300000, guid: 9842c056a3d00dc46a7cc990c4c96984, type: 3}
-  clickClip: {fileID: 8300000, guid: 5280272186ac6f44dbe0086067e0131c, type: 3}
+  clickClip: {fileID: 0}
   audioSource: {fileID: 0}
   hoverScale: {x: 0.2, y: 0.2, z: 0.2}
   scaleDuration: 0.08
@@ -8075,6 +8075,7 @@ GameObject:
   - component: {fileID: 301257626}
   - component: {fileID: 301257629}
   - component: {fileID: 301257628}
+  - component: {fileID: 301257630}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -8213,6 +8214,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 301257630}
+        m_TargetAssemblyTypeName: DynamicButton, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &301257630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301257624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ace37ea26d8b6d46afc4a000fc5c0e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExitGame
 --- !u!1 &303774251
 GameObject:
   m_ObjectHideFlags: 0
