@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class DemoEndingController : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class DemoEndingController : MonoBehaviour
 
     [Header("1. Giao diện & Chữ")]
     public GameObject thankYouUI;
+    public Button okButton;
     public GameObject madeByTeamText;
 
     [Header("2. Hệ thống Ngày/Đêm")]
@@ -31,6 +33,7 @@ public class DemoEndingController : MonoBehaviour
     // ==========================================
 
     private bool hasTriggeredEnding = false;
+    private bool isWaitingForOk = false;
     private float savedSpeedOfDay;
 
     void Awake()
@@ -42,6 +45,11 @@ public class DemoEndingController : MonoBehaviour
     {
         if (thankYouUI != null) thankYouUI.SetActive(false);
         if (madeByTeamText != null) madeByTeamText.SetActive(false);
+
+        if (okButton != null)
+        {
+            Debug.Log("Nút Ok button đâu?? Kéo vô chưa???!!");
+        }
     }
 
     public void PlayEndingCinematic()
@@ -64,15 +72,29 @@ public class DemoEndingController : MonoBehaviour
         {
             audioSource.PlayOneShot(achievementSound);
         }
+        //Button
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
+        isWaitingForOk = true;
+        Debug.Log("ENDING: Waiting for player to press Ok or something in that button...");
+
+        // LỆNH THẦN THÁNH: Chờ cho đến khi isWaitingForOk = false
+        while (isWaitingForOk)
+        {
+            yield return null;
+        }
+        //For the third-view player
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        if (thankYouUI != null) thankYouUI.SetActive(false);
         if (lightningManager != null)
         {
             savedSpeedOfDay = lightningManager.SpeedOfDay;
             lightningManager.SpeedOfDay = 0f;
         }
 
-        yield return new WaitForSeconds(4f);
-        if (thankYouUI != null) thankYouUI.SetActive(false);
 
         // ----------------------------------------------------
         // BƯỚC 2: Tua thời gian đến Đêm
@@ -118,6 +140,11 @@ public class DemoEndingController : MonoBehaviour
         {
             lightningManager.SpeedOfDay = savedSpeedOfDay;
         }
+    }
+    public void OnOkButtonClicked()
+    {
+        isWaitingForOk = false;
+        Debug.Log("Player has press the button! Starting fireworks...");
     }
 
     private IEnumerator FastForwardTime(float targetTime, float duration)
