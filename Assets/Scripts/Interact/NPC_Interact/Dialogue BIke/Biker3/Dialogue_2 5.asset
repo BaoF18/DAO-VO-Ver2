@@ -18,11 +18,11 @@ MonoBehaviour:
   - speakerName: "B\xECnh ch\xED c\u1ED1t"
     text: "K\xEA, v\u1EADy xe anh b\u1ECB g\xEC v\u1EADy\r\n"
   - speakerName: Nam
-    text: "Xe anh b\u1ECB h\u1ECFng bugi r\xF4i"
+    text: "Xe anh b\u1ECB h\u1ECFng bugi r\u1ED3i"
   - speakerName: "B\xECnh ch\xED c\u1ED1t"
     text: "H\u1EA3, th\u1EBF bao nhi\xEAu th\xEC ghi v\xE0o s\u1ED5 cho anh nha  "
   - speakerName: Nam
-    text: "Ok anh g\u01B0\u1EDDi nh\xE0 c\u1EA3 m\xE0"
+    text: "Ok anh ng\u01B0\u1EDDi nh\xE0 c\u1EA3 m\xE0"
   - speakerName: "B\xECnh ch\xED c\u1ED1t"
     text: 'hahahahha
 
