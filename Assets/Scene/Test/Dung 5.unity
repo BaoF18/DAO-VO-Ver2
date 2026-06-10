@@ -353,51 +353,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d87f79f077cef5a498d601df0c7d4912, type: 3}
   m_PrefabInstance: {fileID: 16765761}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &21048384
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 21048386}
-  - component: {fileID: 21048385}
-  m_Layer: 0
-  m_Name: SpawnSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &21048385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21048384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60bc3418a125a614988e3d9e7780be45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCEventSpawner
-  npcPrefab: {fileID: 3899451115265123512, guid: 4d6304d8bd6011849868f684650d7107, type: 3}
---- !u!4 &21048386
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21048384}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -601.8133, y: 0, z: 66.10318}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &23380696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2883,8 +2838,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 7.6}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -2.4500008}
+  m_SizeDelta: {x: 0, y: -4.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &140459944
 MonoBehaviour:
@@ -2906,17 +2861,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "B\u1ED1c ph\xE9t th\u1EBF"
+  m_text: "Bookfet th\u1EBF"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5b41810374ad7224a96498c03f112f0c, type: 2}
-  m_sharedMaterial: {fileID: 6090003120567126878, guid: 5b41810374ad7224a96498c03f112f0c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 238a804a8fdb56146929046ed09fd555, type: 2}
+  m_sharedMaterial: {fileID: -7843254153569585919, guid: 238a804a8fdb56146929046ed09fd555, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190266
-  m_fontColor: {r: 0.7283019, g: 0, b: 0, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2933,17 +2888,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31
-  m_fontSizeBase: 31
+  m_fontSize: 26.73
+  m_fontSizeBase: 26.73
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -7.4
   m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -2972,7 +2927,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -12.278114, y: 0, z: -8.929558, w: 0}
+  m_margin: {x: -0.79206085, y: -3.0629158, z: 0.32466888, w: 0.61317444}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7422,8 +7377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000023842, y: 21.632}
-  m_SizeDelta: {x: 663.0967, y: 134.8362}
+  m_AnchoredPosition: {x: 0.0000083447, y: 33}
+  m_SizeDelta: {x: 668.1827, y: 111.1017}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &313492076
 MonoBehaviour:
@@ -7450,8 +7405,8 @@ MonoBehaviour:
     Sau \u0111\xE2y l\xE0 m\xE0n tr\xECnh di\u1EC5n ph\xE1o hoa ngen ( \u2022\u0300
     \u03C9 \u2022\u0301 )"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5b41810374ad7224a96498c03f112f0c, type: 2}
-  m_sharedMaterial: {fileID: 6090003120567126878, guid: 5b41810374ad7224a96498c03f112f0c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 238a804a8fdb56146929046ed09fd555, type: 2}
+  m_sharedMaterial: {fileID: -7843254153569585919, guid: 238a804a8fdb56146929046ed09fd555, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7475,17 +7430,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.2
-  m_fontSizeBase: 32.2
+  m_fontSize: 25.3
+  m_fontSizeBase: 25.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -3.94
   m_characterHorizontalScale: 1
   m_wordSpacing: 12.88
   m_lineSpacing: 0
@@ -11934,7 +11889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f53a76c0fad06949b89b1e0d112a962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EventTriggerZone
-  spawnerSystem: {fileID: 21048385}
+  spawnerSystem: {fileID: 0}
   mySpawnPoint: {fileID: 0}
   myRoute: {fileID: 0}
 --- !u!65 &526616574
@@ -14531,7 +14486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000019073, y: -67.3}
+  m_AnchoredPosition: {x: -0.000015259, y: -71}
   m_SizeDelta: {x: 187.6826, y: 43.0271}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &612081470
@@ -27773,11 +27728,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187028756}
   m_CullTransparentMesh: 1
---- !u!1 &1192415636 stripped
+--- !u!1 &1192415636
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 5990009623980098097, guid: c57c571e93c436d43b06bc480dd49b5a, type: 3}
   m_PrefabInstance: {fileID: 1920982121}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1192415639}
+  - component: {fileID: 1192415637}
+  - component: {fileID: 1192415638}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!114 &1192415637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27892,6 +27860,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!4 &1192415639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2273324715615827066, guid: c57c571e93c436d43b06bc480dd49b5a, type: 3}
+  m_PrefabInstance: {fileID: 1920982121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192415636}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.42757, y: 0, z: 5.84764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1193834074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36448,7 +36431,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0110\u1EA0O V\xD5\nMade by DragonTail"
+  m_text: "TI\u1EC6M CH\xDA T\u01AF\nMade by DragonTails"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a0d63ad976acc04a99ec7e3e5167664, type: 2}
   m_sharedMaterial: {fileID: 6090003120567126878, guid: 9a0d63ad976acc04a99ec7e3e5167664, type: 2}
@@ -40934,7 +40917,7 @@ MonoBehaviour:
   manaRegenRate: 10
   audioSource: {fileID: 1662372064}
   hurtSounds:
-  - {fileID: 8300000, guid: eee6902faefb2944b889731ba230f29a, type: 3}
+  - {fileID: 8300000, guid: 9f298bd2750c974408cfc9763686889f, type: 3}
   deathSounds:
   - {fileID: 8300000, guid: 3ec6774aa7326194e915fa0ce32caabd, type: 3}
   - {fileID: 8300000, guid: c787573d89c61fb44bc5bc864b4fee55, type: 3}
@@ -46694,7 +46677,7 @@ Transform:
   m_GameObject: {fileID: 1921942620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.107, y: 0.812, z: -4.486}
+  m_LocalPosition: {x: 12.093, y: 0.812, z: -7.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65988,7 +65971,6 @@ SceneRoots:
   - {fileID: 840533828}
   - {fileID: 263043590}
   - {fileID: 227505546}
-  - {fileID: 21048386}
   - {fileID: 1752114280}
   - {fileID: 3677807093393235700}
   - {fileID: 1920982121}
