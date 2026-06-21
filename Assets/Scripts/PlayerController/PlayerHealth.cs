@@ -41,6 +41,8 @@ public class PlayerHealth : MonoBehaviour
     [Tooltip("Kéo các file âm thanh tiếng la (Scream/Hurt) vào đây, có thể kéo nhiều file để random")]
     public AudioClip[] hurtSounds;
     public AudioClip[] deathSounds;
+    [Header("--- DEFENSE (Do not trigger) ---")]
+    public bool isBlocking = false;
 
     void Awake()
     {
@@ -129,6 +131,17 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
 
+        if (isBlocking)
+        {
+            Debug.Log("Block toàn bộ sát thương!");
+
+            // có thể trừ Stamina mỗi lần đỡ đòn ở đây
+            // currentStamina -= 10f; 
+
+            return; // Đẩy lệnh quay xe luôn, KHÔNG chạy xuống đoạn trừ máu bên dưới nữa!
+        }
+  
+
         currentHealth -= damage;
         UpdateAllBars();
 
@@ -143,12 +156,10 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            // NẾU HẾT MÁU: Gọi hàm chết
             StartCoroutine(HandlePlayerDeath());
         }
         else
         {
-            // NẾU CÒN SỐNG
             if (audioSource != null && hurtSounds != null && hurtSounds.Length > 0)
             {
                 AudioClip randomScream = hurtSounds[Random.Range(0, hurtSounds.Length)];

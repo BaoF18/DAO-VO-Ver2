@@ -13,14 +13,14 @@ public class EnemyHealth : MonoBehaviour
     public Image healthBarFill;
     public TextMeshProUGUI hpText;
 
-
     [Header("--- SOUND EFFECTS ---")]
-    [Tooltip("Kéo AudioSource của con quái vào đây")]
     public AudioSource audioSource;
-    [Tooltip("Tiếng đấm trúng")]
     public AudioClip[] hitSounds;
-    [Tooltip("Tiếng quái la hét khi chết")]
     public AudioClip[] deathSounds;
+
+    [Header("--- ANIMATION ---")]
+    private Animator animator;
+    private Collider enemyCollider;
 
     private bool isDead = false;
 
@@ -28,24 +28,24 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         UpdateHealthUI();
+        //Support for Death Animation
+        animator = GetComponent<Animator>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
+        enemyCollider = GetComponent<Collider>();
+        if (enemyCollider == null) enemyCollider = GetComponentInChildren<Collider>();
     }
 
     public void TakeDamage(int damageAmount, Vector3 attackerPosition)
     {
         if (isDead) return;
 
-        // =======================================================
-        // PHÁT TIẾNG ĐẤM TRÚNG (IMPACT)
-        // =======================================================
         if (audioSource != null && hitSounds != null && hitSounds.Length > 0)
         {
             AudioClip randomHit = hitSounds[Random.Range(0, hitSounds.Length)];
             audioSource.PlayOneShot(randomHit);
         }
-        // =======================================================
 
         currentHealth -= damageAmount;
-
         if (currentHealth < 0) currentHealth = 0;
 
         UpdateHealthUI();
@@ -54,12 +54,8 @@ public class EnemyHealth : MonoBehaviour
         {
             Vector3 popupPos = transform.position + Vector3.up * 1.5f;
             GameObject popupObj = Instantiate(UIManager.Instance.damagePopupPrefab, popupPos, Quaternion.identity);
-
             DamagePopup popupScript = popupObj.GetComponent<DamagePopup>();
-            if (popupScript != null)
-            {
-                popupScript.Setup(damageAmount);
-            }
+            if (popupScript != null) popupScript.Setup(damageAmount);
         }
 
         Debug.Log("💥 Enemy lost " + damageAmount + " Health. Remains " + currentHealth + " ❤");
@@ -72,40 +68,60 @@ public class EnemyHealth : MonoBehaviour
 
     void UpdateHealthUI()
     {
-        if (healthBarFill != null)
-        {
-            healthBarFill.fillAmount = (float)currentHealth / maxHealth;
-        }
-
-        if (hpText != null)
-        {
-            hpText.text = currentHealth + " / " + maxHealth;
-        }
+        if (healthBarFill != null) healthBarFill.fillAmount = (float)currentHealth / maxHealth;
+        if (hpText != null) hpText.text = currentHealth + " / " + maxHealth;
     }
 
     void Die()
     {
         isDead = true;
-        Debug.Log("Knock out!");
+        Debug.Log("Knock out! Đang diễn hoạt cảnh chết...");
 
-        // =======================================================
-        // PHÁT TIẾNG CHẾT (DÙNG LOA VÔ HÌNH ĐỂ KHÔNG BỊ CẮT ÂM)
-        // =======================================================
-        if (deathSounds != null && deathSounds.Length > 0)
-        {
-            AudioClip randomDeath = deathSounds[Random.Range(0, deathSounds.Length)];
-
-            // Lệnh này tạo một loa tạm thời phát âm thanh xong tự hủy, cực kỳ an toàn!
-            // Phát ở vị trí của Camera để đảm bảo luôn nghe to và rõ nhất.
-            AudioSource.PlayClipAtPoint(randomDeath, Camera.main.transform.position);
-        }
-        // =======================================================
-
+        // 1. Tắt thanh máu trên đầu
         if (healthBarFill != null && healthBarFill.canvas != null)
         {
             healthBarFill.canvas.gameObject.SetActive(false);
         }
 
+        // 2. Tắt va chạm (Collider)
+        if (enemyCollider != null)
+        {
+            enemyCollider.enabled = false;
+        }
+
+        // =======================================================
+        // [MỚI] 2.5: RÚT ỐNG THỞ (TẮT NÃO VÀ CHÂN CỦA QUÁI)
+        // =======================================================
+        // Tắt bộ não AI (Thay "EnemyAI" bằng tên script AI sếp đang dùng nếu khác)
+        EnemyAI aiScript = GetComponent<EnemyAI>();
+        if (aiScript != null) aiScript.enabled = false;
+
+        // Cắt gân chân (NavMeshAgent) để nó không trượt trên mặt đất
+        UnityEngine.AI.NavMeshAgent agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        if (agent != null) agent.enabled = false;
+        // =======================================================
+
+        // 3. Kích hoạt hoạt cảnh ngã gục
+        if (animator != null)
+        {
+            animator.SetTrigger("Die");
+        }
+
+        // 4. Phát tiếng la hét
+        if (deathSounds != null && deathSounds.Length > 0)
+        {
+            AudioClip randomDeath = deathSounds[Random.Range(0, deathSounds.Length)];
+            AudioSource.PlayClipAtPoint(randomDeath, Camera.main.transform.position);
+        }
+
+        // 5. Gọi Coroutine chờ 3 giây rồi mới dọn xác
+        StartCoroutine(DestroyAfterDelay(3f));
+    }
+
+    // Coroutine đếm ngược dọn xác
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         Destroy(gameObject);
     }
 }

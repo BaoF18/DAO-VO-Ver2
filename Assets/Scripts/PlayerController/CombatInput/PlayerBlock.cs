@@ -18,16 +18,26 @@ public class PlayerBlock : MonoBehaviour
 
     private void Update()
     {
-        // Khi BẮT ĐẦU giữ chuột phải -> Bật khiên
+        // Block on
         if (m_blockAction.WasPressedThisFrame())
         {
-            m_animator.SetBool("IsBlocking", true);
+            if (m_animator != null) m_animator.SetBool("IsBlocking", true);
+
+            if (PlayerHealth.Instance != null)
+            {
+                PlayerHealth.Instance.isBlocking = true;
+            }
         }
 
-        // Khi NHẢ chuột phải ra -> Tắt khiên
+        // Block off
         if (m_blockAction.WasReleasedThisFrame())
         {
-            m_animator.SetBool("IsBlocking", false);
+            if (m_animator != null) m_animator.SetBool("IsBlocking", false);
+
+            if (PlayerHealth.Instance != null)
+            {
+                PlayerHealth.Instance.isBlocking = false;
+            }
         }
     }
 }
