@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   lines:
   - speakerName: Nam
-    text: "Ch\xE0o bu\u1ED5i s\xE1ng\nnay cha d\u1EADy s\u1EDBm v\u1EADy"
-  - speakerName: Cha Nam
+    text: "Ch\xE0o bu\u1ED5i s\xE1ng\nnay b\u1ED1 d\u1EADy s\u1EDBm v\u1EADy"
+  - speakerName: "B\u1ED1 Nam"
     text: "Con \u0111o\xE1n xem "
   - speakerName: Nam
     text: "C\xF3 ph\u1EA3i v\xEC nh\xE0 m\xECnh ngh\xE8o n\xEAn ph\u1EA3i d\u1EADy
-      s\u1EDBm ki\u1EBFm c\u01A1m h\u1EA3 ba "
-  - speakerName: ' Cha Nam'
+      s\u1EDBm ki\u1EBFm c\u01A1m h\u1EA3 b\u1ED1 "
+  - speakerName: "B\u1ED1 Nam"
     text: "Hahaha \n "
