@@ -13498,7 +13498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c890b92277e9f1948997c57751b59738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
-  dialogueData: {fileID: 11400000, guid: 83e43e2f90f536549a18dd434c0d215a, type: 2}
+  dialogueData: {fileID: 11400000, guid: da6ceb7b189359247b6c6d3e9cec8925, type: 2}
   dialogueOverrides: []
   npcTaskTrigger: {fileID: 0}
   onInteractStarted:
@@ -23294,7 +23294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c890b92277e9f1948997c57751b59738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
-  dialogueData: {fileID: 11400000, guid: da2610bc21532854caf7d1f48617bdb0, type: 2}
+  dialogueData: {fileID: 11400000, guid: 058a53595baa26d46ba973059d28b2ba, type: 2}
   dialogueOverrides: []
   npcTaskTrigger: {fileID: 0}
   onInteractStarted:
