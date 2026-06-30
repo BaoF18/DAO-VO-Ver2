@@ -24557,6 +24557,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1224139940}
   m_SourcePrefab: {fileID: 100100000, guid: c4e2840a7394feb46bea876f466c26b4, type: 3}
+--- !u!1 &1043019932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4724732762564663171, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
+  m_PrefabInstance: {fileID: 1483682055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1044655116 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6285730754335074943, guid: 9150543ecc71fa24e95caddc009f2611, type: 3}
@@ -37093,7 +37098,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4724732762564663171, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1662372065}
   m_SourcePrefab: {fileID: 100100000, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
 --- !u!1 &1483753381
 GameObject:
@@ -41289,6 +41297,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5393711218401824057, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
   m_PrefabInstance: {fileID: 1483682055}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1662372065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043019932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb8a340401895e4e8bd01bda0e9d785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDance
+  isDanceUnlocked: 1
+  InputActions: {fileID: -944628639613478452, guid: 3ebcc216e7c8bcd439abd9366cd50f9e, type: 3}
 --- !u!1 &1662724186
 GameObject:
   m_ObjectHideFlags: 0

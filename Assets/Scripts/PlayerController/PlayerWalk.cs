@@ -31,6 +31,7 @@ public class PlayerWalk : MonoBehaviour
     private Animator m_animator;
     private Rigidbody m_rigidbody;
     private PlayerSprint playerSprint;
+    private PlayerDance playerDance;
     private bool inputLocked;
 
     // Reference to the CameraController script
@@ -59,6 +60,7 @@ public class PlayerWalk : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody>();
         playerSprint = GetComponent<PlayerSprint>();
+        playerDance = GetComponent<PlayerDance>();
     }
 
     private void Start()
@@ -119,6 +121,15 @@ public class PlayerWalk : MonoBehaviour
 
         if (moveAmount > 0f) // Check if moving
         {
+        //if moving then stop dancing
+            if (playerDance != null)
+            {
+                // Check if the trigger for dancing is active, and if so, stop dancing to avoid spamming StopDancing more than twice
+                if (m_animator.GetBool("IsDancing"))
+                {
+                    playerDance.StopDancing();
+                }
+            }
             // Calculate movement direction in WORLD space (camera-relative, not player-relative)
             Vector3 cameraForward = cameraController.planarRotation * Vector3.forward;
             Vector3 cameraRight = cameraController.planarRotation * Vector3.right;

@@ -163,6 +163,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeadDance"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc9e373a-2f30-4c62-ad47-5552df6d8b32"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HandDance"",
+                    ""type"": ""Button"",
+                    ""id"": ""482e21d3-6300-4228-9057-1906c24baebf"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -297,6 +315,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Pickup"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""011cc589-cdf5-40aa-8ef0-4a171758d9ea"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeadDance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2dafc842-d6be-4b39-9608-bcf45c091475"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandDance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -313,6 +353,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Pickup = m_Player.FindAction("Pickup", throwIfNotFound: true);
+        m_Player_HeadDance = m_Player.FindAction("HeadDance", throwIfNotFound: true);
+        m_Player_HandDance = m_Player.FindAction("HandDance", throwIfNotFound: true);
     }
 
     ~@PlayerInputAction()
@@ -401,6 +443,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Pickup;
+    private readonly InputAction m_Player_HeadDance;
+    private readonly InputAction m_Player_HandDance;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -444,6 +488,14 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Pickup".
         /// </summary>
         public InputAction @Pickup => m_Wrapper.m_Player_Pickup;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/HeadDance".
+        /// </summary>
+        public InputAction @HeadDance => m_Wrapper.m_Player_HeadDance;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/HandDance".
+        /// </summary>
+        public InputAction @HandDance => m_Wrapper.m_Player_HandDance;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -494,6 +546,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Pickup.started += instance.OnPickup;
             @Pickup.performed += instance.OnPickup;
             @Pickup.canceled += instance.OnPickup;
+            @HeadDance.started += instance.OnHeadDance;
+            @HeadDance.performed += instance.OnHeadDance;
+            @HeadDance.canceled += instance.OnHeadDance;
+            @HandDance.started += instance.OnHandDance;
+            @HandDance.performed += instance.OnHandDance;
+            @HandDance.canceled += instance.OnHandDance;
         }
 
         /// <summary>
@@ -529,6 +587,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Pickup.started -= instance.OnPickup;
             @Pickup.performed -= instance.OnPickup;
             @Pickup.canceled -= instance.OnPickup;
+            @HeadDance.started -= instance.OnHeadDance;
+            @HeadDance.performed -= instance.OnHeadDance;
+            @HeadDance.canceled -= instance.OnHeadDance;
+            @HandDance.started -= instance.OnHandDance;
+            @HandDance.performed -= instance.OnHandDance;
+            @HandDance.canceled -= instance.OnHandDance;
         }
 
         /// <summary>
@@ -625,5 +689,19 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPickup(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HeadDance" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHeadDance(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HandDance" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHandDance(InputAction.CallbackContext context);
     }
 }
