@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e048829dd91dc47498cde6f504b11987, type: 3}
+  m_Name: NgocPose
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  lines:
+  - speakerName: Nam
+    text: "Em ch\xE0o ch\u1ECB Ng\u1ECDc nh\xE1"
+  - speakerName: "Chi Ng\u1ECDc Kem"
+    text: "\u1EEAmmm ch\xE0o em nha "
+  - speakerName: "Chi Ng\u1ECDc Kem"
+    text: "M\u1EDBi ng\xE0y n\xE0o peter b\xE9 x\xEDu m\xE0 gi\u1EDD b\u1EB1ng c\u1ED5
+      tay r\u1ED3i  "
+  - speakerName: Nam
+    text: 'Hihi
+
+'
+  - speakerName: Nam
+    text: "D\u1EA1o n\xE0y ch\u1ECB ch\u0103m \u0111i b\u1ED9 qu\xE1 v\u1EADy \n"
+  - speakerName: "Chi Ng\u1ECDc Kem"
+    text: "Th\u1EB1ng n\xE0y, ch\u1ECB \u0111i ki\u1EBFm Sugar Daddy ch\u1EE9 b\u1ED9
+      g\xEC"
+  - speakerName: "Chi Ng\u1ECDc Kem"
+    text: "Em th\u1EA5y c\xF3 b\xE0 n\xE0o \u0111i b\u1ED9 m\u1EB7c \u0111\u1ED3
+      nh\u01B0 ch\u1ECB kh\xF4ng "
+  - speakerName: Nam
+    text: .....
+  - speakerName: Nam
+    text: "Th\xF4i th\xEC th\u1EB1ng em ch\xFAc ch\u1ECB kh\u1EDFi nghi\u1EC7p th\xE0nh
+      c\xF4ng "
+  - speakerName: "Chi Ng\u1ECDc Kem"
+    text: "Gi\xE0u r\u1ED3i ch\u1ECB kh\xF4ng qu\xEAn m \u0111\xE2u.."
+  - speakerName: Nam
+    text: "Qu\xFD h\xF3a \u1EA1"

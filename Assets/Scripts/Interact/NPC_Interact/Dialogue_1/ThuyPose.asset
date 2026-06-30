@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e048829dd91dc47498cde6f504b11987, type: 3}
-  m_Name: 1
+  m_Name: ThuyPose
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   lines:
   - speakerName: Nam
-    text: "Ch\xE0o bu\u1ED5i s\xE1ng\nnay b\u1ED1 d\u1EADy s\u1EDBm v\u1EADy"
-  - speakerName: "B\u1ED1 Nam"
-    text: "Con \u0111o\xE1n xem "
+    text: "Em \u01A1i n\u1EBFu m\u1ED9ng kh\xF4ng th\xE0nh th\xEC saoooooo"
+  - speakerName: "Ch\u1ECB Th\u1EE7y con b\xE0 S\u01A1n"
+    text: "Sao sao th\u1EB1ng b\u1ED1 m"
+  - speakerName: "Ch\u1ECB Th\u1EE7y con b\xE0 S\u01A1n"
+    text: "S\xE1ng s\u1EDBm ch\u01B0a u\u1ED1ng thu\u1ED1c \xE0"
   - speakerName: Nam
-    text: "C\xF3 ph\u1EA3i v\xEC nh\xE0 m\xECnh ngh\xE8o n\xEAn ph\u1EA3i d\u1EADy
-      s\u1EDBm ki\u1EBFm c\u01A1m h\u1EA3 b\u1ED1 "
-  - speakerName: "B\u1ED1 Nam"
-    text: "Hahaha \n "
+    text: "H\u1ED1 h\u1ED1 h\u1ED1 h\u1ED1"
