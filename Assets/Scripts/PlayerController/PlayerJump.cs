@@ -15,10 +15,14 @@ public class PlayerJump : MonoBehaviour
     private bool wasGrounded;
     private bool hasJumped; // đã nhảy 1 lần, chưa chạm đất lại
 
+    public AudioClip jumpedSound;
+    private AudioSource m_audoSource;
+
     private void Awake()
     {
         m_animator = GetComponentInChildren<Animator>();
         m_rb = GetComponent<Rigidbody>();
+        m_audoSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -70,5 +74,11 @@ public class PlayerJump : MonoBehaviour
 
         m_rb.linearVelocity = new Vector3(m_rb.linearVelocity.x, 0f, m_rb.linearVelocity.z);
         m_rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+
+        if(m_audoSource != null)
+        {
+            m_audoSource.PlayOneShot(jumpedSound);
+        }
     }
 }
