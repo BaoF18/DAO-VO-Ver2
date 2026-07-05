@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b802a6072b3406d45ae56508933df6c4
+guid: 85e1844c23c87e74f9a9b191f195a7de
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,23 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Ads
-    second: {fileID: 2100000, guid: 15972d6f7002e714690f2bc0c1c3f5b5, type: 2}
+      name: Case
+    second: {fileID: 2100000, guid: 55faa45fc83fbf74f8a687662b8d81dc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BaseColor
-    second: {fileID: 2100000, guid: fe40e5117142ea34b89c5ada2acf45c0, type: 2}
+      name: Light
+    second: {fileID: 2100000, guid: 0b85e3be850356b4f8ea00140171aaab, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BaseColor1
-    second: {fileID: 2100000, guid: e0ba309299fb9eb49970e9cc1cd187c8, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: khong-the-nhin-cuoi-voi-bien-quang-cao-vo-doi-o-vn-hinh-5
-    second: {fileID: 2800000, guid: fe52c9cd543433f4a9b398aab45715c9, type: 3}
+      name: Material.001
+    second: {fileID: 2100000, guid: 41d3062af5bf2da4190ab4b4a8a4bb8b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
