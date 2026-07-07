@@ -59,13 +59,33 @@ public class PlayerHitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Chỉ đấm những thứ thuộc layer "Enemy"
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            bool hasHitSomething = false;
+
+            // 1. Thử xem có phải giang hồ không?
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
                 enemy.TakeDamage(currentDamage, transform.root.position);
+                hasHitSomething = true;
+            }
+            else
+            {
+                // 2. Nếu không phải giang hồ, thử xem có phải con chó không?
+                DogAI dog = other.GetComponent<DogAI>();
+                if (dog != null)
+                {
+                    dog.TakeDamage(currentDamage, transform.root); // Gửi transform của Player sang cho chó gọi bầy
+                    hasHitSomething = true;
+                }
+            }
 
+            // Nếu thực sự đấm trúng mục tiêu (người hoặc chó)
+            if (hasHitSomething)
+            {
+                // Rung màn hình tăng cảm giác lực
                 if (Camera.main != null)
                 {
                     CameraController cam = Camera.main.GetComponent<CameraController>();
@@ -75,6 +95,7 @@ public class PlayerHitbox : MonoBehaviour
                     }
                 }
 
+                // Tắt hitbox ngay lập tức để 1 nhát chém không trừ máu 2 lần
                 DisableHitbox();
             }
         }

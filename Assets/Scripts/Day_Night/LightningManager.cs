@@ -1,5 +1,17 @@
 using Unity.VisualScripting;
 using UnityEngine;
+
+// ==========================================
+// 1. CLASS GLOWING MATERIAL CỦA SẾP
+// ==========================================
+[System.Serializable]
+public class GlowingMaterial
+{
+    public Material material;
+    [ColorUsage(true, true)] public Color nightEmissionColor = Color.yellow * 5f;
+    [ColorUsage(true, true)] public Color dayEmissionColor = Color.black;
+}
+
 [ExecuteAlways]
 public class LightningManager : MonoBehaviour
 {
@@ -10,6 +22,7 @@ public class LightningManager : MonoBehaviour
     //Material skybox
     [SerializeField] private Material DaySkybox;
     [SerializeField] private Material NightSkybox;
+
     //Variables
     [SerializeField, Range(0, 24)] public float TimeOfDay;
     [SerializeField, Range(0, 10)] public float SpeedOfDay = 1f;
@@ -18,34 +31,61 @@ public class LightningManager : MonoBehaviour
     [SerializeField] private float SunsetTemperature = 15000f;
     [SerializeField] private AnimationCurve ExposureCurve;
     [SerializeField] private AnimationCurve SunSize;
+
     //Colors
     [SerializeField] private Color MorningSkyTint;
     [SerializeField] private Color AfternoonSkyTint;
     [SerializeField] private Color EveningSkyTint;
     [SerializeField] private AnimationCurve SunTemperature;
 
+    // ==========================================
+    // 2. KHU VỰC ĐÈN VÀ VẬT LIỆU PHÁT SÁNG
+    // ==========================================
+    [Header("Street Lights & Emissives")]
+    public Light[] streetLights;
+    [Tooltip("Kéo các Material muốn phát sáng vào đây và chỉnh màu")]
+    public GlowingMaterial[] glowingMaterials;
 
+    private bool isNight = false; // Biến kiểm soát trạng thái
+    // ==========================================
 
+    private void Start()
+    {
+        // Bật Keyword Emission cho các Material ngay khi chạy game
+        if (Application.isPlaying)
+        {
+            foreach (GlowingMaterial gm in glowingMaterials)
+            {
+                if (gm.material != null)
+                {
+                    gm.material.EnableKeyword("_EMISSION");
+                }
+            }
 
+            // Đồng bộ trạng thái đèn ở ngay frame đầu tiên
+            float timePercent = TimeOfDay / 24f;
+            isNight = !(timePercent >= 0.25f && timePercent <= 0.75f);
+            ToggleStreetLights(isNight);
+        }
+    }
 
     private void Update()
     {
-        if(Preset == null)
+        if (Preset == null)
         {
-            return; 
+            return;
         }
         if (Application.isPlaying)
         {
-
             UpdateLighting(CalculateTime() / 24f);
             UpdateSkybox(CalculateTime() / 24f);
-
         }
         else
         {
             UpdateLighting(TimeOfDay / 24f);
             UpdateSkybox(TimeOfDay / 24f);
         }
+
         if (RenderSettings.skybox != null)
         {
             SkyColorAttributes(TimeOfDay);
@@ -53,11 +93,7 @@ public class LightningManager : MonoBehaviour
             RenderSettings.skybox.SetFloat("_Exposure", ExposureCurve.Evaluate(TimeOfDay));
             RenderSettings.skybox.SetFloat("_SunSize", SunSize.Evaluate(TimeOfDay));
         }
-
-
     }
-
-
 
     private void SkyColorAttributes(float hour)
     {
@@ -91,15 +127,11 @@ public class LightningManager : MonoBehaviour
         else
         {
             float t = Mathf.InverseLerp(4f, 6f, hour);
-
             lerpedColor = Color.Lerp(EveningSkyTint, MorningSkyTint, t);
         }
 
         RenderSettings.skybox.SetColor("_SkyTint", lerpedColor);
-        
     }
-
-
 
     private void SkyStartAttributes(float hour, float StartSunRiseTemperature, float AfternoonSunTemperature, float SunsetTemperature)
     {
@@ -108,22 +140,22 @@ public class LightningManager : MonoBehaviour
 
         if (hour >= 6f && hour < 15f)
         {
-            float t = Mathf.InverseLerp(6f, 15f, hour); // 6h - 15h
+            float t = Mathf.InverseLerp(6f, 15f, hour);
             temperature = Mathf.Lerp(StartSunRiseTemperature, AfternoonSunTemperature, t);
-            if(hour >= 6f && hour < 7.5f)
+            if (hour >= 6f && hour < 7.5f)
             {
-                 t = Mathf.InverseLerp(6f, 7.5f, hour);
+                t = Mathf.InverseLerp(6f, 7.5f, hour);
                 intensity = Mathf.Lerp(0.002f, 0.05f, t);
             }
-            else if(hour >= 7.5f && hour < 15f)
+            else if (hour >= 7.5f && hour < 15f)
             {
-                 t = Mathf.InverseLerp(7.5f, 15f, hour);
+                t = Mathf.InverseLerp(7.5f, 15f, hour);
                 intensity = Mathf.Lerp(0.05f, 1f, t);
             }
         }
         else if (hour >= 15f && hour < 18f)
         {
-            float t = Mathf.InverseLerp(15f, 18f, hour); //15h - 18h
+            float t = Mathf.InverseLerp(15f, 18f, hour);
             temperature = Mathf.Lerp(AfternoonSunTemperature, SunsetTemperature, t);
             intensity = Mathf.Lerp(1f, 0.001f, t);
             if (hour >= 15f && hour < 16f)
@@ -131,21 +163,21 @@ public class LightningManager : MonoBehaviour
                 t = Mathf.InverseLerp(15f, 16f, hour);
                 intensity = Mathf.Lerp(1f, 0.05f, t);
             }
-            else if(hour >= 16f && hour <= 18f)
+            else if (hour >= 16f && hour <= 18f)
             {
                 t = Mathf.InverseLerp(16f, 18f, hour);
                 intensity = Mathf.Lerp(0.05f, 0.001f, t);
             }
         }
-        else if(hour > 18f && hour < 24f)
+        else if (hour > 18f && hour < 24f)
         {
-            float t = Mathf.InverseLerp(18f, 24f, hour); // 4h -6h
+            float t = Mathf.InverseLerp(18f, 24f, hour);
             temperature = Mathf.Lerp(SunsetTemperature, StartSunRiseTemperature, t);
             intensity = Mathf.Lerp(0.1f, 0.1f, t);
         }
         else
         {
-            float t = Mathf.InverseLerp(0f, 6f, hour); // 4h -6h
+            float t = Mathf.InverseLerp(0f, 6f, hour);
             temperature = Mathf.Lerp(SunsetTemperature, StartSunRiseTemperature, t);
             intensity = Mathf.Lerp(0.1f, 0.002f, t);
         }
@@ -153,16 +185,7 @@ public class LightningManager : MonoBehaviour
         DirectionalLight.useColorTemperature = true;
         DirectionalLight.colorTemperature = temperature;
         DirectionalLight.intensity = intensity;
-
-
-
-
     }
-        
-
-        
-
-    
 
     private float CalculateTime()
     {
@@ -171,21 +194,20 @@ public class LightningManager : MonoBehaviour
         return TimeOfDay;
     }
 
-
-
     private void UpdateLighting(float timePercent)
     {
         RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
         RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);
 
-        if(DirectionalLight != null)
+        if (DirectionalLight != null)
         {
             DirectionalLight.color = Preset.DirectionalColor.Evaluate(timePercent);
-            DirectionalLight.transform.localRotation = 
+            DirectionalLight.transform.localRotation =
                 Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170, 0));
             // Turn on sun light
             DirectionalLight.enabled = (timePercent >= 0.25f && timePercent <= 0.75f); // from 6h to 18h
         }
+
         if (MoonLight != null)
         {
             MoonLight.transform.localRotation =
@@ -195,49 +217,75 @@ public class LightningManager : MonoBehaviour
             MoonLight.enabled = !(timePercent >= 0.25f && timePercent <= 0.75f); // from 18h to 6h
         }
 
+        // ==========================================
+        // 3. LOGIC KÍCH HOẠT ĐÈN ĐƯỜNG
+        // ==========================================
+        if (Application.isPlaying)
+        {
+            // Kiểm tra xem có đang là ban đêm không (Dựa theo đúng logic bật Moon của nhóm)
+            bool checkNight = !(timePercent >= 0.25f && timePercent <= 0.75f);
 
-
+            // Nếu giao thừa (Chuyển giao giữa ngày/đêm) thì gạt công tắc
+            if (checkNight != isNight)
+            {
+                isNight = checkNight;
+                ToggleStreetLights(isNight);
+            }
+        }
     }
 
+    // ==========================================
+    // 4. HÀM GẠT CÔNG TẮC ĐÈN
+    // ==========================================
+    void ToggleStreetLights(bool state)
+    {
+        // Bật/tắt bóng đèn đường (Point Light, Spot Light...)
+        foreach (Light light in streetLights)
+        {
+            if (light != null) light.enabled = state;
+        }
 
+        // Bật/tắt độ chói (Emission) của biển hiệu, bóng đèn
+        foreach (GlowingMaterial gm in glowingMaterials)
+        {
+            if (gm.material != null)
+            {
+                gm.material.SetColor("_EmissiveColor", state ? gm.nightEmissionColor : gm.dayEmissionColor);
+            }
+        }
+    }
 
-    /// <summary>
-    /// set up DirectionalLight
-    /// </summary>
     private void OnValidate()
     {
-        if(DirectionalLight != null) 
+        if (DirectionalLight != null)
         {
             return;
         }
-        if(RenderSettings.sun != null)
+        if (RenderSettings.sun != null)
         {
             DirectionalLight = RenderSettings.sun;
         }
         else
         {
-            Light[] lights = GameObject.FindObjectsByType<Light>(FindObjectsSortMode.None); // find all lights in scene and get first LightType.Directional 
+            Light[] lights = GameObject.FindObjectsByType<Light>(FindObjectsSortMode.None);
             foreach (Light light in lights)
             {
-                if(light.type == LightType.Directional)
+                if (light.type == LightType.Directional)
                 {
                     DirectionalLight = light;
                 }
             }
         }
-        
     }
 
     void UpdateSkybox(float timePercent)
     {
-        bool isDayTime = timePercent >= 0.25f && timePercent <= 0.75f; // 6h - 18h
+        bool isDayTime = timePercent >= 0.25f && timePercent <= 0.75f;
 
         if (RenderSettings.skybox != (isDayTime ? DaySkybox : NightSkybox))
         {
             RenderSettings.skybox = isDayTime ? DaySkybox : NightSkybox;
-            DynamicGI.UpdateEnvironment(); // update lighting environment
+            DynamicGI.UpdateEnvironment();
         }
     }
-
-
 }

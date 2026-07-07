@@ -45,7 +45,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 1, g: 0.9655028, b: 0.9103774, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 130000
   m_Range: 10
   m_SpotAngle: 30
@@ -259,8 +259,8 @@ MonoBehaviour:
   Preset: {fileID: 11400000, guid: b75786ebdf747fd48b208b565300debe, type: 2}
   DaySkybox: {fileID: 0}
   NightSkybox: {fileID: 0}
-  TimeOfDay: 7.09
-  SpeedOfDay: 0
+  TimeOfDay: 6
+  SpeedOfDay: 0.11
   StartSunRiseTemperature: 4000
   AfternoonSunTemperature: 15000
   SunsetTemperature: 15000
@@ -348,12 +348,50 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  MorningSkyTint: {r: 0, g: 0, b: 0, a: 0}
+  AfternoonSkyTint: {r: 0, g: 0, b: 0, a: 0}
+  EveningSkyTint: {r: 0, g: 0, b: 0, a: 0}
   SunTemperature:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  streetLights:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  glowingMaterials:
+  - material: {fileID: 2100000, guid: 0b85e3be850356b4f8ea00140171aaab, type: 2}
+    nightEmissionColor: {r: 1024, g: 1024, b: 1024, a: 0}
+    dayEmissionColor: {r: 0, g: 0, b: 0, a: 0}
+  - material: {fileID: 2100000, guid: 725bf1941ab779546ac3296ff1640a05, type: 2}
+    nightEmissionColor: {r: 1024, g: 1024, b: 1024, a: 0}
+    dayEmissionColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &5668909882709404266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,7 +489,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 1
+  scale: 0.33
   allowOffScreen: 0
   volumetricCloudOcclusion: 0
   occlusionRemapCurve:
