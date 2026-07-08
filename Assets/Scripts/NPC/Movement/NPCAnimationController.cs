@@ -41,7 +41,7 @@ public class NPCAnimationController : MonoBehaviour
     /// </summary>
     public void UpdateAnimation(float state)
     {
-        if (animator == null) return;
+        if (animator == null || !HasFloatParameter(StateHash)) return;
         animator.SetFloat(StateHash, state, dampTime, Time.deltaTime);
     }
 
@@ -122,6 +122,19 @@ public class NPCAnimationController : MonoBehaviour
         foreach (var parameter in animator.parameters)
         {
             if (parameter.type == AnimatorControllerParameterType.Trigger && parameter.nameHash == parameterHash)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool HasFloatParameter(int parameterHash)
+    {
+        foreach (var parameter in animator.parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Float && parameter.nameHash == parameterHash)
             {
                 return true;
             }
