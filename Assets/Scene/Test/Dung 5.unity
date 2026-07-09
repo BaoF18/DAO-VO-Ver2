@@ -51941,6 +51941,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7263460005404079141, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
+      propertyPath: jumpedSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ba4520c00d95b7b4697bb1775570dc74, type: 3}
+    - target: {fileID: 7263460005404079141, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7611094808568084394, guid: 1f24f44bc3c91864b8f0eb7f6e1318e8, type: 3}
       propertyPath: manaBarFill
       value: 
