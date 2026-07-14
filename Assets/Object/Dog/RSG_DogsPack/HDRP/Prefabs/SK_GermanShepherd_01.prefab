@@ -1082,7 +1082,7 @@ MonoBehaviour:
   timeBetweenAttacks: 1.5
   attackDamage: 30
   dogPrefab: {fileID: 8830056448587170079}
-  packSize: 3
+  packSize: 12
   agent: {fileID: 0}
   anim: {fileID: 0}
   audioSource: {fileID: 2822921659406255609}
@@ -1094,13 +1094,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e7b07f0614348d74e90ddae708d0e0cb, type: 3}
   - {fileID: 8300000, guid: bcb3810291fb01349bdfad5336986a48, type: 3}
   biteSounds:
-  - {fileID: 8300000, guid: d7c7f96bb8d6096438dccfb927bdd52c, type: 3}
-  - {fileID: 8300000, guid: a41dd3283fe6db7489ae04c345d27c2c, type: 3}
-  - {fileID: 8300000, guid: 5d6c518503e9e3b4d8d77b1caf878448, type: 3}
+  - {fileID: 8300000, guid: beb1f7c9ff74bdb4e87ceefd8370cd8f, type: 3}
   minBarkDelay: 4
   maxBarkDelay: 10
-  minAggroBarkDelay: 0.2
-  maxAggroBarkDelay: 0.6
+  minAggroBarkDelay: 19
+  maxAggroBarkDelay: 30
   poopPrefab: {fileID: 6640834500397689123, guid: d4d489822f69a37439156eee793e2bac, type: 3}
   fartSounds:
   - {fileID: 8300000, guid: c0115a56532745f46bc999ca2e5ad794, type: 3}

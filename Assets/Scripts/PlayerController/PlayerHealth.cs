@@ -223,4 +223,22 @@ public class PlayerHealth : MonoBehaviour
             UIManager.Instance.deathScreenGroup.SetActive(false);
         }
     }
+    // Instant Health
+    public void RestoreFullHealth()
+    {
+        currentHealth = maxHealth;
+        UpdateAllBars();
+    }
+
+    public void RestoreFullStamina()
+    {
+        currentStamina = maxStamina;
+        UpdateAllBars();
+    }
+
+    public void RestoreFullMana()
+    {
+        currentMana = maxMana;
+        UpdateAllBars();
+    }
 }
