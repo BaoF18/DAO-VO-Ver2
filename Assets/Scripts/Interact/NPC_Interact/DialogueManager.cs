@@ -4,11 +4,21 @@ using TMPro;
 using System;
 using System.Collections;
 
+// Cấu trúc mới để sếp ghép Tên nhân vật <-> Giọng nói
+[System.Serializable]
+public struct CharacterVoice
+{
+    [Tooltip("Tên nhân vật (Phải nhập đúng y hệt trong Dialogue Data)")]
+    public string characterName;
+    [Tooltip("File âm thanh lải nhải của nhân vật này")]
+    public AudioClip voiceClip;
+}
+
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; private set; }
 
-    // === EVENTS: để các hệ thống khác lắng nghe mà không cần tham chiếu trực tiếp ===
+    // === EVENTS ===
     public static event Action DialogueStarted;
     public static event Action DialogueEnded;
     public static event Action DialogueLineTypingStarted;
@@ -19,8 +29,14 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
-    [Header("Audio")]
+    [Header("Audio System")]
     public AudioSource typingSource;
+
+    [Tooltip("'bla bla'")]
+    public AudioClip defaultVoiceClip;
+
+    [Tooltip("Danh sách các giọng nói đặc biệt")]
+    public CharacterVoice[] customVoices;
 
     [Header("Settings")]
     public float typeSpeed = 0.03f;
@@ -88,6 +104,28 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueLine line = currentData.lines[currentLine];
         nameText.text = line.speakerName;
+
+
+        AudioClip selectedClip = defaultVoiceClip; // Mặc định xài tiếng bla bla
+
+        // Quét xem tên người đang nói có nằm trong danh sách giọng đặc biệt không
+        if (customVoices != null && customVoices.Length > 0)
+        {
+            foreach (var cv in customVoices)
+            {
+                // So sánh tên (Không phân biệt chữ hoa/thường)
+                if (string.Equals(cv.characterName.Trim(), line.speakerName.Trim(), StringComparison.OrdinalIgnoreCase))
+                {
+                    selectedClip = cv.voiceClip;
+                    break;
+                }
+            }
+        }
+
+        if (typingSource != null)
+        {
+            typingSource.clip = selectedClip;
+        }
 
         if (typeCoroutine != null)
             StopCoroutine(typeCoroutine);
@@ -164,7 +202,7 @@ public class DialogueManager : MonoBehaviour
 
     private void PlayTypingSfx()
     {
-        if (typingSource != null) typingSource.Play();
+        if (typingSource != null && typingSource.clip != null) typingSource.Play();
     }
 
     private void StopTypingSfx()
@@ -174,7 +212,7 @@ public class DialogueManager : MonoBehaviour
 
     private void RestartTypingSfx()
     {
-        if (typingSource != null)
+        if (typingSource != null && typingSource.clip != null)
         {
             typingSource.time = 0;
             typingSource.loop = true;

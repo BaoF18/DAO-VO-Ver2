@@ -1080,7 +1080,7 @@ MonoBehaviour:
   maxIdleTime: 5
   attackRange: 1.5
   timeBetweenAttacks: 1.5
-  attackDamage: 30
+  attackDamage: 5
   dogPrefab: {fileID: 8830056448587170079}
   packSize: 12
   agent: {fileID: 0}

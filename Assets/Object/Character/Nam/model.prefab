@@ -1393,8 +1393,8 @@ MonoBehaviour:
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 256
-  jumpedSound: {fileID: 0}
+    m_Bits: 4294967295
+  jumpedSound: {fileID: 8300000, guid: ba4520c00d95b7b4697bb1775570dc74, type: 3}
 --- !u!114 &6409047252108375694
 MonoBehaviour:
   m_ObjectHideFlags: 0
